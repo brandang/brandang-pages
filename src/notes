@@ -1,0 +1,11 @@
+alternate between varying shades of grey / very light red, blue, green colours
+title and icon on the left, content on the right
+have lots of padding
+
+Preprocessing:
+record penstrokes from the user
+if digit classification is uncertain
+    look at pentrokes involved in that digit and separate into two digits
+    if only one penstroke was used in the digit, classify it is a single digit
+    also if penstroke is too small (below certain threshold), connect it to the penstroke that it is touching
+
