@@ -11,7 +11,7 @@ const useStyles = makeStyles((theme) => ({
                 opacity: 1,
             },
         },
-        padding:10
+        paddingRight: 50
     },
     buttonText: {
         opacity: 0.5,

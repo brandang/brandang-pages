@@ -7,7 +7,7 @@ export const aboutMeBrief = "Hello! I am Brandon, and I am a (aspiring) software
 //     "I am currently a third year Computer Science Student at the University of Toronto. I started programming when I was" +
 //     " in high school; at first teaching myself, but afterwards getting formal instruction on it. "
 
-export const myEducationInfo = "I am currently a third year Computer Science student studying at the University of Toronto."
+export const myEducationInfo = "Computer Science student at the University of Toronto."
 
 export const myWorkExperienceInfo = "I have had many jobs in the past, but my first \"serious\" one is at Environment and " +
     "Climate Change Canada, which is where I am currently working as a Software Developer intern."
@@ -18,8 +18,8 @@ export const myProjectsExperience = "I have worked on a variety of different pro
     " some desktop apps, and a few web apps. More details are provided in the 'My Projects' section."
 
 export const myHobbiesAndInterests = "Aside from programming, I also have a passion for reading; I am a bit of a bookworm." +
-    " I have probably read J.R.R. Tolkien`s \"Lord of the Rings\" series almost a dozen times! Lately, I have been enjoying novels" +
-    " by H.G. Wells, an early Science Fiction writer. Other than that, I love playing video games, especially those in the " +
+    " My favourite series is J.R.R. Tolkien`s \"Lord of the Rings\", although I also enjoy Science Fiction novels" +
+    " by authors such as H.G. Wells. Other than that, I love playing video games, especially those in the " +
     "Grand Strategy genre. "
 
 export const emailAddress = "brandon.dang1234@gmail.com"
@@ -49,3 +49,7 @@ export const test = "Here is a fun little project that I created in my spare tim
     "to some classification errors. Identification of the digits 6 and 1 were especially error-prone. However, I manually wrote down" +
     "about a dozen digits to add to the dataset, and it solved most of these issues.   Limitations there must be some space between" +
     " each digit. messed up writing (like the ones seen in capchas) sometimes works, but sometimes does not"
+
+export const websiteDescription = "This website was designed, laid out, and built entirely by myself. I used the" +
+    " JavaScript React library to build the interactive UI. The icons were provided from the Material-UI library." +
+    " This website is currently hosted on GitHub pages. "

@@ -5,6 +5,7 @@ import AboutMe from "./pages/AboutMe"
 import MyProjects from "./pages/MyProjects"
 import { Router, Link, Location } from '@reach/router'
 import posed, { PoseGroup } from 'react-pose'
+import { ParallaxProvider } from 'react-scroll-parallax'
 
 const RouteContainer = posed.div({
     enter: { opacity: 1, delay: 50, beforeChildren: 50 },
@@ -30,11 +31,13 @@ function App() {
 
     return (
         <div className="App">
-            <PosedRouter>
-                <HomePage path="/" />
-                <AboutMe path="/AboutMe" />
-                <MyProjects path="/MyProjects" />
-            </PosedRouter>
+            <ParallaxProvider>
+                <PosedRouter>
+                    <HomePage path="/" />
+                    <AboutMe path="/AboutMe" />
+                    <MyProjects path="/MyProjects" />
+                </PosedRouter>
+            </ParallaxProvider>
         </div>
     )
 }

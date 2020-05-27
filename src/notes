@@ -1,6 +1,5 @@
-alternate between varying shades of grey / very light red, blue, green colours
-title and icon on the left, content on the right
-have lots of padding
+have appbar scroll to position
+have first home page image fade out when scrolling up
 
 Preprocessing:
 record penstrokes from the user
@@ -9,3 +8,18 @@ if digit classification is uncertain
     if only one penstroke was used in the digit, classify it is a single digit
     also if penstroke is too small (below certain threshold), connect it to the penstroke that it is touching
 
+
+
+react animate as you scroll library:
+https://github.com/react-component/scroll-anim
+https://www.react-reveal.com/
+
+use that library to adjust overlay to hide opening
+
+orange: work
+white: projects
+purple/some other colour: education
+white: hobbies
+grey: contact and resume, as well as info about website, and link to github
+
+change text color depending on progress
