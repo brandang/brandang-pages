@@ -1,0 +1,26 @@
+{
+  "files": {
+    "main.css": "/brandang-pages/static/css/main.d1b05096.chunk.css",
+    "main.js": "/brandang-pages/static/js/main.44309e30.chunk.js",
+    "main.js.map": "/brandang-pages/static/js/main.44309e30.chunk.js.map",
+    "runtime-main.js": "/brandang-pages/static/js/runtime-main.3980553d.js",
+    "runtime-main.js.map": "/brandang-pages/static/js/runtime-main.3980553d.js.map",
+    "static/js/2.ea012151.chunk.js": "/brandang-pages/static/js/2.ea012151.chunk.js",
+    "static/js/2.ea012151.chunk.js.map": "/brandang-pages/static/js/2.ea012151.chunk.js.map",
+    "index.html": "/brandang-pages/index.html",
+    "precache-manifest.62681f0d66d049fb864b6892662121fb.js": "/brandang-pages/precache-manifest.62681f0d66d049fb864b6892662121fb.js",
+    "service-worker.js": "/brandang-pages/service-worker.js",
+    "static/css/main.d1b05096.chunk.css.map": "/brandang-pages/static/css/main.d1b05096.chunk.css.map",
+    "static/js/2.ea012151.chunk.js.LICENSE.txt": "/brandang-pages/static/js/2.ea012151.chunk.js.LICENSE.txt",
+    "static/media/Resume.pdf": "/brandang-pages/static/media/Resume.6fdbcf9d.pdf",
+    "static/media/aboutMe.JPG": "/brandang-pages/static/media/aboutMe.567c837a.JPG",
+    "static/media/backgroundImage.jpg": "/brandang-pages/static/media/backgroundImage.5b357908.jpg",
+    "static/media/blackBackground.jpg": "/brandang-pages/static/media/blackBackground.27cd9d82.jpg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.3980553d.js",
+    "static/js/2.ea012151.chunk.js",
+    "static/css/main.d1b05096.chunk.css",
+    "static/js/main.44309e30.chunk.js"
+  ]
+}
