@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/brandang-pages/static/css/main.d1b05096.chunk.css",
-    "main.js": "/brandang-pages/static/js/main.0212bf77.chunk.js",
-    "main.js.map": "/brandang-pages/static/js/main.0212bf77.chunk.js.map",
+    "main.js": "/brandang-pages/static/js/main.965f2c4f.chunk.js",
+    "main.js.map": "/brandang-pages/static/js/main.965f2c4f.chunk.js.map",
     "runtime-main.js": "/brandang-pages/static/js/runtime-main.68262221.js",
     "runtime-main.js.map": "/brandang-pages/static/js/runtime-main.68262221.js.map",
     "static/js/2.86ed305f.chunk.js": "/brandang-pages/static/js/2.86ed305f.chunk.js",
     "static/js/2.86ed305f.chunk.js.map": "/brandang-pages/static/js/2.86ed305f.chunk.js.map",
     "index.html": "/brandang-pages/index.html",
-    "precache-manifest.50a91336a992d5d2dade0459e6ff160d.js": "/brandang-pages/precache-manifest.50a91336a992d5d2dade0459e6ff160d.js",
+    "precache-manifest.a3e50e98632eb18b1873475dd4093879.js": "/brandang-pages/precache-manifest.a3e50e98632eb18b1873475dd4093879.js",
     "service-worker.js": "/brandang-pages/service-worker.js",
     "static/css/main.d1b05096.chunk.css.map": "/brandang-pages/static/css/main.d1b05096.chunk.css.map",
     "static/js/2.86ed305f.chunk.js.LICENSE.txt": "/brandang-pages/static/js/2.86ed305f.chunk.js.LICENSE.txt",
@@ -21,6 +21,6 @@
     "static/js/runtime-main.68262221.js",
     "static/js/2.86ed305f.chunk.js",
     "static/css/main.d1b05096.chunk.css",
-    "static/js/main.0212bf77.chunk.js"
+    "static/js/main.965f2c4f.chunk.js"
   ]
 }

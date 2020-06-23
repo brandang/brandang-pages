@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/brandang-pages/precache-manifest.50a91336a992d5d2dade0459e6ff160d.js"
+  "/brandang-pages/precache-manifest.a3e50e98632eb18b1873475dd4093879.js"
 );
 
 self.addEventListener('message', (event) => {
