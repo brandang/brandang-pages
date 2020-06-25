@@ -1,8 +1,6 @@
 import React from 'react'
 import './App.css'
 import HomePage from "./pages/HomePage"
-import AboutMe from "./pages/AboutMe"
-import MyProjects from "./pages/MyProjects"
 import { Router, Link, Location } from '@reach/router'
 import posed, { PoseGroup } from 'react-pose'
 import { ParallaxProvider } from 'react-scroll-parallax'
@@ -34,8 +32,6 @@ function App() {
             <ParallaxProvider>
                 <PosedRouter>
                     <HomePage path={process.env.PUBLIC_URL + '/'} />
-                    <AboutMe path="/AboutMe" />
-                    <MyProjects path="/MyProjects" />
                 </PosedRouter>
             </ParallaxProvider>
         </div>
