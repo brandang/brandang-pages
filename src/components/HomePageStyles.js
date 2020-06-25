@@ -1,5 +1,4 @@
 import React, {useEffect} from 'react'
-import {LightTextTypography, DarkTextTypography, theme} from '../CustomTheme'
 import {makeStyles} from "@material-ui/core/styles"
 
 export const canvasWidth = 200

@@ -8,8 +8,6 @@ import Button from '@material-ui/core/Button'
 import { ThemeProvider } from '@material-ui/core/styles'
 import {LightTextTypography, DarkTextTypography, theme} from '../CustomTheme'
 import posed from 'react-pose'
-import { Router, Link, Location } from '@reach/router'
-import MainBackground from "../components/MainBackground"
 import {
     aboutMeBrief, myProgrammingLanguages, myWorkExperienceInfo, myProjectsDescription, myEducationInfo,
     myHobbiesAndInterests, emailAddress, websiteDescription, digitClassifierDescription, notesAppSummary,
@@ -48,7 +46,6 @@ import {getDigitsFromCanvas} from "../CanvasHelpers"
 import NumberClassificationDialog from "../components/NumberClassificationDialog"
 import CardMedia from '@material-ui/core/CardMedia'
 import {styles, canvasWidth, canvasHeight} from "../components/HomePageStyles"
-import useWindowDimensions from "../WindowDimensions"
 import HomePageBackground from "../components/HomePageBackground"
 
 const Element = ScrollAnim.Element
@@ -64,20 +61,7 @@ const ItemPoseContainer = posed.div({
     enter: { staggerChildren: 500, delayChildren: 500 }
 });
 
-const AvatarPosedContainer = posed.div({
-    enter: { staggerChildren: 0, delayChildren: 50 }
-});
-
 const Item = posed.p({
-    enter: { y: 0, opacity: 1 },
-    exit: { y: -50, opacity: 0 }
-});
-
-const PoseContainer = posed.div({
-    enter: { staggerChildren: 100 }
-});
-
-const AppBarItem = posed.p({
     enter: { y: 0, opacity: 1 },
     exit: { y: -50, opacity: 0 }
 });
@@ -121,9 +105,6 @@ function HomePage() {
         setPrediction(predictions)
         setOpenDialog(true)
 
-        // const pixels = getPixelsArrayFromCanvas(trimmedCanvas, trimmedCanvas.width, trimmedCanvas.height)
-        // const prediction = classifier.predict(pixels, 3)
-        // console.log(prediction)
     }
 
     const copiedEmailAddress = () => {
