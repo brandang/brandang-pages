@@ -19,7 +19,7 @@ export const myProjectsExperience = "I have worked on a variety of different pro
 
 export const myHobbiesAndInterests = "Aside from programming, I also have a passion for reading; I am a bit of a bookworm." +
     " My favourite series is J.R.R. Tolkien`s \"Lord of the Rings\", although I also enjoy Science Fiction novels" +
-    " by authors such as H.G. Wells. Other than that, I love playing video games, especially those in the " +
+    " by authors like H.G. Wells. Other than that, I love playing video games, especially those in the " +
     "Grand Strategy genre. "
 
 export const emailAddress = "brandon.dang1234@gmail.com"
@@ -27,12 +27,23 @@ export const emailAddress = "brandon.dang1234@gmail.com"
 export const myProjectsDescription = "Here, you can view some of the personal projects that I have worked on over the " +
     "years. I use some of them everyday in my day-to-day life."
 
-export const digitClassifierDescription = "Here is an interactive demo of a very simple digit classifier that I created." +
+export const digitClassifierDescription = "Here is an interactive demo of a fun little simple digit classifier that I created." +
     " The program examines hand-written numbers and tries to determine what digit it is that the user wrote. You can" +
-    " try it out below. For best results, please try to write as clearly as possible."
+    " try it out below. For best results, please try to write as clearly as possible, and be sure to leave some space between" +
+    " each digit."
 
 export const classifierDialogErrorText = "Do note that this classifier is by no means perfect. For best results, it is" +
-    " recommended to write as legibly as possible. "
+    " recommended to write as legibly as possible. Please also leave a little whitespace between each digit so that " +
+    "they are not stuck together in one blob."
+
+export const notesAppSummary = "The following is a video demonstration of an Android Notes app that I created in my spare" +
+    " time. Users may embed images and audio recordings within their Notes."
+
+export const photoLockerAppSummary = "The following is a video demonstration of an Android PhotoLocker app that I created" +
+    " in my spare time. Users may encrypt their photos with a password key. The file is unreadable without first" +
+    " decrypting it using the key."
+
+export const classifierExplanation = ""
 
 export const test = "Here is a fun little project that I created in my spare time. It identifies numbers that the user" +
     " writes down. Although there are probably machine learning libraries out there that can help in this, I decided to " +

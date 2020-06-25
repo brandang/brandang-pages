@@ -1,12 +1,9 @@
-import React, {useEffect} from 'react'
+import React, {useEffect, useState} from 'react'
 
 import '../App.css'
 import Avatar from '@material-ui/core/Avatar'
-import portrait from "../images/Portrait.jpg"
-import { makeStyles } from '@material-ui/core/styles'
 import Grid from '@material-ui/core/Grid'
 import Typography from '@material-ui/core/Typography'
-import { withStyles } from "@material-ui/core/styles"
 import Button from '@material-ui/core/Button'
 import { ThemeProvider } from '@material-ui/core/styles'
 import {LightTextTypography, DarkTextTypography, theme} from '../CustomTheme'
@@ -15,18 +12,15 @@ import { Router, Link, Location } from '@reach/router'
 import MainBackground from "../components/MainBackground"
 import {
     aboutMeBrief, myProgrammingLanguages, myWorkExperienceInfo, myProjectsDescription, myEducationInfo,
-    myHobbiesAndInterests, emailAddress, websiteDescription,
+    myHobbiesAndInterests, emailAddress, websiteDescription, digitClassifierDescription, notesAppSummary,
+    photoLockerAppSummary, classifierExplanation
 } from "../Localisation"
 import Container from "@material-ui/core/Container"
 import ScrollItem from "../components/ScrollItem"
 import {BlueHeader, WhiteHeader, OrangeHeader, PurpleHeader, DarkBlueHeader} from "../components/Headers"
-import Box from "@material-ui/core/Box"
-import AppBarButton from "../components/AppBarButton"
 import AppBar from "@material-ui/core/AppBar"
-import Animate from 'rc-animate'
 import ScrollAnim from 'rc-scroll-anim'
 import QueueAnim from 'rc-queue-anim'
-import { Parallax } from 'react-scroll-parallax'
 import PriorityHighIcon from '@material-ui/icons/PriorityHigh'
 import CodeIcon from '@material-ui/icons/Code'
 import WorkIcon from '@material-ui/icons/Work'
@@ -35,7 +29,6 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
 import SchoolIcon from '@material-ui/icons/School'
 import BrushIcon from '@material-ui/icons/Brush'
 import ChatIcon from '@material-ui/icons/Chat'
-import { Container as Table, Row, Col } from 'react-grid-system'
 import ExpansionPanel from '@material-ui/core/ExpansionPanel'
 import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary'
 import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails'
@@ -46,8 +39,17 @@ import IconButton from "@material-ui/core/IconButton"
 import EmailIcon from "@material-ui/icons/Email"
 import FileCopyIcon from "@material-ui/icons/FileCopy"
 import EmailAddressCopiedDialog from "../components/EmailAddressCopiedDialog"
-import Tabs from '@material-ui/core/Tabs'
-import Tab from '@material-ui/core/Tab'
+import RoundContainer from "../components/RoundContainer"
+import SignatureCanvas from "react-signature-canvas"
+import RestoreIcon from "@material-ui/icons/Restore"
+import DoneIcon from "@material-ui/icons/Done"
+import DigitClassifier from "../DigitClassifier"
+import {getDigitsFromCanvas} from "../CanvasHelpers"
+import NumberClassificationDialog from "../components/NumberClassificationDialog"
+import CardMedia from '@material-ui/core/CardMedia'
+import {styles, canvasWidth, canvasHeight} from "../components/HomePageStyles"
+import useWindowDimensions from "../WindowDimensions"
+import HomePageBackground from "../components/HomePageBackground"
 
 const Element = ScrollAnim.Element
 const ScrollOverPack = ScrollAnim.OverPack
@@ -55,6 +57,8 @@ const EventListener = ScrollAnim.Event
 const ShortCut = ScrollAnim.Link
 
 const replay = false
+
+const penSize = 10
 
 const ItemPoseContainer = posed.div({
     enter: { staggerChildren: 500, delayChildren: 500 }
@@ -78,322 +82,210 @@ const AppBarItem = posed.p({
     exit: { y: -50, opacity: 0 }
 });
 
-const useStyles = makeStyles((theme) => ({
-    titleGrid: {
-        height: '100vh',
-        paddingBottom: "10vh",
-        marginBottom: '10vh',
-        position: "fixed",
-        top: "0",
-        left: "0",
-        zIndex: -1
-    },
-    skillsItem: {
-        paddingBottom: "50px"
-    },
-    avatar: {
-        width: theme.spacing(40),
-        height: theme.spacing(40),
-    },
-    appBar: {
-        background: '#434343',
-        boxShadow: 'none',
-    },
-    navBar: {
-        width: "100px",
-        position: "absolute",
-        left: 0,
-        height: "2px",
-        background: "#fff",
-        transition: "width 1s"
-    },
-    navBarButton: {
-        marginLeft: 20,
-        marginRight: 20,
-        marginTop: 20,
-        marginBottom: 20,
-        backgroundColor: "#434343",
-        cursor: "pointer",
-        float: "left",
-    },
-    heading: {
-        paddingBottom: "30px"
-    },
-    blueBox: {
-        paddingTop: "0px",
-        paddingBottom: "0px",
-        backgroundColor: "#006cbf"
-    },
-    whiteBox: {
-        paddingTop: "0px",
-        paddingBottom: "0px",
-        backgroundColor: "#FFF"
-    },
-    orangeBox: {
-        paddingTop: "0px",
-        paddingBottom: "0px",
-        backgroundColor: "#E56B1F"
-    },
-    purpleBox: {
-        paddingTop: "0px",
-        paddingBottom: "0px",
-        backgroundColor: "#961fe0"
-    },
-    darkBlueBox: {
-        paddingTop: "0px",
-        paddingBottom: "0px",
-        backgroundColor: "#2a5a79"
-    },
-    darkGrayBox: {
-        paddingTop: "0px",
-        paddingBottom: "0px",
-        backgroundColor: "#434343"
-    },
-    firstContainer: {
-        minHeight: '70vh',
-        display: "flex",
-        justifyContent: 'center',
-        alignItems: 'center'
-    },
-    boxContainer: {
-        display: "flex",
-        minHeight: "80vh",
-        justifyContent: 'center',
-        alignItems: 'flex-start',
-        paddingTop: 50,
-        paddingBottom: 50
-    },
-    footerContainer: {
-        display: "flex",
-        justifyContent: 'center',
-        alignItems: 'flex-start',
-        paddingTop: 10,
-        paddingBottom: 150
-    },
-    skillsIcon: {
-        color: '#ffffff',
-        fontSize: 150
-    },
-    aboutIcon: {
-        color: '#006cbf',
-        fontSize: 150
-    },
-    workIcon: {
-        color: '#e56b1f',
-        fontSize: 130
-    },
-    projectsIcon: {
-        color: '#ffffff',
-        fontSize: 120
-    },
-    educationIcon: {
-        color: '#961fe0',
-        fontSize: 140
-    },
-    hobbiesIcon: {
-        color: '#ffffff',
-        fontSize: 130
-    },
-    chatIcon: {
-        color: '#2a5a79',
-        fontSize: 130
-    },
-    emailIcon: {
-        color: '#2a5a79',
-        fontSize: 60
-    },
-    resumeIcon: {
-        color: '#2a5a79',
-        fontSize: 60
-    },
-    iconButton: {
-        marginTop: 20,
-        marginLeft: 20,
-        marginRight: 20,
-        backgroundColor: "#ffffff",
-        '&:hover': {
-            backgroundColor: "#c4c4c4",
-        },
-        '&:active': {
-            backgroundColor: '#c4c4c4'
-        }
-    },
-    darkIconContainer: {
-        backgroundColor: "#434343",
-        width: "150px",
-        height: "150px",
-        padding: "10px",
-        marginBottom: "20px",
-    },
-    lightIconContainer: {
-        backgroundColor: "#FFF",
-        width: "150px",
-        height: "150px",
-        padding: "10px",
-        marginBottom: "20px",
-    }
-}));
-
-window.customElements.define("main-background", MainBackground);
-
 function HomePage() {
 
-    const classes = useStyles()
+    const classes = styles()
 
-    const [showDialog, setShowDialog] = React.useState(false)
+    const [windowDimensions, setWindowDimensions] = useState([window.innerWidth, window.innerHeight])
 
-    const copiedEmailAddress = () => {
-        setShowDialog(true)
+    // whether or not to show snackbar about email address being copied to clipboard
+    const [showSnackbar, setShowSnackbar] = React.useState(false)
+
+    // whether or not to show dialog about digit classifier
+    const [openDialog, setOpenDialog] = React.useState(false)
+
+    const [classifierPrediction, setPrediction] = React.useState("Unknown")
+
+    // NOTE: DONT USE REFS FOR FUNCTIONAL COMPONENTS, SINCE THEY MIGHT GET DEREFENCED
+    let canvasRef = React.createRef()
+
+    const onRestoreClick = () => {
+        canvasRef.clear()
     }
 
     const handleCloseDialog = () => {
-        setShowDialog(false)
+        setOpenDialog(false)
+    }
+
+    const classifier = new DigitClassifier()
+
+    const onSubmitClick = () => {
+        const trimmedCanvas = canvasRef.getTrimmedCanvas()
+        // console.log(canvasRef.toDataURL())
+        const digits = getDigitsFromCanvas(trimmedCanvas, trimmedCanvas.width, trimmedCanvas.height)
+        let predictions = ""
+        for (let i in digits) {
+            const digit = digits[i]
+            predictions += classifier.predict(digit, 3)
+        }
+        setPrediction(predictions)
+        setOpenDialog(true)
+
+        // const pixels = getPixelsArrayFromCanvas(trimmedCanvas, trimmedCanvas.width, trimmedCanvas.height)
+        // const prediction = classifier.predict(pixels, 3)
+        // console.log(prediction)
+    }
+
+    const copiedEmailAddress = () => {
+        setShowSnackbar(true)
+    }
+
+    const handleCloseSnackBar = () => {
+        setShowSnackbar(false)
     }
 
     const preventDefault = (event) => event.preventDefault()
 
     useEffect(() => {
+        // this function runs whenever page finished loading
+
         // update on page resize or scroll events
-        window.addEventListener('resize', handleWindowResize);
+        window.addEventListener('resize', handleWindowResize)
+        // update whenever page scrolls
+        window.addEventListener('scroll', onScroll)
+
+        updateNavBar()
     }, []);
     // passing an empty array as second argument triggers the callback in useEffect only after the initial render
     // thus replicating `componentDidMount` lifecycle behaviour
 
     // updates components as needed when window resizes
     const handleWindowResize = () => {
-        if (navBarIsFullWidth) {
-            updateNavBarFull(lastSelectedItem)
+        setWindowDimensions([window.innerWidth, window.innerHeight])
+        updateProgressBar(lastSelectedItem)
+    }
+
+    const onScroll = () => {
+        updateNavBar()
+    }
+
+    const updateNavBar = () => {
+        const navBar = document.getElementById("navBar")
+        const scrollY = window.scrollY
+        if (scrollY >= windowDimensions[1] * 0.2) {
+            navBar.style.backgroundColor = "#434343"
         } else {
-            updateNavBar(lastSelectedItem)
+            navBar.style.backgroundColor = "transparent"
         }
+        updateProgressBar(scrollY)
     }
 
-    let navBarRef = React.createRef()
     // for determining which function to call when user resizes window
-    let navBarIsFullWidth = false
     let lastSelectedItem = null
+    let selectedItemIndex = 0
 
-    const updateNavBar = (event) => {
-        if (!event) {
-            return
-        }
-        const target = event.target
-        if (!target) {
-            return
-        }
-        navBarRef.style.width = `${target.getBoundingClientRect().right + 20}px`
-        navBarIsFullWidth = false
-        lastSelectedItem = event
-    }
+    const updateProgressBar = (scrollY) => {
+        // const home = document.getElementById("home").getBoundingClientRect().top
+        // if (!document.getElementById("about")) {return}
+        const home = document.getElementById("home").getBoundingClientRect().top
+        const about = document.getElementById("about").getBoundingClientRect().top
+        const skills = document.getElementById("skills").getBoundingClientRect().top
+        const experience = document.getElementById("experience").getBoundingClientRect().top
+        const projects = document.getElementById("projects").getBoundingClientRect().top
+        const education = document.getElementById("education").getBoundingClientRect().top
+        const hobbies = document.getElementById("hobbies").getBoundingClientRect().top
+        const contact = document.getElementById("contact").getBoundingClientRect().top
 
-    // update nav bar so it takes up full width of screen
-    const updateNavBarFull = (event) => {
-        if (!event) {
-            return
+        const homeButton = document.getElementById("homeNavButton")
+        const aboutButton = document.getElementById("aboutNavButton")
+        const skillsButton = document.getElementById("skillsNavButton")
+        const experienceButton = document.getElementById("experienceNavButton")
+        const projectsButton = document.getElementById("projectsNavButton")
+        const educationButton = document.getElementById("educationNavButton")
+        const hobbiesButton = document.getElementById("hobbiesNavButton")
+        const contactButton = document.getElementById("contactNavButton")
+
+        const threshold = windowDimensions[1] * 0.2
+        let lastSelectedItem = contactButton
+
+        if (home <= threshold)
+            lastSelectedItem = homeButton
+        if (about <= threshold)
+            lastSelectedItem = aboutButton
+        if (skills <= threshold)
+            lastSelectedItem = skillsButton
+        if (experience <= threshold)
+            lastSelectedItem = experienceButton
+        if (projects <= threshold)
+            lastSelectedItem = projectsButton
+        if (education <= threshold)
+            lastSelectedItem = educationButton
+        if (hobbies <= threshold)
+            lastSelectedItem = hobbiesButton
+        if (contact <= threshold)
+            lastSelectedItem = contactButton
+
+        const progressBar = document.getElementById("progressBar")
+
+        if (lastSelectedItem === contactButton) {
+            progressBar.style.width = `100vw`
+        } else {
+            progressBar.style.width = `${lastSelectedItem.getBoundingClientRect().right + 20}px`
         }
-        const target = event.target
-        if (!target) {
-            return
-        }
-        navBarRef.style.width = `100vw`
-        navBarIsFullWidth = true
-        lastSelectedItem = event
     }
 
     return (
         <ThemeProvider theme={theme}>
-            <main-background/>
-            <EmailAddressCopiedDialog show={showDialog} handleClose={handleCloseDialog}/>
-            <AppBar position="fixed" className={classes.appBar}>
-                {/*<PoseContainer>
-                    <AppBarItem style={{padding: '0px', margin: '0px'}}>
-                        <Box display="flex" p={1} m={1} style={{padding: '0px', margin: '0px'}}>
-                            <Box flex={1} p={1} m={1}/>
-                            <AppBarButton buttonText={"Home"} to={"/"} component={Link}/>
-                            <AppBarButton buttonText={"About me"} disabled/>
-                            <AppBarButton buttonText={"My projects"} to={"/MyProjects"} component={Link}/>
-                        </Box>
-                    </AppBarItem>
-                </PoseContainer>*/}
+            {/*<main-background/>*/}
+            {/*<MainBackground/>*/}
+            <HomePageBackground/>
+            <EmailAddressCopiedDialog show={showSnackbar} handleClose={handleCloseSnackBar}/>
+            <NumberClassificationDialog show={openDialog} prediction={classifierPrediction} onHide={handleCloseDialog}/>
+            <AppBar id={"navBar"} position="fixed" className={classes.navBar}>
                 <div style={{display: 'flex', justifyContent:'center'}}>
-                    <div ref={(c) => { navBarRef = c }} className={classes.navBar}/>
-                    <ShortCut to="about" className={classes.navBarButton} onFocus={updateNavBar}>
+                    <div id={"progressBar"} className={classes.progressBar}/>
+                    <ShortCut id={"homeNavButton"} to="home" className={classes.navBarButton}>
+                        <LightTextTypography variant={"body3"}>
+                            Home
+                        </LightTextTypography>
+                    </ShortCut>
+                    <ShortCut id={"aboutNavButton"} to="about" className={classes.navBarButton}>
                         <LightTextTypography variant={"body3"}>
                             About
                         </LightTextTypography>
                     </ShortCut>
-                    <ShortCut to="skills" className={classes.navBarButton} onFocus={updateNavBar}>
+                    <ShortCut id={"skillsNavButton"} to="skills" className={classes.navBarButton}>
                         <LightTextTypography variant={"body3"}>
                             Skills
                         </LightTextTypography>
                     </ShortCut>
-                    <ShortCut to="experience" className={classes.navBarButton} onFocus={updateNavBar}>
+                    <ShortCut id={"experienceNavButton"} to="experience" className={classes.navBarButton}>
                         <LightTextTypography variant={"body3"}>
                             Experience
                         </LightTextTypography>
                     </ShortCut>
-                    <ShortCut to="projects" className={classes.navBarButton} onFocus={updateNavBar}>
+                    <ShortCut id={"projectsNavButton"} to="projects" className={classes.navBarButton}>
                         <LightTextTypography variant={"body3"}>
                             Projects
                         </LightTextTypography>
                     </ShortCut>
-                    <ShortCut to="education" className={classes.navBarButton} onFocus={updateNavBar}>
+                    <ShortCut id={"educationNavButton"} to="education" className={classes.navBarButton}>
                         <LightTextTypography variant={"body3"}>
                             Education
                         </LightTextTypography>
                     </ShortCut>
-                    <ShortCut to="hobbies" className={classes.navBarButton} onFocus={updateNavBar}>
+                    <ShortCut id={"hobbiesNavButton"} to="hobbies" className={classes.navBarButton}>
                         <LightTextTypography variant={"body3"}>
                             Hobbies
                         </LightTextTypography>
                     </ShortCut>
-                    <ShortCut to="contact" className={classes.navBarButton} onFocus={updateNavBarFull}>
+                    <ShortCut id={"contactNavButton"} to="contact" className={classes.navBarButton}>
                         <LightTextTypography variant={"body3"}>
                             Contact
                         </LightTextTypography>
                     </ShortCut>
                 </div>
-               {/* <Tabs value={tab} theme={theme} onChange={handleTabChange} indicatorColor="primary" centered selectionFollowsFocus>
-                    <Tab style={getStyle(0)} label="Home">
-                        <ShortCut to="home"/>
-                    </Tab>
-                    <Tab style={getStyle(0)} label="About">
-                        <ShortCut to="about"/>
-                    </Tab>
-                    <Tab style={getStyle(0)} label="Skills">
-                        <ShortCut to="skills"/>
-                    </Tab>
-                    <Tab style={getStyle(0)} label="Experience">
-                        <ShortCut to="experience"/>
-                    </Tab>
-                    <Tab style={getStyle(0)} label="Projects">
-                        <ShortCut to="projects"/>
-                    </Tab>
-                    <Tab style={getStyle(0)} label="Education">
-                        <ShortCut to="education"/>
-                    </Tab>
-                    <Tab style={getStyle(0)} label="Hobbies">
-                        <ShortCut to="hobbies"/>
-                    </Tab>
-                    <Tab style={getStyle(0)} label="Contact">
-                        <ShortCut to="home"/>
-                    </Tab>
-                </Tabs>*/}
             </AppBar>
+                {/*<video autoPlay muted loop className={classes.videoBackground}>
+                    <source src={SampleVideo} type="video/mp4" />
+                </video>*/}
+
             {/* padding is required so pose animation does not create unnecessary scrollbars */}
-            <div id="home" style={{ paddingLeft: 20, paddingRight: 20 }}>
+            <div style={{ paddingLeft: 20, paddingRight: 20 }}>
                 <Grid container spacing={5} direction="row" justify="flex-start" alignItems="center"
                       className={classes.titleGrid}>
 
-                    <Grid item xs={2}/>
-
-                    <AvatarPosedContainer>
-                        <Item>
-                            <Grid item >
-                                <Avatar alt="Brandon Dang" src={portrait} className={classes.avatar}/>
-                            </Grid>
-                        </Item>
-                    </AvatarPosedContainer>
+                    <Grid item xs={3}/>
 
                     <Grid item direction="column" >
                         <ItemPoseContainer>
@@ -415,23 +307,22 @@ function HomePage() {
                         </ItemPoseContainer>
                     </Grid>
                 </Grid>
-
             </div>
 
-            <ScrollItem>
-                <div style={{height: '100vh'}}/>
+            <ScrollItem >
+                <div id="home" style={{height: '100vh', zIndex: 1, position: "relative"}}/>
             </ScrollItem>
 
             <div id={"about"} className={classes.blueBox}>
                 <Container className={classes.firstContainer}>
-                    <ScrollOverPack playScale={[0, 0.3]} always={replay}>
+                    <ScrollOverPack playScale={[0, 0.3]} always={true}>
                         <QueueAnim key="0" type={"scale"}>
                             <div key={1} style={{display: 'flex', justifyContent:'center'}}>
                                 <Avatar className={classes.lightIconContainer}>
                                     <PriorityHighIcon className={classes.aboutIcon}/>
                                 </Avatar>
                             </div>
-                            <LightTextTypography key="2" align="center" variant="h2" className={classes.heading}>
+                            <LightTextTypography key="2" align="center" variant="h3" className={classes.heading}>
                                 A little about me
                             </LightTextTypography>
                             <LightTextTypography key="3" align="center" variant="body1" gutterBottomm
@@ -447,64 +338,44 @@ function HomePage() {
             <div id={"skills"} className={classes.whiteBox}>
                 <BlueHeader/>
                 <Container className={classes.boxContainer}>
-                    <ScrollOverPack playScale={[0.1, 0.3]} always={replay}>
+                    <ScrollOverPack playScale={[0.2, 0.3]} always={replay}>
                         <QueueAnim key={0} type="scale">
                             <div key={1} style={{display: 'flex', justifyContent:'center'}}>
                                 <Avatar className={classes.darkIconContainer}>
                                     <CodeIcon className={classes.skillsIcon}/>
                                 </Avatar>
                             </div>
-                            <DarkTextTypography key={2} align="center" variant="h2" gutterBottom
+                            <DarkTextTypography key={2} align="center" variant="h3" gutterBottom
                                                 className={classes.heading}>
                                 My skills
                             </DarkTextTypography>
-
-                            {/* Need to use this table instead of Grid from Material UI library because for some
-                             reason the Grid there is always invisible. */}
-                            <Table key={3}>
-                                <Row>
-                                <Col>
-                                    <Parallax x={[-200, 0]}>
-                                        <DarkTextTypography align="center" variant="h4" className={classes.skillsItem}>
-                                            Java
-                                        </DarkTextTypography>
-                                    </Parallax>
-                                    <Parallax x={[150, -100]}>
-                                        <DarkTextTypography align="center" variant="h4" className={classes.skillsItem}>
-                                            Python
-                                        </DarkTextTypography>
-                                    </Parallax>
-                                    <Parallax x={[0, -100]}>
-                                        <DarkTextTypography align="center" variant="h4" className={classes.skillsItem}>
-                                            SQL
-                                        </DarkTextTypography>
-                                    </Parallax>
-                                    <Parallax x={[-50, 100]}>
-                                        <DarkTextTypography align="center" variant="h4" className={classes.skillsItem}>
-                                            React
-                                        </DarkTextTypography>
-                                    </Parallax>
-                                </Col>
-                                <Col>
-                                    <Parallax x={[100, 0]}>
-                                        <DarkTextTypography align="center" variant="h4" className={classes.skillsItem}>
-                                            JavaScript
-                                        </DarkTextTypography>
-                                    </Parallax>
-                                    <Parallax x={[250, 0]}>
-                                        <DarkTextTypography align="center" variant="h4" className={classes.skillsItem}>
-                                            C
-                                        </DarkTextTypography>
-                                    </Parallax>
-                                    <Parallax x={[0, 120]}>
-                                        <DarkTextTypography align="center" variant="h4" className={classes.skillsItem}>
-                                            CSS
-                                        </DarkTextTypography>
-                                    </Parallax>
-                                </Col>
-                                </Row>
-                            </Table>
-                            <DarkTextTypography key={4} align="center" variant="h4">
+                            <div key={3} style={{display: "flex", flexDirection: "row", justifyContent: 'center'}}>
+                                <RoundContainer colour={"#ff4d4d"}>
+                                    Java
+                                </RoundContainer>
+                                <RoundContainer colour={"#009eb1"}>
+                                    Python
+                                </RoundContainer>
+                                <RoundContainer className={classes.purpleRoundContainer} colour={"#9b5dff"}>
+                                    JavaScript
+                                </RoundContainer>
+                                <RoundContainer colour={"#389500"}>
+                                    C
+                                </RoundContainer>
+                            </div>
+                            <div key={4} style={{display: "flex", flexDirection: "row", justifyContent: 'center',
+                                marginBottom: "20px"}}>
+                                <RoundContainer colour={"#ff6d00"}> 
+                                    SQL
+                                </RoundContainer>
+                                <RoundContainer colour={"#566cff"}>
+                                    CSS
+                                </RoundContainer>
+                                <RoundContainer colour={"#ff60aa"}>
+                                    React
+                                </RoundContainer>
+                            </div>
+                            <DarkTextTypography key={5} align="center" variant="h4">
                                 And more!
                             </DarkTextTypography>
                         </QueueAnim>
@@ -523,7 +394,7 @@ function HomePage() {
                                     <WorkIcon className={classes.workIcon}/>
                                 </Avatar>
                             </div>
-                            <LightTextTypography key={1} align="center" variant="h2" gutterBottom
+                            <LightTextTypography key={1} align="center" variant="h3" gutterBottom
                                                  className={classes.heading}>
                                 Work experience
                             </LightTextTypography>
@@ -546,7 +417,7 @@ function HomePage() {
                                 </Avatar>
                             </div>
 
-                            <DarkTextTypography key={2} align="center" variant="h2" gutterBottom
+                            <DarkTextTypography key={2} align="center" variant="h3" gutterBottom
                                                 className={classes.heading}>
                                 My projects
                             </DarkTextTypography>
@@ -558,42 +429,81 @@ function HomePage() {
                                 <ExpansionPanel>
                                     <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}
                                         aria-controls="panel1a-content" id="panel1a-header"
-                                                           style={{backgroundColor: "#9cd5ff"}}>
-                                        <Typography className={classes.heading}>Expansion Panel 1</Typography>
+                                                           style={{backgroundColor: "#cbe9ff"}}>
+                                        <div style={{width: "100%"}}>
+                                            <Typography className={classes.heading}>Android Notes App</Typography>
+                                        </div>
                                     </ExpansionPanelSummary>
-                                    <ExpansionPanelDetails style={{backgroundColor: "#9cd5ff"}}>
-                                        <Typography>
-                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex,
-                                            sit amet blandit leo lobortis eget.
-                                        </Typography>
+                                    <ExpansionPanelDetails style={{backgroundColor: "#cbe9ff"}} className={classes.videoPanel}>
+                                        <DarkTextTypography variant={"body2"}>
+                                            {notesAppSummary}
+                                        </DarkTextTypography>
+                                        <div className={classes.videoContainer}>
+                                            <CardMedia className={classes.youtubeVideo}
+                                                       src={"https://www.youtube.com/embed/RfoJ7mikJfg"} component="iframe"/>
+                                        </div>
                                     </ExpansionPanelDetails>
                                 </ExpansionPanel>
                                 <ExpansionPanel>
                                     <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}
                                                            aria-controls="panel1a-content" id="panel1a-header"
-                                                           style={{backgroundColor: "#b69cff"}}>
-                                        <Typography className={classes.heading}>
-                                            Expansion Panel 2
-                                        </Typography>
+                                                           style={{backgroundColor: "#ddd2ff"}}>
+                                        <div style={{width: "100%"}}>
+                                            <Typography className={classes.heading}>
+                                                Android Photolocker App
+                                            </Typography>
+                                        </div>
                                     </ExpansionPanelSummary>
-                                    <ExpansionPanelDetails style={{backgroundColor: "#b69cff"}}>
-                                        <Typography>
-                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex,
-                                            sit amet blandit leo lobortis eget.
-                                        </Typography>
+                                    <ExpansionPanelDetails style={{backgroundColor: "#ddd2ff"}} className={classes.videoPanel}>
+                                        <DarkTextTypography variant={"body2"}>
+                                            {photoLockerAppSummary}
+                                        </DarkTextTypography>
+                                        <div className={classes.videoContainer}>
+                                            <CardMedia className={classes.youtubeVideo}
+                                                       src={"https://www.youtube.com/embed/RfoJ7mikJfg"} component="iframe"/>
+                                        </div>
                                     </ExpansionPanelDetails>
                                 </ExpansionPanel>
                                 <ExpansionPanel>
                                     <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}
                                                            aria-controls="panel1a-content" id="panel1a-header"
-                                                           style={{backgroundColor: "#baff9c"}}>
-                                        <Typography className={classes.heading}>Disabled Expansion Panel</Typography>
+                                                           style={{backgroundColor: "#dcffcf"}}>
+                                        <div style={{width: "100%"}}>
+                                            <Typography className={classes.heading}>Number Classifier Demo</Typography>
+                                        </div>
                                     </ExpansionPanelSummary>
-                                    <ExpansionPanelDetails style={{backgroundColor: "#baff9c"}}>
-                                        <Typography>
-                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex,
-                                            sit amet blandit leo lobortis eget.
-                                        </Typography>
+                                    <ExpansionPanelDetails className={classes.classifierDemoContainer} style={{backgroundColor: "#dcffcf"}}>
+                                        <div>
+                                            <DarkTextTypography variant="body2">
+                                                {digitClassifierDescription}
+                                            </DarkTextTypography>
+                                            <div style={{width: "100%", justifyContent: 'center', display: 'flex'}}>
+                                                <div className={classes.canvasContainer}>
+                                                    <SignatureCanvas penColor={"black"} canvasProps={{width: canvasWidth, height:
+                                                        canvasHeight, className: 'sigCanvas'}} minWidth={penSize} minHeight={penSize}
+                                                                     ref={(ref) => { canvasRef = ref }}/>
+                                                </div>
+                                            </div>
+                                            {/*Div to align grid in center*/}
+                                            <div style={{width: "100%", justifyContent: 'center', display: 'flex'}}>
+                                                <Grid container direction="row" justify="center" alignItems="center" spacing={1}
+                                                      className={classes.grid}>
+                                                    <Grid item>
+                                                        <Button color="secondary" onClick={onRestoreClick}>
+                                                            <RestoreIcon className={classes.darkIcon}/>
+                                                        </Button>
+                                                    </Grid>
+                                                    <Grid item>
+                                                        <Button color="secondary" onClick={onSubmitClick}>
+                                                            <DoneIcon className={classes.darkIcon}/>
+                                                        </Button>
+                                                    </Grid>
+                                                </Grid>
+                                            </div>
+                                            <DarkTextTypography variant="body2">
+                                                {classifierExplanation}
+                                            </DarkTextTypography>
+                                        </div>
                                     </ExpansionPanelDetails>
                                 </ExpansionPanel>
                             </div>
@@ -614,18 +524,18 @@ function HomePage() {
                                     <SchoolIcon className={classes.educationIcon}/>
                                 </Avatar>
                             </div>
-                            <LightTextTypography key={1} align="center" variant="h2" gutterBottom
+                            <LightTextTypography key={1} align="center" variant="h3" gutterBottom
                                                  className={classes.heading}>
                                 Education
                             </LightTextTypography>
-                            <LightTextTypography key={1} align="center" variant="h4" gutterBottom
+                            <LightTextTypography key={2} align="center" variant="h4" gutterBottom
                                                  className={classes.heading}>
                                 University of Toronto
                             </LightTextTypography>
-                            <LightTextTypography key={1} align="center" variant="h4" className={classes.heading}>
+                            <LightTextTypography key={3} align="center" variant="h4" className={classes.heading}>
                                 2017 - Present
                             </LightTextTypography>
-                            <LightTextTypography key={2} align="center" variant="body1" gutterBottom>
+                            <LightTextTypography key={4} align="center" variant="body1" gutterBottom>
                                 {myEducationInfo}
                             </LightTextTypography>
                         </QueueAnim>
@@ -643,11 +553,11 @@ function HomePage() {
                                     <BrushIcon className={classes.hobbiesIcon}/>
                                 </Avatar>
                             </div>
-                            <DarkTextTypography key={1} align="center" variant="h2" gutterBottom
+                            <DarkTextTypography key={1} align="center" variant="h3" gutterBottom
                                                  className={classes.heading}>
                                 Hobbies and interests
                             </DarkTextTypography>
-                            <DarkTextTypography key={1} align="center" variant="body1" gutterBottom
+                            <DarkTextTypography key={2} align="center" variant="body1" gutterBottom
                                                  className={classes.heading}>
                                 {myHobbiesAndInterests}
                             </DarkTextTypography>
@@ -666,7 +576,7 @@ function HomePage() {
                                     <ChatIcon className={classes.chatIcon}/>
                                 </Avatar>
                             </div>
-                            <LightTextTypography key={1} align="center" variant="h2" gutterBottom
+                            <LightTextTypography key={1} align="center" variant="h3" gutterBottom
                                                 className={classes.heading}>
                                 Contact me
                             </LightTextTypography>

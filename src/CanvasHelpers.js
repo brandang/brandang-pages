@@ -28,17 +28,17 @@ export function getDigitsFromCanvas(canvas, canvasWidth, canvasHeight) {
         scaledCanvasContext.drawImage(newCanvas, 0, 0, 8, 8)
         scaledDigitAlphas.push(getAlphas(scaledCanvasContext.getImageData(0, 0, 8, 8).data))
 
-        console.log(scaledCanvas.toDataURL('image/png'))
+        // console.log(scaledCanvas.toDataURL('image/png'))
         // get pixels for training data
         let output = ""
         for (let j in scaledDigitAlphas[i]) {
             output += parseFloat(scaledDigitAlphas[i][j]).toFixed(2)
             output += ","
         }
-        console.log(output)
+        // console.log(output)
     }
 
-    console.log(scaledDigitAlphas)
+    // console.log(scaledDigitAlphas)
     return scaledDigitAlphas
 }
 

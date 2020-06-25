@@ -27,9 +27,9 @@ const styles = (theme) => ({
 });
 
 const DialogTitle = withStyles(styles)((props) => {
-    const { children, classes, onClose, ...other } = props;
+    const { children, classes, onClose, id } = props;
     return (
-        <MuiDialogTitle disableTypography className={classes.root} {...other}>
+        <MuiDialogTitle disableTypography className={classes.root} id={id}>
             <Typography variant="h6">{children}</Typography>
             {onClose ? (
                 <IconButton aria-label="close" className={classes.closeButton} onClick={onClose}>
@@ -59,13 +59,13 @@ export default function NumberClassificationDialog(props) {
         <ThemeProvider theme={theme}>
             <Dialog onClose={props.onHide} aria-labelledby="customized-dialog-title" open={props.show}>
                 <DialogTitle id="customized-dialog-title" onClose={props.onHide}>
-                    <LightTextTypography>Submission Results</LightTextTypography>
+                    <LightTextTypography variant={"h5"}>Submission Results</LightTextTypography>
                 </DialogTitle>
                 <DialogContent>
-                    <DarkTextTypography gutterBottom>
+                    <DarkTextTypography gutterBottom variant={"body2"}>
                         Your number was predicted to be: {props.prediction}
                     </DarkTextTypography>
-                    <DarkTextTypography gutterBottom>
+                    <DarkTextTypography gutterBottom variant={"body2"}>
                         {classifierDialogErrorText}
                     </DarkTextTypography>
                 </DialogContent>

@@ -33,7 +33,7 @@ function App() {
         <div className="App">
             <ParallaxProvider>
                 <PosedRouter>
-                    <HomePage path="/" />
+                    <HomePage path={process.env.PUBLIC_URL + '/'} />
                     <AboutMe path="/AboutMe" />
                     <MyProjects path="/MyProjects" />
                 </PosedRouter>

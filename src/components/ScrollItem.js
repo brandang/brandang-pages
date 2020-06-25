@@ -14,13 +14,9 @@ const useStyles = makeStyles((theme) => ({
         background: "#006cbf",
         opacity: '0',
         transition: `opacity ${duration}ms ease-in-out`,
+        position: 'relative',
+        zIndex: 1
     },
-    scrollItemActive: {
-        height: '100vh',
-        background: "#006cbf",
-        opacity: '1',
-        transition: `opacity ${duration}ms ease-in-out`,
-    }
 }))
 
 export default function ScrollItem(props) {

@@ -1,6 +1,6 @@
-import React from 'react';
-import backgroundOverlay from '../images/overlay.png'
-import background from '../images/background.png'
+import backgroundOverlay from '../images/backgroundImage.jpg'
+// import background from '../images/background.png'
+import background from '../images/blackBackground.jpg'
 
 export default class MainBackground extends HTMLElement {
 
@@ -12,9 +12,6 @@ export default class MainBackground extends HTMLElement {
         // function that gets called when animation ends.
         this.onTransitionEnd = this.onTransitionEnd.bind(this)
         this.startTransition = this.startTransition.bind(this)
-
-        // whether or not to show this background
-        const show = this.getAttribute('show')
 
         // the transition to play
         this.transitionDuration = "opacity 2s"
@@ -36,9 +33,11 @@ export default class MainBackground extends HTMLElement {
                     position: fixed;
                     width: 100vw;
 					height: 100vh;
+					left: 20vw;
                     background: url(${backgroundOverlay});
-                    background-size: cover;
-                    opacity: 0
+                    background-size: contain;
+                    background-repeat: no-repeat;
+                    opacity: 0.2
                 }
             </style>
             <div class="foreground"></div>
@@ -77,10 +76,10 @@ export default class MainBackground extends HTMLElement {
     startTransition() {
         // start transition
         if (this.fadingIn) {
-            this.foreground.style.opacity = '1'
+            this.foreground.style.opacity = '0.4'
         }
         else {
-            this.foreground.style.opacity = '0.3'
+            this.foreground.style.opacity = '0.2'
         }
 
         // set transition length

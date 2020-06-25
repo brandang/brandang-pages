@@ -23,14 +23,24 @@ export const theme = createMuiTheme({
         fontFamily: '"Segoe UI"',
         body1: {
             fontSize: 26,
-            lineHeight: 3
+            lineHeight: 2
         },
         body2: {
             fontSize: 20,
+            lineHeight: 2
         },
         body3: {
             fontSize: 16,
-        }
+        },
+        h1: {
+            fontSize: 128
+        },
+        h2: {
+            fontSize: 72
+        },
+        h3: {
+            fontSize: 48
+        },
     }
 })
 
