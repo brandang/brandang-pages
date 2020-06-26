@@ -324,7 +324,7 @@ function HomePage() {
                                             className={classes.heading}>
                             My skills
                         </DarkTextTypography>
-                        <div style={{display: "flex", flexDirection: "row", justifyContent: 'center'}}>
+                        <div className={classes.skillsDisplayContainer}>
                             <RoundContainer colour={"#ff4d4d"}>
                                 Java
                             </RoundContainer>
@@ -337,9 +337,6 @@ function HomePage() {
                             <RoundContainer colour={"#389500"}>
                                 C
                             </RoundContainer>
-                        </div>
-                        <div style={{display: "flex", flexDirection: "row", justifyContent: 'center',
-                            marginBottom: "20px"}}>
                             <RoundContainer colour={"#ff6d00"}>
                                 SQL
                             </RoundContainer>

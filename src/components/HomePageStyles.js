@@ -213,4 +213,11 @@ export const styles = makeStyles((theme) => ({
         paddingBottom: "50px",
         paddingTop: "50px",
     },
+    skillsDisplayContainer: {
+        display: "flex",
+        flexDirection: "row",
+        justifyContent: 'center',
+        flexWrap: 'wrap',
+        width: '600px'
+    }
 }))
