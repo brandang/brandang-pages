@@ -46,8 +46,10 @@ import CardMedia from '@material-ui/core/CardMedia'
 import {styles, canvasWidth, canvasHeight} from "../components/HomePageStyles"
 import HomePageBackground from "../components/HomePageBackground"
 import AnimateInQueue from "../components/AnimateInQueue"
+import { Link, Element , Events, animateScroll as scroll, scrollSpy, scroller } from 'react-scroll'
 
 const debug = false
+const scrollAnimationDuration = 500
 
 const penSize = 10
 
@@ -119,7 +121,7 @@ function HomePage() {
         // update whenever page scrolls
         window.addEventListener('scroll', onScroll)
 
-        // updateNavBar()
+        updateNavBar()
     }, []);
     // passing an empty array as second argument triggers the callback in useEffect only after the initial render
     // thus replicating `componentDidMount` lifecycle behaviour
@@ -127,11 +129,11 @@ function HomePage() {
     // updates components as needed when window resizes
     const handleWindowResize = () => {
         setWindowDimensions([window.innerWidth, window.innerHeight])
-        // updateProgressBar(lastSelectedItem)
+        updateProgressBar(lastSelectedItem)
     }
 
     const onScroll = () => {
-        // updateNavBar()
+        updateNavBar()
     }
 
     const updateNavBar = () => {
@@ -201,54 +203,60 @@ function HomePage() {
 
     return (
         <ThemeProvider theme={theme}>
-            {/*<main-background/>*/}
-            {/*<MainBackground/>*/}
             <HomePageBackground/>
             <EmailAddressCopiedDialog show={showSnackbar} handleClose={handleCloseSnackBar}/>
             <NumberClassificationDialog show={openDialog} prediction={classifierPrediction} onHide={handleCloseDialog}/>
             <AppBar id={"navBar"} position="fixed" className={classes.navBar}>
                 <div style={{display: 'flex', justifyContent:'center'}}>
                     <div id={"progressBar"} className={classes.progressBar}/>
-                    {/*<ShortCut id={"homeNavButton"} to="home" className={classes.navBarButton}>
+                    <Link id={"homeNavButton"} className={classes.navBarButton} to={"home"} spy={true}
+                          smooth={true} duration={scrollAnimationDuration}>
                         <LightTextTypography variant={"body3"}>
                             Home
                         </LightTextTypography>
-                    </ShortCut>
-                    <ShortCut id={"aboutNavButton"} to="about" className={classes.navBarButton}>
+                    </Link>
+                    <Link id={"aboutNavButton"} className={classes.navBarButton} to={"about"} spy={true}
+                          smooth={true} duration={scrollAnimationDuration}>
                         <LightTextTypography variant={"body3"}>
                             About
                         </LightTextTypography>
-                    </ShortCut>
-                    <ShortCut id={"skillsNavButton"} to="skills" className={classes.navBarButton}>
+                    </Link>
+                    <Link id={"skillsNavButton"} className={classes.navBarButton} to={"skills"} spy={true}
+                          smooth={true} duration={scrollAnimationDuration}>
                         <LightTextTypography variant={"body3"}>
                             Skills
                         </LightTextTypography>
-                    </ShortCut>
-                    <ShortCut id={"experienceNavButton"} to="experience" className={classes.navBarButton}>
+                    </Link>
+                    <Link id={"experienceNavButton"} className={classes.navBarButton} to={"experience"} spy={true}
+                          smooth={true} duration={scrollAnimationDuration}>
                         <LightTextTypography variant={"body3"}>
                             Experience
                         </LightTextTypography>
-                    </ShortCut>
-                    <ShortCut id={"projectsNavButton"} to="projects" className={classes.navBarButton}>
+                    </Link>
+                    <Link id={"projectsNavButton"} className={classes.navBarButton} to={"projects"} spy={true}
+                          smooth={true} duration={scrollAnimationDuration}>
                         <LightTextTypography variant={"body3"}>
                             Projects
                         </LightTextTypography>
-                    </ShortCut>
-                    <ShortCut id={"educationNavButton"} to="education" className={classes.navBarButton}>
+                    </Link>
+                    <Link id={"educationNavButton"} className={classes.navBarButton} to={"education"} spy={true}
+                          smooth={true} duration={scrollAnimationDuration}>
                         <LightTextTypography variant={"body3"}>
                             Education
                         </LightTextTypography>
-                    </ShortCut>
-                    <ShortCut id={"hobbiesNavButton"} to="hobbies" className={classes.navBarButton}>
+                    </Link>
+                    <Link id={"hobbiesNavButton"} className={classes.navBarButton} to={"hobbies"} spy={true}
+                          smooth={true} duration={scrollAnimationDuration}>
                         <LightTextTypography variant={"body3"}>
                             Hobbies
                         </LightTextTypography>
-                    </ShortCut>
-                    <ShortCut id={"contactNavButton"} to="contact" className={classes.navBarButton}>
+                    </Link>
+                    <Link id={"contactNavButton"} className={classes.navBarButton} to={"contact"} spy={true}
+                          smooth={true} duration={scrollAnimationDuration}>
                         <LightTextTypography variant={"body3"}>
                             Contact
                         </LightTextTypography>
-                    </ShortCut>*/}
+                    </Link>
                 </div>
             </AppBar>
 
