@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react'
-
+import "animate.css/animate.min.css"
 import '../App.css'
 import Avatar from '@material-ui/core/Avatar'
 import Grid from '@material-ui/core/Grid'
@@ -17,8 +17,6 @@ import Container from "@material-ui/core/Container"
 import ScrollItem from "../components/ScrollItem"
 import {BlueHeader, WhiteHeader, OrangeHeader, PurpleHeader, DarkBlueHeader} from "../components/Headers"
 import AppBar from "@material-ui/core/AppBar"
-import ScrollAnim from 'rc-scroll-anim'
-import QueueAnim from 'rc-queue-anim'
 import PriorityHighIcon from '@material-ui/icons/PriorityHigh'
 import CodeIcon from '@material-ui/icons/Code'
 import WorkIcon from '@material-ui/icons/Work'
@@ -47,13 +45,9 @@ import NumberClassificationDialog from "../components/NumberClassificationDialog
 import CardMedia from '@material-ui/core/CardMedia'
 import {styles, canvasWidth, canvasHeight} from "../components/HomePageStyles"
 import HomePageBackground from "../components/HomePageBackground"
+import AnimateInQueue from "../components/AnimateInQueue"
 
-const Element = ScrollAnim.Element
-const ScrollOverPack = ScrollAnim.OverPack
-const EventListener = ScrollAnim.Event
-const ShortCut = ScrollAnim.Link
-
-const replay = false
+const debug = false
 
 const penSize = 10
 
@@ -125,7 +119,7 @@ function HomePage() {
         // update whenever page scrolls
         window.addEventListener('scroll', onScroll)
 
-        updateNavBar()
+        // updateNavBar()
     }, []);
     // passing an empty array as second argument triggers the callback in useEffect only after the initial render
     // thus replicating `componentDidMount` lifecycle behaviour
@@ -133,11 +127,11 @@ function HomePage() {
     // updates components as needed when window resizes
     const handleWindowResize = () => {
         setWindowDimensions([window.innerWidth, window.innerHeight])
-        updateProgressBar(lastSelectedItem)
+        // updateProgressBar(lastSelectedItem)
     }
 
     const onScroll = () => {
-        updateNavBar()
+        // updateNavBar()
     }
 
     const updateNavBar = () => {
@@ -215,7 +209,7 @@ function HomePage() {
             <AppBar id={"navBar"} position="fixed" className={classes.navBar}>
                 <div style={{display: 'flex', justifyContent:'center'}}>
                     <div id={"progressBar"} className={classes.progressBar}/>
-                    <ShortCut id={"homeNavButton"} to="home" className={classes.navBarButton}>
+                    {/*<ShortCut id={"homeNavButton"} to="home" className={classes.navBarButton}>
                         <LightTextTypography variant={"body3"}>
                             Home
                         </LightTextTypography>
@@ -254,12 +248,9 @@ function HomePage() {
                         <LightTextTypography variant={"body3"}>
                             Contact
                         </LightTextTypography>
-                    </ShortCut>
+                    </ShortCut>*/}
                 </div>
             </AppBar>
-                {/*<video autoPlay muted loop className={classes.videoBackground}>
-                    <source src={SampleVideo} type="video/mp4" />
-                </video>*/}
 
             {/* padding is required so pose animation does not create unnecessary scrollbars */}
             <div style={{ paddingLeft: 20, paddingRight: 20 }}>
@@ -296,319 +287,298 @@ function HomePage() {
 
             <div id={"about"} className={classes.blueBox}>
                 <Container className={classes.firstContainer}>
-                    <ScrollOverPack playScale={[0, 0.3]} always={true}>
-                        <QueueAnim key="0" type={"scale"}>
-                            <div key={1} style={{display: 'flex', justifyContent:'center'}}>
-                                <Avatar className={classes.lightIconContainer}>
-                                    <PriorityHighIcon className={classes.aboutIcon}/>
-                                </Avatar>
-                            </div>
-                            <LightTextTypography key="2" align="center" variant="h3" className={classes.heading}>
-                                A little about me
-                            </LightTextTypography>
-                            <LightTextTypography key="3" align="center" variant="body1" gutterBottomm
-                                                 style={{paddingBottom: "20px"}}>
-                                {aboutMeBrief}
-                            </LightTextTypography>
-
-                        </QueueAnim>
-                    </ScrollOverPack>
+                    <AnimateInQueue animateIn="animate__fadeIn" animateOnce={!debug}>
+                        <div style={{display: 'flex', justifyContent:'center'}}>
+                            <Avatar className={classes.lightIconContainer}>
+                                <PriorityHighIcon className={classes.aboutIcon}/>
+                            </Avatar>
+                        </div>
+                        <LightTextTypography align="center" variant="h3" className={classes.heading}>
+                            A little about me
+                        </LightTextTypography>
+                        <LightTextTypography align="center" variant="body1" gutterBottomm style={{paddingBottom: "20px"}}>
+                            {aboutMeBrief}
+                        </LightTextTypography>
+                    </AnimateInQueue>
                 </Container>
             </div>
 
             <div id={"skills"} className={classes.whiteBox}>
                 <BlueHeader/>
                 <Container className={classes.boxContainer}>
-                    <ScrollOverPack playScale={[0.2, 0.3]} always={replay}>
-                        <QueueAnim key={0} type="scale">
-                            <div key={1} style={{display: 'flex', justifyContent:'center'}}>
-                                <Avatar className={classes.darkIconContainer}>
-                                    <CodeIcon className={classes.skillsIcon}/>
-                                </Avatar>
-                            </div>
-                            <DarkTextTypography key={2} align="center" variant="h3" gutterBottom
-                                                className={classes.heading}>
-                                My skills
-                            </DarkTextTypography>
-                            <div key={3} style={{display: "flex", flexDirection: "row", justifyContent: 'center'}}>
-                                <RoundContainer colour={"#ff4d4d"}>
-                                    Java
-                                </RoundContainer>
-                                <RoundContainer colour={"#009eb1"}>
-                                    Python
-                                </RoundContainer>
-                                <RoundContainer className={classes.purpleRoundContainer} colour={"#9b5dff"}>
-                                    JavaScript
-                                </RoundContainer>
-                                <RoundContainer colour={"#389500"}>
-                                    C
-                                </RoundContainer>
-                            </div>
-                            <div key={4} style={{display: "flex", flexDirection: "row", justifyContent: 'center',
-                                marginBottom: "20px"}}>
-                                <RoundContainer colour={"#ff6d00"}> 
-                                    SQL
-                                </RoundContainer>
-                                <RoundContainer colour={"#566cff"}>
-                                    CSS
-                                </RoundContainer>
-                                <RoundContainer colour={"#ff60aa"}>
-                                    React
-                                </RoundContainer>
-                            </div>
-                            <DarkTextTypography key={5} align="center" variant="h4">
-                                And more!
-                            </DarkTextTypography>
-                        </QueueAnim>
-                    </ScrollOverPack>
-
+                    <AnimateInQueue animateIn="animate__fadeIn" animateOnce={!debug}>
+                        <div style={{display: 'flex', justifyContent:'center'}}>
+                            <Avatar className={classes.darkIconContainer}>
+                                <CodeIcon className={classes.skillsIcon}/>
+                            </Avatar>
+                        </div>
+                        <DarkTextTypography align="center" variant="h3" gutterBottom
+                                            className={classes.heading}>
+                            My skills
+                        </DarkTextTypography>
+                        <div style={{display: "flex", flexDirection: "row", justifyContent: 'center'}}>
+                            <RoundContainer colour={"#ff4d4d"}>
+                                Java
+                            </RoundContainer>
+                            <RoundContainer colour={"#009eb1"}>
+                                Python
+                            </RoundContainer>
+                            <RoundContainer className={classes.purpleRoundContainer} colour={"#9b5dff"}>
+                                JavaScript
+                            </RoundContainer>
+                            <RoundContainer colour={"#389500"}>
+                                C
+                            </RoundContainer>
+                        </div>
+                        <div style={{display: "flex", flexDirection: "row", justifyContent: 'center',
+                            marginBottom: "20px"}}>
+                            <RoundContainer colour={"#ff6d00"}>
+                                SQL
+                            </RoundContainer>
+                            <RoundContainer colour={"#566cff"}>
+                                CSS
+                            </RoundContainer>
+                            <RoundContainer colour={"#ff60aa"}>
+                                React
+                            </RoundContainer>
+                        </div>
+                        <DarkTextTypography align="center" variant="h4">
+                            And more!
+                        </DarkTextTypography>
+                    </AnimateInQueue>
                 </Container>
             </div>
 
             <div id={"experience"} className={classes.orangeBox}>
                 <WhiteHeader/>
                 <Container className={classes.boxContainer}>
-                    <ScrollOverPack playScale={[0.1, 0.3]} always={replay}>
-                        <QueueAnim key={0} type="scale">
-                            <div key={0} style={{display: 'flex', justifyContent:'center'}}>
-                                <Avatar className={classes.lightIconContainer}>
-                                    <WorkIcon className={classes.workIcon}/>
-                                </Avatar>
-                            </div>
-                            <LightTextTypography key={1} align="center" variant="h3" gutterBottom
-                                                 className={classes.heading}>
-                                Work experience
-                            </LightTextTypography>
-                            <LightTextTypography key={2} align="center" variant="body1" gutterBottom>
-                                {myWorkExperienceInfo}
-                            </LightTextTypography>
-                        </QueueAnim>
-                    </ScrollOverPack>
+                    <AnimateInQueue animateIn="animate__fadeIn" animateOnce={!debug}>
+                        <div style={{display: 'flex', justifyContent:'center'}}>
+                            <Avatar className={classes.lightIconContainer}>
+                                <WorkIcon className={classes.workIcon}/>
+                            </Avatar>
+                        </div>
+                        <LightTextTypography align="center" variant="h3" gutterBottom
+                                             className={classes.heading}>
+                            Work experience
+                        </LightTextTypography>
+                        <LightTextTypography align="center" variant="body1" gutterBottom>
+                            {myWorkExperienceInfo}
+                        </LightTextTypography>
+                    </AnimateInQueue>
                 </Container>
             </div>
 
             <div id={"projects"} className={classes.whiteBox}>
                 <OrangeHeader/>
                 <Container className={classes.boxContainer}>
-                    <ScrollOverPack playScale={[0.1, 0.3]} always={replay}>
-                        <QueueAnim key={0} type="scale">
-                            <div key={1} style={{display: 'flex', justifyContent:'center'}}>
-                                <Avatar className={classes.darkIconContainer}>
-                                    <BuildIcon className={classes.projectsIcon}/>
-                                </Avatar>
-                            </div>
+                    <AnimateInQueue animateIn="animate__fadeIn" animateOnce={!debug}>
+                        <div style={{display: 'flex', justifyContent:'center'}}>
+                            <Avatar className={classes.darkIconContainer}>
+                                <BuildIcon className={classes.projectsIcon}/>
+                            </Avatar>
+                        </div>
 
-                            <DarkTextTypography key={2} align="center" variant="h3" gutterBottom
-                                                className={classes.heading}>
-                                My projects
-                            </DarkTextTypography>
-                            <DarkTextTypography key={3} align="center" variant="body1" gutterBottom>
-                                {myProjectsDescription}
-                            </DarkTextTypography>
+                        <DarkTextTypography align="center" variant="h3" gutterBottom
+                                            className={classes.heading}>
+                            My projects
+                        </DarkTextTypography>
+                        <DarkTextTypography align="center" variant="body1" gutterBottom>
+                            {myProjectsDescription}
+                        </DarkTextTypography>
 
-                            <div key={4}>
-                                <ExpansionPanel>
-                                    <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}
-                                        aria-controls="panel1a-content" id="panel1a-header"
-                                                           style={{backgroundColor: "#cbe9ff"}}>
-                                        <div style={{width: "100%"}}>
-                                            <Typography className={classes.heading}>Android Notes App</Typography>
-                                        </div>
-                                    </ExpansionPanelSummary>
-                                    <ExpansionPanelDetails style={{backgroundColor: "#cbe9ff"}} className={classes.videoPanel}>
-                                        <DarkTextTypography variant={"body2"}>
-                                            {notesAppSummary}
+                        <div>
+                            <ExpansionPanel>
+                                <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}
+                                    aria-controls="panel1a-content" id="panel1a-header"
+                                                       style={{backgroundColor: "#cbe9ff"}}>
+                                    <div style={{width: "100%"}}>
+                                        <Typography className={classes.heading}>Android Notes App</Typography>
+                                    </div>
+                                </ExpansionPanelSummary>
+                                <ExpansionPanelDetails style={{backgroundColor: "#cbe9ff"}} className={classes.videoPanel}>
+                                    <DarkTextTypography variant={"body2"}>
+                                        {notesAppSummary}
+                                    </DarkTextTypography>
+                                    <div className={classes.videoContainer}>
+                                        <CardMedia className={classes.youtubeVideo}
+                                                   src={"https://www.youtube.com/embed/RfoJ7mikJfg"} component="iframe"/>
+                                    </div>
+                                </ExpansionPanelDetails>
+                            </ExpansionPanel>
+                            <ExpansionPanel>
+                                <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}
+                                                       aria-controls="panel1a-content" id="panel1a-header"
+                                                       style={{backgroundColor: "#ddd2ff"}}>
+                                    <div style={{width: "100%"}}>
+                                        <Typography className={classes.heading}>
+                                            Android Photolocker App
+                                        </Typography>
+                                    </div>
+                                </ExpansionPanelSummary>
+                                <ExpansionPanelDetails style={{backgroundColor: "#ddd2ff"}} className={classes.videoPanel}>
+                                    <DarkTextTypography variant={"body2"}>
+                                        {photoLockerAppSummary}
+                                    </DarkTextTypography>
+                                    <div className={classes.videoContainer}>
+                                        <CardMedia className={classes.youtubeVideo}
+                                                   src={"https://www.youtube.com/embed/RfoJ7mikJfg"} component="iframe"/>
+                                    </div>
+                                </ExpansionPanelDetails>
+                            </ExpansionPanel>
+                            <ExpansionPanel>
+                                <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}
+                                                       aria-controls="panel1a-content" id="panel1a-header"
+                                                       style={{backgroundColor: "#dcffcf"}}>
+                                    <div style={{width: "100%"}}>
+                                        <Typography className={classes.heading}>Number Classifier Demo</Typography>
+                                    </div>
+                                </ExpansionPanelSummary>
+                                <ExpansionPanelDetails className={classes.classifierDemoContainer} style={{backgroundColor: "#dcffcf"}}>
+                                    <div>
+                                        <DarkTextTypography variant="body2">
+                                            {digitClassifierDescription}
                                         </DarkTextTypography>
-                                        <div className={classes.videoContainer}>
-                                            <CardMedia className={classes.youtubeVideo}
-                                                       src={"https://www.youtube.com/embed/RfoJ7mikJfg"} component="iframe"/>
-                                        </div>
-                                    </ExpansionPanelDetails>
-                                </ExpansionPanel>
-                                <ExpansionPanel>
-                                    <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}
-                                                           aria-controls="panel1a-content" id="panel1a-header"
-                                                           style={{backgroundColor: "#ddd2ff"}}>
-                                        <div style={{width: "100%"}}>
-                                            <Typography className={classes.heading}>
-                                                Android Photolocker App
-                                            </Typography>
-                                        </div>
-                                    </ExpansionPanelSummary>
-                                    <ExpansionPanelDetails style={{backgroundColor: "#ddd2ff"}} className={classes.videoPanel}>
-                                        <DarkTextTypography variant={"body2"}>
-                                            {photoLockerAppSummary}
-                                        </DarkTextTypography>
-                                        <div className={classes.videoContainer}>
-                                            <CardMedia className={classes.youtubeVideo}
-                                                       src={"https://www.youtube.com/embed/RfoJ7mikJfg"} component="iframe"/>
-                                        </div>
-                                    </ExpansionPanelDetails>
-                                </ExpansionPanel>
-                                <ExpansionPanel>
-                                    <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}
-                                                           aria-controls="panel1a-content" id="panel1a-header"
-                                                           style={{backgroundColor: "#dcffcf"}}>
-                                        <div style={{width: "100%"}}>
-                                            <Typography className={classes.heading}>Number Classifier Demo</Typography>
-                                        </div>
-                                    </ExpansionPanelSummary>
-                                    <ExpansionPanelDetails className={classes.classifierDemoContainer} style={{backgroundColor: "#dcffcf"}}>
-                                        <div>
-                                            <DarkTextTypography variant="body2">
-                                                {digitClassifierDescription}
-                                            </DarkTextTypography>
-                                            <div style={{width: "100%", justifyContent: 'center', display: 'flex'}}>
-                                                <div className={classes.canvasContainer}>
-                                                    <SignatureCanvas penColor={"black"} canvasProps={{width: canvasWidth, height:
-                                                        canvasHeight, className: 'sigCanvas'}} minWidth={penSize} minHeight={penSize}
-                                                                     ref={(ref) => { canvasRef = ref }}/>
-                                                </div>
+                                        <div style={{width: "100%", justifyContent: 'center', display: 'flex'}}>
+                                            <div className={classes.canvasContainer}>
+                                                <SignatureCanvas penColor={"black"} canvasProps={{width: canvasWidth, height:
+                                                    canvasHeight, className: 'sigCanvas'}} minWidth={penSize} minHeight={penSize}
+                                                                 ref={(ref) => { canvasRef = ref }}/>
                                             </div>
-                                            {/*Div to align grid in center*/}
-                                            <div style={{width: "100%", justifyContent: 'center', display: 'flex'}}>
-                                                <Grid container direction="row" justify="center" alignItems="center" spacing={1}
-                                                      className={classes.grid}>
-                                                    <Grid item>
-                                                        <Button color="secondary" onClick={onRestoreClick}>
-                                                            <RestoreIcon className={classes.darkIcon}/>
-                                                        </Button>
-                                                    </Grid>
-                                                    <Grid item>
-                                                        <Button color="secondary" onClick={onSubmitClick}>
-                                                            <DoneIcon className={classes.darkIcon}/>
-                                                        </Button>
-                                                    </Grid>
+                                        </div>
+                                        Div to align grid in center
+                                        <div style={{width: "100%", justifyContent: 'center', display: 'flex'}}>
+                                            <Grid container direction="row" justify="center" alignItems="center" spacing={1}
+                                                  className={classes.grid}>
+                                                <Grid item>
+                                                    <Button color="secondary" onClick={onRestoreClick}>
+                                                        <RestoreIcon className={classes.darkIcon}/>
+                                                    </Button>
                                                 </Grid>
-                                            </div>
-                                            <DarkTextTypography variant="body2">
-                                                {classifierExplanation}
-                                            </DarkTextTypography>
+                                                <Grid item>
+                                                    <Button color="secondary" onClick={onSubmitClick}>
+                                                        <DoneIcon className={classes.darkIcon}/>
+                                                    </Button>
+                                                </Grid>
+                                            </Grid>
                                         </div>
-                                    </ExpansionPanelDetails>
-                                </ExpansionPanel>
-                            </div>
-
-                        </QueueAnim>
-                    </ScrollOverPack>
-
+                                        <DarkTextTypography variant="body2">
+                                            {classifierExplanation}
+                                        </DarkTextTypography>
+                                    </div>
+                                </ExpansionPanelDetails>
+                            </ExpansionPanel>
+                        </div>
+                    </AnimateInQueue>
                 </Container>
             </div>
 
             <div id={"education"} className={classes.purpleBox}>
                 <WhiteHeader/>
                 <Container className={classes.boxContainer}>
-                    <ScrollOverPack playScale={[0.1, 0.3]} always={replay}>
-                        <QueueAnim key={0} type="scale">
-                            <div key={0} style={{display: 'flex', justifyContent:'center'}}>
-                                <Avatar className={classes.lightIconContainer}>
-                                    <SchoolIcon className={classes.educationIcon}/>
-                                </Avatar>
-                            </div>
-                            <LightTextTypography key={1} align="center" variant="h3" gutterBottom
-                                                 className={classes.heading}>
-                                Education
-                            </LightTextTypography>
-                            <LightTextTypography key={2} align="center" variant="h4" gutterBottom
-                                                 className={classes.heading}>
-                                University of Toronto
-                            </LightTextTypography>
-                            <LightTextTypography key={3} align="center" variant="h4" className={classes.heading}>
-                                2017 - Present
-                            </LightTextTypography>
-                            <LightTextTypography key={4} align="center" variant="body1" gutterBottom>
-                                {myEducationInfo}
-                            </LightTextTypography>
-                        </QueueAnim>
-                    </ScrollOverPack>
+                    <AnimateInQueue animateIn="animate__fadeIn" animateOnce={!debug}>
+                        <div style={{display: 'flex', justifyContent:'center'}}>
+                            <Avatar className={classes.lightIconContainer}>
+                                <SchoolIcon className={classes.educationIcon}/>
+                            </Avatar>
+                        </div>
+                        <LightTextTypography align="center" variant="h3" gutterBottom
+                                             className={classes.heading}>
+                            Education
+                        </LightTextTypography>
+                        <LightTextTypography align="center" variant="h4" gutterBottom
+                                             className={classes.heading}>
+                            University of Toronto
+                        </LightTextTypography>
+                        <LightTextTypography align="center" variant="h4" className={classes.heading}>
+                            2017 - Present
+                        </LightTextTypography>
+                        <LightTextTypography align="center" variant="body1" gutterBottom>
+                            {myEducationInfo}
+                        </LightTextTypography>
+                    </AnimateInQueue>
                 </Container>
             </div>
 
             <div id={"hobbies"} className={classes.whiteBox}>
                 <PurpleHeader/>
                 <Container className={classes.boxContainer}>
-                    <ScrollOverPack playScale={[0.1, 0.3]} always={replay}>
-                        <QueueAnim key={0} type="scale">
-                            <div key={0} style={{display: 'flex', justifyContent:'center'}}>
-                                <Avatar className={classes.darkIconContainer}>
-                                    <BrushIcon className={classes.hobbiesIcon}/>
-                                </Avatar>
-                            </div>
-                            <DarkTextTypography key={1} align="center" variant="h3" gutterBottom
-                                                 className={classes.heading}>
-                                Hobbies and interests
-                            </DarkTextTypography>
-                            <DarkTextTypography key={2} align="center" variant="body1" gutterBottom
-                                                 className={classes.heading}>
-                                {myHobbiesAndInterests}
-                            </DarkTextTypography>
-                        </QueueAnim>
-                    </ScrollOverPack>
+                    <AnimateInQueue animateIn="animate__fadeIn" animateOnce={!debug}>
+                        <div style={{display: 'flex', justifyContent:'center'}}>
+                            <Avatar className={classes.darkIconContainer}>
+                                <BrushIcon className={classes.hobbiesIcon}/>
+                            </Avatar>
+                        </div>
+                        <DarkTextTypography align="center" variant="h3" gutterBottom
+                                             className={classes.heading}>
+                            Hobbies and interests
+                        </DarkTextTypography>
+                        <DarkTextTypography align="center" variant="body1" gutterBottom
+                                             className={classes.heading}>
+                            {myHobbiesAndInterests}
+                        </DarkTextTypography>
+                    </AnimateInQueue>
                 </Container>
             </div>
 
             <div id={"contact"} className={classes.darkBlueBox}>
                 <WhiteHeader/>
                 <Container className={classes.boxContainer}>
-                    <ScrollOverPack playScale={[0.1, 0.3]} always={replay}>
-                        <QueueAnim key={0} type="scale">
-                            <div key={0} style={{display: 'flex', justifyContent:'center'}}>
-                                <Avatar className={classes.lightIconContainer}>
-                                    <ChatIcon className={classes.chatIcon}/>
-                                </Avatar>
-                            </div>
-                            <LightTextTypography key={1} align="center" variant="h3" gutterBottom
-                                                className={classes.heading}>
-                                Contact me
-                            </LightTextTypography>
-                            <LightTextTypography key={2} align="center" variant="body1">
-                                If you wish to contact me, please email me at {" "}
-                                <CopyToClipboard text={emailAddress} onCopy={copiedEmailAddress}>
-                                    {/* Prevent default just makes it so that it does not do anything. */}
-                                    <HyperLink href="" onClick={preventDefault}>
-                                        brandon.dang1234@gmail.com
-                                    </HyperLink>
-                                </CopyToClipboard>
-                            </LightTextTypography>
-                            <LightTextTypography key={3} align="center" variant="body1" gutterBottom>
-                                My resume is also available {" "}
-                                <HyperLink href={Resume}>
-                                    here.
+                    <AnimateInQueue animateIn="animate__fadeIn" animateOnce={!debug}>
+                        <div style={{display: 'flex', justifyContent:'center'}}>
+                            <Avatar className={classes.lightIconContainer}>
+                                <ChatIcon className={classes.chatIcon}/>
+                            </Avatar>
+                        </div>
+                        <LightTextTypography align="center" variant="h3" gutterBottom
+                                            className={classes.heading}>
+                            Contact me
+                        </LightTextTypography>
+                        <LightTextTypography align="center" variant="body1">
+                            If you wish to contact me, please email me at {" "}
+                            <CopyToClipboard text={emailAddress} onCopy={copiedEmailAddress}>
+                                {/*Prevent default just makes it so that it does not do anything.*/}
+                                <HyperLink href="" onClick={preventDefault}>
+                                    brandon.dang1234@gmail.com
                                 </HyperLink>
-                            </LightTextTypography>
-                            <Grid container key={4} direction="row" justify="center" alignItems="stretch" spacing={1}>
-                                <CopyToClipboard text={emailAddress} onCopy={copiedEmailAddress}>
-                                    <IconButton className={classes.iconButton}>
-                                        <EmailIcon className={classes.emailIcon}/>
-                                    </IconButton>
-                                </CopyToClipboard>
-                                <IconButton href={Resume} className={classes.iconButton}>
-                                    <FileCopyIcon className={classes.resumeIcon}/>
+                            </CopyToClipboard>
+                        </LightTextTypography>
+                        <LightTextTypography align="center" variant="body1" gutterBottom>
+                            My resume is also available {" "}
+                            <HyperLink href={Resume}>
+                                here.
+                            </HyperLink>
+                        </LightTextTypography>
+                        <Grid container direction="row" justify="center" alignItems="stretch" spacing={1}>
+                            <CopyToClipboard text={emailAddress} onCopy={copiedEmailAddress}>
+                                <IconButton className={classes.iconButton}>
+                                    <EmailIcon className={classes.emailIcon}/>
                                 </IconButton>
-                            </Grid>
-                        </QueueAnim>
-                    </ScrollOverPack>
+                            </CopyToClipboard>
+                            <IconButton href={Resume} className={classes.iconButton}>
+                                <FileCopyIcon className={classes.resumeIcon}/>
+                            </IconButton>
+                        </Grid>
+                    </AnimateInQueue>
                 </Container>
             </div>
 
             <div className={classes.darkGrayBox}>
                 <DarkBlueHeader/>
                 <Container className={classes.footerContainer}>
-                    <ScrollOverPack playScale={[0.1, 0.3]} always={replay}>
-                        <QueueAnim key={0} type="scale">
-                            <LightTextTypography key={1} align="center" variant="h4" gutterBottom>
-                                About this website
-                            </LightTextTypography>
-                            <LightTextTypography key={2} align="center" variant="body2" gutterBottom>
-                                {websiteDescription}
-                            </LightTextTypography>
-                        </QueueAnim>
-                    </ScrollOverPack>
+                    <AnimateInQueue animateIn="animate__fadeIn" animateOnce={!debug}>
+                        <LightTextTypography align="center" variant="h4" gutterBottom>
+                            About this website
+                        </LightTextTypography>
+                        <LightTextTypography align="center" variant="body2" gutterBottom>
+                            {websiteDescription}
+                        </LightTextTypography>
+                    </AnimateInQueue>
                 </Container>
             </div>
 
         </ThemeProvider>
-    );
+    )
 }
 
-export default HomePage;
+export default HomePage

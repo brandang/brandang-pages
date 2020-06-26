@@ -104,7 +104,6 @@ export const styles = makeStyles((theme) => ({
         paddingBottom: 50
     },
     footerContainer: {
-        display: "flex",
         justifyContent: 'center',
         alignItems: 'flex-start',
         paddingTop: 10,
