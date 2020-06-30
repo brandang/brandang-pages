@@ -186,8 +186,8 @@ export const styles = makeStyles((theme) => ({
         width: canvasWidth
     },
     youtubeVideo: {
-        width: 1080,
-        height: 720
+        width: '100%',
+        height: '720px'
     },
     videoPanel: {
         justifyContent: 'center',
@@ -219,5 +219,12 @@ export const styles = makeStyles((theme) => ({
         justifyContent: 'center',
         flexWrap: 'wrap',
         width: '600px'
+    },
+    skillsDisplayContainerMobile: {
+        display: "flex",
+        flexDirection: "row",
+        justifyContent: 'center',
+        flexWrap: 'wrap',
+        width: '100vw'
     }
 }))

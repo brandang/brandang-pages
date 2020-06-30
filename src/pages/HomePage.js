@@ -47,6 +47,12 @@ import {styles, canvasWidth, canvasHeight} from "../components/HomePageStyles"
 import HomePageBackground from "../components/HomePageBackground"
 import AnimateInQueue from "../components/AnimateInQueue"
 import { Link, Element , Events, animateScroll as scroll, scrollSpy, scroller } from 'react-scroll'
+import {
+    BrowserView,
+    MobileView,
+    isBrowser,
+    isMobile
+} from "react-device-detect"
 
 const debug = false
 const scrollAnimationDuration = 500
@@ -137,6 +143,8 @@ function HomePage() {
     }
 
     const updateNavBar = () => {
+        // mobile does not have this
+        if (isMobile) {return}
         const navBar = document.getElementById("navBar")
         const scrollY = window.scrollY
         if (scrollY >= windowDimensions[1] * 0.2) {
@@ -152,8 +160,9 @@ function HomePage() {
     let selectedItemIndex = 0
 
     const updateProgressBar = (scrollY) => {
-        // const home = document.getElementById("home").getBoundingClientRect().top
-        // if (!document.getElementById("about")) {return}
+        // mobile does not have this
+        if (isMobile) {return}
+
         const home = document.getElementById("home").getBoundingClientRect().top
         const about = document.getElementById("about").getBoundingClientRect().top
         const skills = document.getElementById("skills").getBoundingClientRect().top
@@ -261,31 +270,51 @@ function HomePage() {
             </AppBar>
 
             {/* padding is required so pose animation does not create unnecessary scrollbars */}
-            <div style={{ paddingLeft: 20, paddingRight: 20 }}>
-                <Grid container spacing={5} direction="row" justify="flex-start" alignItems="center"
-                      className={classes.titleGrid}>
-
-                    <Grid item xs={3}/>
-
-                    <Grid item direction="column" >
-                        <ItemPoseContainer>
-                            <Item>
-                                <LightTextTypography align={"left"} variant="h2">
-                                    Hello!
-                                </LightTextTypography>
-                            </Item>
-                            <Item>
-                                <LightTextTypography align={"left"} variant="h1">
-                                    I'm Brandon.
-                                </LightTextTypography>
-                            </Item>
-                            <Item>
-                                <LightTextTypography align={"left"} variant="h2">
-                                    A Software Developer.
-                                </LightTextTypography>
-                            </Item>
-                        </ItemPoseContainer>
-                    </Grid>
+            <div style={{ paddingLeft: 20, paddingRight: 20}}>
+                <Grid container direction="row" justify="flex-start" alignItems="center" alignContent="center"
+                      justify={"center"} className={classes.titleGrid}>
+                    <BrowserView>
+                        <Grid item direction="column">
+                            <ItemPoseContainer>
+                                <Item>
+                                    <LightTextTypography align={"left"} variant="h2">
+                                        Hello!
+                                    </LightTextTypography>
+                                </Item>
+                                <Item>
+                                    <LightTextTypography align={"left"} variant="h1">
+                                        I'm Brandon.
+                                    </LightTextTypography>
+                                </Item>
+                                <Item>
+                                    <LightTextTypography align={"left"} variant="h2">
+                                        A Software Developer.
+                                    </LightTextTypography>
+                                </Item>
+                            </ItemPoseContainer>
+                        </Grid>
+                    </BrowserView>
+                    <MobileView>
+                        <Grid item direction="column" >
+                            <ItemPoseContainer>
+                                <Item>
+                                    <LightTextTypography align={"left"} variant="h4">
+                                        Hello!
+                                    </LightTextTypography>
+                                </Item>
+                                <Item>
+                                    <LightTextTypography align={"left"} variant="h3">
+                                        I'm Brandon.
+                                    </LightTextTypography>
+                                </Item>
+                                <Item>
+                                    <LightTextTypography align={"left"} variant="h4">
+                                        A Software Developer.
+                                    </LightTextTypography>
+                                </Item>
+                            </ItemPoseContainer>
+                        </Grid>
+                    </MobileView>
                 </Grid>
             </div>
 
@@ -324,7 +353,7 @@ function HomePage() {
                                             className={classes.heading}>
                             My skills
                         </DarkTextTypography>
-                        <div className={classes.skillsDisplayContainer}>
+                        <div className={isMobile ? classes.skillsDisplayContainerMobile : classes.skillsDisplayContainer}>
                             <RoundContainer colour={"#ff4d4d"}>
                                 Java
                             </RoundContainer>
@@ -392,88 +421,82 @@ function HomePage() {
                             {myProjectsDescription}
                         </DarkTextTypography>
 
-                        <div>
-                            <ExpansionPanel>
-                                <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}
-                                    aria-controls="panel1a-content" id="panel1a-header"
-                                                       style={{backgroundColor: "#cbe9ff"}}>
-                                    <div style={{width: "100%"}}>
-                                        <Typography className={classes.heading}>Android Notes App</Typography>
-                                    </div>
-                                </ExpansionPanelSummary>
-                                <ExpansionPanelDetails style={{backgroundColor: "#cbe9ff"}} className={classes.videoPanel}>
-                                    <DarkTextTypography variant={"body2"}>
-                                        {notesAppSummary}
+                        <ExpansionPanel>
+                            <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}
+                                aria-controls="panel1a-content" id="panel1a-header"
+                                                   style={{backgroundColor: "#cbe9ff"}}>
+                                <div style={{width: "100%"}}>
+                                    <Typography className={classes.heading}>Android Notes App</Typography>
+                                </div>
+                            </ExpansionPanelSummary>
+                            <ExpansionPanelDetails style={{backgroundColor: "#cbe9ff"}} className={classes.videoPanel}>
+                                <DarkTextTypography variant={"body2"}>
+                                    {notesAppSummary}
+                                </DarkTextTypography>
+                                <CardMedia className={classes.youtubeVideo}
+                                           src={"https://www.youtube.com/embed/RfoJ7mikJfg"} component="iframe"/>
+                            </ExpansionPanelDetails>
+                        </ExpansionPanel>
+                        <ExpansionPanel>
+                            <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}
+                                                   aria-controls="panel1a-content" id="panel1a-header"
+                                                   style={{backgroundColor: "#ddd2ff"}}>
+                                <div style={{width: "100%"}}>
+                                    <Typography className={classes.heading}>
+                                        Android Photolocker App
+                                    </Typography>
+                                </div>
+                            </ExpansionPanelSummary>
+                            <ExpansionPanelDetails style={{backgroundColor: "#ddd2ff"}} className={classes.videoPanel}>
+                                <DarkTextTypography variant={"body2"}>
+                                    {photoLockerAppSummary}
+                                </DarkTextTypography>
+                                <CardMedia className={classes.youtubeVideo}
+                                           src={"https://www.youtube.com/embed/RfoJ7mikJfg"} component="iframe"/>
+                            </ExpansionPanelDetails>
+                        </ExpansionPanel>
+                        <ExpansionPanel>
+                            <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}
+                                                   aria-controls="panel1a-content" id="panel1a-header"
+                                                   style={{backgroundColor: "#dcffcf"}}>
+                                <div style={{width: "100%"}}>
+                                    <Typography className={classes.heading}>Number Classifier Demo</Typography>
+                                </div>
+                            </ExpansionPanelSummary>
+                            <ExpansionPanelDetails className={classes.classifierDemoContainer} style={{backgroundColor: "#dcffcf"}}>
+                                <div>
+                                    <DarkTextTypography variant="body2">
+                                        {digitClassifierDescription}
                                     </DarkTextTypography>
-                                    <div className={classes.videoContainer}>
-                                        <CardMedia className={classes.youtubeVideo}
-                                                   src={"https://www.youtube.com/embed/RfoJ7mikJfg"} component="iframe"/>
-                                    </div>
-                                </ExpansionPanelDetails>
-                            </ExpansionPanel>
-                            <ExpansionPanel>
-                                <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}
-                                                       aria-controls="panel1a-content" id="panel1a-header"
-                                                       style={{backgroundColor: "#ddd2ff"}}>
-                                    <div style={{width: "100%"}}>
-                                        <Typography className={classes.heading}>
-                                            Android Photolocker App
-                                        </Typography>
-                                    </div>
-                                </ExpansionPanelSummary>
-                                <ExpansionPanelDetails style={{backgroundColor: "#ddd2ff"}} className={classes.videoPanel}>
-                                    <DarkTextTypography variant={"body2"}>
-                                        {photoLockerAppSummary}
-                                    </DarkTextTypography>
-                                    <div className={classes.videoContainer}>
-                                        <CardMedia className={classes.youtubeVideo}
-                                                   src={"https://www.youtube.com/embed/RfoJ7mikJfg"} component="iframe"/>
-                                    </div>
-                                </ExpansionPanelDetails>
-                            </ExpansionPanel>
-                            <ExpansionPanel>
-                                <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}
-                                                       aria-controls="panel1a-content" id="panel1a-header"
-                                                       style={{backgroundColor: "#dcffcf"}}>
-                                    <div style={{width: "100%"}}>
-                                        <Typography className={classes.heading}>Number Classifier Demo</Typography>
-                                    </div>
-                                </ExpansionPanelSummary>
-                                <ExpansionPanelDetails className={classes.classifierDemoContainer} style={{backgroundColor: "#dcffcf"}}>
-                                    <div>
-                                        <DarkTextTypography variant="body2">
-                                            {digitClassifierDescription}
-                                        </DarkTextTypography>
-                                        <div style={{width: "100%", justifyContent: 'center', display: 'flex'}}>
-                                            <div className={classes.canvasContainer}>
-                                                <SignatureCanvas penColor={"black"} canvasProps={{width: canvasWidth, height:
-                                                    canvasHeight, className: 'sigCanvas'}} minWidth={penSize} minHeight={penSize}
-                                                                 ref={(ref) => { canvasRef = ref }}/>
-                                            </div>
+                                    <div style={{width: "100%", justifyContent: 'center', display: 'flex'}}>
+                                        <div className={classes.canvasContainer}>
+                                            <SignatureCanvas penColor={"black"} canvasProps={{width: canvasWidth, height:
+                                                canvasHeight, className: 'sigCanvas'}} minWidth={penSize} minHeight={penSize}
+                                                             ref={(ref) => { canvasRef = ref }}/>
                                         </div>
-                                        Div to align grid in center
-                                        <div style={{width: "100%", justifyContent: 'center', display: 'flex'}}>
-                                            <Grid container direction="row" justify="center" alignItems="center" spacing={1}
-                                                  className={classes.grid}>
-                                                <Grid item>
-                                                    <Button color="secondary" onClick={onRestoreClick}>
-                                                        <RestoreIcon className={classes.darkIcon}/>
-                                                    </Button>
-                                                </Grid>
-                                                <Grid item>
-                                                    <Button color="secondary" onClick={onSubmitClick}>
-                                                        <DoneIcon className={classes.darkIcon}/>
-                                                    </Button>
-                                                </Grid>
+                                    </div>
+                                    {/*Div to align grid in center*/}
+                                    <div style={{width: "100%", justifyContent: 'center', display: 'flex'}}>
+                                        <Grid container direction="row" justify="center" alignItems="center" spacing={1}
+                                              className={classes.grid}>
+                                            <Grid item>
+                                                <Button color="secondary" onClick={onRestoreClick}>
+                                                    <RestoreIcon className={classes.darkIcon}/>
+                                                </Button>
                                             </Grid>
-                                        </div>
-                                        <DarkTextTypography variant="body2">
-                                            {classifierExplanation}
-                                        </DarkTextTypography>
+                                            <Grid item>
+                                                <Button color="secondary" onClick={onSubmitClick}>
+                                                    <DoneIcon className={classes.darkIcon}/>
+                                                </Button>
+                                            </Grid>
+                                        </Grid>
                                     </div>
-                                </ExpansionPanelDetails>
-                            </ExpansionPanel>
-                        </div>
+                                    <DarkTextTypography variant="body2">
+                                        {classifierExplanation}
+                                    </DarkTextTypography>
+                                </div>
+                            </ExpansionPanelDetails>
+                        </ExpansionPanel>
                     </AnimateInQueue>
                 </Container>
             </div>
