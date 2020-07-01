@@ -53,6 +53,12 @@ import {
     isBrowser,
     isMobile
 } from "react-device-detect"
+import Drawer from '@material-ui/core/Drawer'
+import List from '@material-ui/core/List'
+import ListItem from '@material-ui/core/ListItem'
+import ListItemText from '@material-ui/core/ListItemText'
+import Toolbar from '@material-ui/core/Toolbar'
+import MenuIcon from '@material-ui/icons/Menu'
 
 const debug = false
 const scrollAnimationDuration = 500
@@ -80,6 +86,8 @@ function HomePage() {
     // whether or not to show dialog about digit classifier
     const [openDialog, setOpenDialog] = React.useState(false)
 
+    const [showDrawer, setShowDrawer] = React.useState(false)
+
     const [classifierPrediction, setPrediction] = React.useState("Unknown")
 
     // NOTE: DONT USE REFS FOR FUNCTIONAL COMPONENTS, SINCE THEY MIGHT GET DEREFENCED
@@ -106,7 +114,6 @@ function HomePage() {
         }
         setPrediction(predictions)
         setOpenDialog(true)
-
     }
 
     const copiedEmailAddress = () => {
@@ -115,6 +122,10 @@ function HomePage() {
 
     const handleCloseSnackBar = () => {
         setShowSnackbar(false)
+    }
+
+    const onDrawerClose = () => {
+        setShowDrawer(false)
     }
 
     const preventDefault = (event) => event.preventDefault()
@@ -215,59 +226,97 @@ function HomePage() {
             <HomePageBackground/>
             <EmailAddressCopiedDialog show={showSnackbar} handleClose={handleCloseSnackBar}/>
             <NumberClassificationDialog show={openDialog} prediction={classifierPrediction} onHide={handleCloseDialog}/>
-            <AppBar id={"navBar"} position="fixed" className={classes.navBar}>
-                <div style={{display: 'flex', justifyContent:'center'}}>
-                    <div id={"progressBar"} className={classes.progressBar}/>
-                    <Link id={"homeNavButton"} className={classes.navBarButton} to={"home"} spy={true}
-                          smooth={true} duration={scrollAnimationDuration}>
-                        <LightTextTypography variant={"body3"}>
-                            Home
-                        </LightTextTypography>
-                    </Link>
-                    <Link id={"aboutNavButton"} className={classes.navBarButton} to={"about"} spy={true}
-                          smooth={true} duration={scrollAnimationDuration}>
-                        <LightTextTypography variant={"body3"}>
-                            About
-                        </LightTextTypography>
-                    </Link>
-                    <Link id={"skillsNavButton"} className={classes.navBarButton} to={"skills"} spy={true}
-                          smooth={true} duration={scrollAnimationDuration}>
-                        <LightTextTypography variant={"body3"}>
-                            Skills
-                        </LightTextTypography>
-                    </Link>
-                    <Link id={"experienceNavButton"} className={classes.navBarButton} to={"experience"} spy={true}
-                          smooth={true} duration={scrollAnimationDuration}>
-                        <LightTextTypography variant={"body3"}>
-                            Experience
-                        </LightTextTypography>
-                    </Link>
-                    <Link id={"projectsNavButton"} className={classes.navBarButton} to={"projects"} spy={true}
-                          smooth={true} duration={scrollAnimationDuration}>
-                        <LightTextTypography variant={"body3"}>
-                            Projects
-                        </LightTextTypography>
-                    </Link>
-                    <Link id={"educationNavButton"} className={classes.navBarButton} to={"education"} spy={true}
-                          smooth={true} duration={scrollAnimationDuration}>
-                        <LightTextTypography variant={"body3"}>
-                            Education
-                        </LightTextTypography>
-                    </Link>
-                    <Link id={"hobbiesNavButton"} className={classes.navBarButton} to={"hobbies"} spy={true}
-                          smooth={true} duration={scrollAnimationDuration}>
-                        <LightTextTypography variant={"body3"}>
-                            Hobbies
-                        </LightTextTypography>
-                    </Link>
-                    <Link id={"contactNavButton"} className={classes.navBarButton} to={"contact"} spy={true}
-                          smooth={true} duration={scrollAnimationDuration}>
-                        <LightTextTypography variant={"body3"}>
-                            Contact
-                        </LightTextTypography>
-                    </Link>
-                </div>
+            <AppBar id={"navBar"} position="fixed" className={isMobile ? classes.navBarMobile : classes.navBar}>
+                <BrowserView>
+                    <div style={{display: 'flex', justifyContent:'center'}}>
+                        <div id={"progressBar"} className={classes.progressBar}/>
+                        <Link id={"homeNavButton"} className={classes.navBarButton} to={"home"} spy={true}
+                              smooth={true} duration={scrollAnimationDuration}>
+                            <LightTextTypography variant={"body3"}>
+                                Home
+                            </LightTextTypography>
+                        </Link>
+                        <Link id={"aboutNavButton"} className={classes.navBarButton} to={"about"} spy={true}
+                              smooth={true} duration={scrollAnimationDuration}>
+                            <LightTextTypography variant={"body3"}>
+                                About
+                            </LightTextTypography>
+                        </Link>
+                        <Link id={"skillsNavButton"} className={classes.navBarButton} to={"skills"} spy={true}
+                              smooth={true} duration={scrollAnimationDuration}>
+                            <LightTextTypography variant={"body3"}>
+                                Skills
+                            </LightTextTypography>
+                        </Link>
+                        <Link id={"experienceNavButton"} className={classes.navBarButton} to={"experience"} spy={true}
+                              smooth={true} duration={scrollAnimationDuration}>
+                            <LightTextTypography variant={"body3"}>
+                                Experience
+                            </LightTextTypography>
+                        </Link>
+                        <Link id={"projectsNavButton"} className={classes.navBarButton} to={"projects"} spy={true}
+                              smooth={true} duration={scrollAnimationDuration}>
+                            <LightTextTypography variant={"body3"}>
+                                Projects
+                            </LightTextTypography>
+                        </Link>
+                        <Link id={"educationNavButton"} className={classes.navBarButton} to={"education"} spy={true}
+                              smooth={true} duration={scrollAnimationDuration}>
+                            <LightTextTypography variant={"body3"}>
+                                Education
+                            </LightTextTypography>
+                        </Link>
+                        <Link id={"hobbiesNavButton"} className={classes.navBarButton} to={"hobbies"} spy={true}
+                              smooth={true} duration={scrollAnimationDuration}>
+                            <LightTextTypography variant={"body3"}>
+                                Hobbies
+                            </LightTextTypography>
+                        </Link>
+                        <Link id={"contactNavButton"} className={classes.navBarButton} to={"contact"} spy={true}
+                              smooth={true} duration={scrollAnimationDuration}>
+                            <LightTextTypography variant={"body3"}>
+                                Contact
+                            </LightTextTypography>
+                        </Link>
+                    </div>
+                </BrowserView>
+                <MobileView>
+                    <IconButton className={classes.menuIcon}>
+                        <MenuIcon/>
+                    </IconButton>
+                </MobileView>
             </AppBar>
+
+            <MobileView>
+                <Drawer anchor={"right"} open={showDrawer} onClose={onDrawerClose}>
+                    <List>
+                        <ListItem>
+                            <ListItemText>Home</ListItemText>
+                        </ListItem>
+                        <ListItem>
+                            <ListItemText>About</ListItemText>
+                        </ListItem>
+                        <ListItem>
+                            <ListItemText>Skills</ListItemText>
+                        </ListItem>
+                        <ListItem>
+                            <ListItemText>Experience</ListItemText>
+                        </ListItem>
+                        <ListItem>
+                            <ListItemText>Projects</ListItemText>
+                        </ListItem>
+                        <ListItem>
+                            <ListItemText>Education</ListItemText>
+                        </ListItem>
+                        <ListItem>
+                            <ListItemText>Hobbies</ListItemText>
+                        </ListItem>
+                        <ListItem>
+                            <ListItemText>Contact</ListItemText>
+                        </ListItem>
+                    </List>
+                </Drawer>
+            </MobileView>
 
             {/* padding is required so pose animation does not create unnecessary scrollbars */}
             <div style={{ paddingLeft: 20, paddingRight: 20}}>

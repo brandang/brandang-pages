@@ -25,6 +25,10 @@ export const styles = makeStyles((theme) => ({
         background: 'transparent',
         boxShadow: 'none',
     },
+    navBarMobile: {
+        background: '#434343',
+        boxShadow: 'none',
+    },
     progressBar: {
         width: "100px",
         position: "absolute",
@@ -108,6 +112,9 @@ export const styles = makeStyles((theme) => ({
         alignItems: 'flex-start',
         paddingTop: 10,
         paddingBottom: 150
+    },
+    menuIcon: {
+        color: '#ffffff',
     },
     skillsIcon: {
         color: '#ffffff',
