@@ -115,6 +115,7 @@ export const styles = makeStyles((theme) => ({
     },
     menuIcon: {
         color: '#ffffff',
+        marginRight: 20
     },
     skillsIcon: {
         color: '#ffffff',
@@ -233,5 +234,11 @@ export const styles = makeStyles((theme) => ({
         justifyContent: 'center',
         flexWrap: 'wrap',
         width: '100vw'
+    },
+    drawerList: {
+        backgroundColor: "#434343"
+    },
+    menuDrawer: {
+        backgroundColor: "#434343"
     }
 }))

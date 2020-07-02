@@ -128,6 +128,10 @@ function HomePage() {
         setShowDrawer(false)
     }
 
+    const onDrawerOpen = () => {
+        setShowDrawer(true)
+    }
+
     const preventDefault = (event) => event.preventDefault()
 
     useEffect(() => {
@@ -281,40 +285,64 @@ function HomePage() {
                     </div>
                 </BrowserView>
                 <MobileView>
-                    <IconButton className={classes.menuIcon}>
-                        <MenuIcon/>
-                    </IconButton>
+                    <div style={{display: 'flex', justifyContent: 'flex-end'}}>
+                        <IconButton className={classes.menuIcon} onClick={onDrawerOpen}>
+                            <MenuIcon/>
+                        </IconButton>
+                    </div>
                 </MobileView>
             </AppBar>
 
             <MobileView>
-                <Drawer anchor={"right"} open={showDrawer} onClose={onDrawerClose}>
-                    <List>
-                        <ListItem>
-                            <ListItemText>Home</ListItemText>
-                        </ListItem>
-                        <ListItem>
-                            <ListItemText>About</ListItemText>
-                        </ListItem>
-                        <ListItem>
-                            <ListItemText>Skills</ListItemText>
-                        </ListItem>
-                        <ListItem>
-                            <ListItemText>Experience</ListItemText>
-                        </ListItem>
-                        <ListItem>
-                            <ListItemText>Projects</ListItemText>
-                        </ListItem>
-                        <ListItem>
-                            <ListItemText>Education</ListItemText>
-                        </ListItem>
-                        <ListItem>
-                            <ListItemText>Hobbies</ListItemText>
-                        </ListItem>
-                        <ListItem>
-                            <ListItemText>Contact</ListItemText>
-                        </ListItem>
-                    </List>
+                <Drawer anchor={"right"} open={showDrawer} onClose={onDrawerClose} classes={{paper: classes.menuDrawer}}>
+                    <Link id={"homeNavButton"} className={classes.navBarButton} to={"home"} spy={true}
+                          smooth={true} duration={scrollAnimationDuration} onSetInactive={onDrawerClose}>
+                        <LightTextTypography variant={"body3"}>
+                            Home
+                        </LightTextTypography>
+                    </Link>
+                    <Link id={"aboutNavButton"} className={classes.navBarButton} to={"about"} spy={true}
+                          smooth={true} duration={scrollAnimationDuration} onSetInactive={onDrawerClose}>
+                        <LightTextTypography variant={"body3"}>
+                            About
+                        </LightTextTypography>
+                    </Link>
+                    <Link id={"skillsNavButton"} className={classes.navBarButton} to={"skills"} spy={true}
+                          smooth={true} duration={scrollAnimationDuration} onSetInactive={onDrawerClose}>
+                        <LightTextTypography variant={"body3"}>
+                            Skills
+                        </LightTextTypography>
+                    </Link>
+                    <Link id={"experienceNavButton"} className={classes.navBarButton} to={"experience"} spy={true}
+                          smooth={true} duration={scrollAnimationDuration} onSetInactive={onDrawerClose}>
+                        <LightTextTypography variant={"body3"}>
+                            Experience
+                        </LightTextTypography>
+                    </Link>
+                    <Link id={"projectsNavButton"} className={classes.navBarButton} to={"projects"} spy={true}
+                          smooth={true} duration={scrollAnimationDuration} onSetInactive={onDrawerClose}>
+                        <LightTextTypography variant={"body3"}>
+                            Projects
+                        </LightTextTypography>
+                    </Link>
+                    <Link id={"educationNavButton"} className={classes.navBarButton} to={"education"} spy={true}
+                          smooth={true} duration={scrollAnimationDuration} onSetInactive={onDrawerClose}>
+                        <LightTextTypography variant={"body3"}>
+                            Education
+                        </LightTextTypography>
+                    </Link>
+                    <Link id={"hobbiesNavButton"} className={classes.navBarButton} to={"hobbies"} spy={true}
+                          smooth={true} duration={scrollAnimationDuration} onSetInactive={onDrawerClose}>
+                        <LightTextTypography variant={"body3"}>
+                            Hobbies
+                        </LightTextTypography>
+                    </Link>
+                    <Link id={"contactNavButton"} className={classes.navBarButton} to={"contact"} spy={true}
+                          smooth={true} duration={scrollAnimationDuration} onSetInactive={onDrawerClose}>
+                        <LightTextTypography variant={"body3"}>
+                            Contact
+                        </LightTextTypography>
+                    </Link>
                 </Drawer>
             </MobileView>
 
