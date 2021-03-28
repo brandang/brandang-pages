@@ -228,6 +228,7 @@ function HomePage() {
     return (
         <ThemeProvider theme={theme}>
             <HomePageBackground/>
+            <div style={{zIndex: 1, position: "relative"}}>
             <EmailAddressCopiedDialog show={showSnackbar} handleClose={handleCloseSnackBar}/>
             <NumberClassificationDialog show={openDialog} prediction={classifierPrediction} onHide={handleCloseDialog}/>
             <AppBar id={"navBar"} position="fixed" className={isMobile ? classes.navBarMobile : classes.navBar}>
@@ -395,291 +396,296 @@ function HomePage() {
                 </Grid>
             </div>
 
-            <ScrollItem >
-                <div id="home" style={{height: '100vh', zIndex: 1, position: "relative"}}/>
-            </ScrollItem>
+            {/*for some reason, position relative makes it so that the horizontal line glitch no longer occurs*/}
+            <div style={{zIndex: "1", position: "relative"}}>
 
-            <div id={"about"} className={classes.blueBox}>
-                <Container className={classes.firstContainer}>
-                    <AnimateInQueue animateIn="animate__fadeIn" animateOnce={!debug}>
-                        <div style={{display: 'flex', justifyContent:'center'}}>
-                            <Avatar className={classes.lightIconContainer}>
-                                <PriorityHighIcon className={classes.aboutIcon}/>
-                            </Avatar>
-                        </div>
-                        <LightTextTypography align="center" variant="h3" className={classes.heading}>
-                            A little about me
-                        </LightTextTypography>
-                        <LightTextTypography align="center" variant="body1" gutterBottomm style={{paddingBottom: "20px"}}>
-                            {aboutMeBrief}
-                        </LightTextTypography>
-                    </AnimateInQueue>
-                </Container>
-            </div>
+                <ScrollItem >
+                    <div id="home" style={{height: '100vh', zIndex: 1, position: "relative"}}/>
+                </ScrollItem>
 
-            <div id={"skills"} className={classes.whiteBox}>
-                <BlueHeader/>
-                <Container className={classes.boxContainer}>
-                    <AnimateInQueue animateIn="animate__fadeIn" animateOnce={!debug}>
-                        <div style={{display: 'flex', justifyContent:'center'}}>
-                            <Avatar className={classes.darkIconContainer}>
-                                <CodeIcon className={classes.skillsIcon}/>
-                            </Avatar>
-                        </div>
-                        <DarkTextTypography align="center" variant="h3" gutterBottom
-                                            className={classes.heading}>
-                            My skills
-                        </DarkTextTypography>
-                        <div className={isMobile ? classes.skillsDisplayContainerMobile : classes.skillsDisplayContainer}>
-                            <RoundContainer colour={"#ff4d4d"}>
-                                Java
-                            </RoundContainer>
-                            <RoundContainer colour={"#009eb1"}>
-                                Python
-                            </RoundContainer>
-                            <RoundContainer className={classes.purpleRoundContainer} colour={"#9b5dff"}>
-                                JavaScript
-                            </RoundContainer>
-                            <RoundContainer colour={"#389500"}>
-                                C
-                            </RoundContainer>
-                            <RoundContainer colour={"#ff6d00"}>
-                                SQL
-                            </RoundContainer>
-                            <RoundContainer colour={"#566cff"}>
-                                CSS
-                            </RoundContainer>
-                            <RoundContainer colour={"#ff60aa"}>
-                                React
-                            </RoundContainer>
-                        </div>
-                        <DarkTextTypography align="center" variant="h4">
-                            And more!
-                        </DarkTextTypography>
-                    </AnimateInQueue>
-                </Container>
-            </div>
+                <div id={"about"} className={classes.blueBox}>
+                    <Container className={classes.firstContainer}>
+                        <AnimateInQueue animateIn="animate__fadeIn" animateOnce={!debug}>
+                            <div style={{display: 'flex', justifyContent:'center'}}>
+                                <Avatar className={classes.lightIconContainer}>
+                                    <PriorityHighIcon className={classes.aboutIcon}/>
+                                </Avatar>
+                            </div>
+                            <LightTextTypography align="center" variant="h3" className={classes.heading}>
+                                A little about me
+                            </LightTextTypography>
+                            <LightTextTypography align="center" variant="body1" gutterBottomm style={{paddingBottom: "20px"}}>
+                                {aboutMeBrief}
+                            </LightTextTypography>
+                        </AnimateInQueue>
+                    </Container>
+                </div>
 
-            <div id={"experience"} className={classes.orangeBox}>
-                <WhiteHeader/>
-                <Container className={classes.boxContainer}>
-                    <AnimateInQueue animateIn="animate__fadeIn" animateOnce={!debug}>
-                        <div style={{display: 'flex', justifyContent:'center'}}>
-                            <Avatar className={classes.lightIconContainer}>
-                                <WorkIcon className={classes.workIcon}/>
-                            </Avatar>
-                        </div>
-                        <LightTextTypography align="center" variant="h3" gutterBottom
-                                             className={classes.heading}>
-                            Work experience
-                        </LightTextTypography>
-                        <LightTextTypography align="center" variant="body1" gutterBottom>
-                            {myWorkExperienceInfo}
-                        </LightTextTypography>
-                    </AnimateInQueue>
-                </Container>
-            </div>
+                <div id={"skills"} className={classes.whiteBox}>
+                    <BlueHeader/>
+                    <Container className={classes.boxContainer}>
+                        <AnimateInQueue animateIn="animate__fadeIn" animateOnce={!debug}>
+                            <div style={{display: 'flex', justifyContent:'center'}}>
+                                <Avatar className={classes.darkIconContainer}>
+                                    <CodeIcon className={classes.skillsIcon}/>
+                                </Avatar>
+                            </div>
+                            <DarkTextTypography align="center" variant="h3" gutterBottom
+                                                className={classes.heading}>
+                                My skills
+                            </DarkTextTypography>
+                            <div className={isMobile ? classes.skillsDisplayContainerMobile : classes.skillsDisplayContainer}>
+                                <RoundContainer colour={"#ff4d4d"}>
+                                    Java
+                                </RoundContainer>
+                                <RoundContainer colour={"#009eb1"}>
+                                    Python
+                                </RoundContainer>
+                                <RoundContainer className={classes.purpleRoundContainer} colour={"#9b5dff"}>
+                                    JavaScript
+                                </RoundContainer>
+                                <RoundContainer colour={"#389500"}>
+                                    C
+                                </RoundContainer>
+                                <RoundContainer colour={"#ff6d00"}>
+                                    SQL
+                                </RoundContainer>
+                                <RoundContainer colour={"#566cff"}>
+                                    CSS
+                                </RoundContainer>
+                                <RoundContainer colour={"#ff60aa"}>
+                                    React
+                                </RoundContainer>
+                            </div>
+                            <DarkTextTypography align="center" variant="h4">
+                                And more!
+                            </DarkTextTypography>
+                        </AnimateInQueue>
+                    </Container>
+                </div>
 
-            <div id={"projects"} className={classes.whiteBox}>
-                <OrangeHeader/>
-                <Container className={classes.boxContainer}>
-                    <AnimateInQueue animateIn="animate__fadeIn" animateOnce={!debug}>
-                        <div style={{display: 'flex', justifyContent:'center'}}>
-                            <Avatar className={classes.darkIconContainer}>
-                                <BuildIcon className={classes.projectsIcon}/>
-                            </Avatar>
-                        </div>
+                <div id={"experience"} className={classes.orangeBox}>
+                    <WhiteHeader/>
+                    <Container className={classes.boxContainer}>
+                        <AnimateInQueue animateIn="animate__fadeIn" animateOnce={!debug}>
+                            <div style={{display: 'flex', justifyContent:'center'}}>
+                                <Avatar className={classes.lightIconContainer}>
+                                    <WorkIcon className={classes.workIcon}/>
+                                </Avatar>
+                            </div>
+                            <LightTextTypography align="center" variant="h3" gutterBottom
+                                                 className={classes.heading}>
+                                Work experience
+                            </LightTextTypography>
+                            <LightTextTypography align="center" variant="body1" gutterBottom>
+                                {myWorkExperienceInfo}
+                            </LightTextTypography>
+                        </AnimateInQueue>
+                    </Container>
+                </div>
 
-                        <DarkTextTypography align="center" variant="h3" gutterBottom
-                                            className={classes.heading}>
-                            My projects
-                        </DarkTextTypography>
-                        <DarkTextTypography align="center" variant="body1" gutterBottom>
-                            {myProjectsDescription}
-                        </DarkTextTypography>
+                <div id={"projects"} className={classes.whiteBox}>
+                    <OrangeHeader/>
+                    <Container className={classes.boxContainer}>
+                        <AnimateInQueue animateIn="animate__fadeIn" animateOnce={!debug}>
+                            <div style={{display: 'flex', justifyContent:'center'}}>
+                                <Avatar className={classes.darkIconContainer}>
+                                    <BuildIcon className={classes.projectsIcon}/>
+                                </Avatar>
+                            </div>
 
-                        <ExpansionPanel>
-                            <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}
-                                aria-controls="panel1a-content" id="panel1a-header"
-                                                   style={{backgroundColor: "#cbe9ff"}}>
-                                <div style={{width: "100%"}}>
-                                    <Typography className={classes.heading}>Android Notes App</Typography>
-                                </div>
-                            </ExpansionPanelSummary>
-                            <ExpansionPanelDetails style={{backgroundColor: "#cbe9ff"}} className={classes.videoPanel}>
-                                <DarkTextTypography variant={"body2"}>
-                                    {notesAppSummary}
-                                </DarkTextTypography>
-                                <CardMedia className={classes.youtubeVideo}
-                                           src={"https://www.youtube.com/embed/RfoJ7mikJfg"} component="iframe"/>
-                            </ExpansionPanelDetails>
-                        </ExpansionPanel>
-                        <ExpansionPanel>
-                            <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}
-                                                   aria-controls="panel1a-content" id="panel1a-header"
-                                                   style={{backgroundColor: "#ddd2ff"}}>
-                                <div style={{width: "100%"}}>
-                                    <Typography className={classes.heading}>
-                                        Android Photolocker App
-                                    </Typography>
-                                </div>
-                            </ExpansionPanelSummary>
-                            <ExpansionPanelDetails style={{backgroundColor: "#ddd2ff"}} className={classes.videoPanel}>
-                                <DarkTextTypography variant={"body2"}>
-                                    {photoLockerAppSummary}
-                                </DarkTextTypography>
-                                <CardMedia className={classes.youtubeVideo}
-                                           src={"https://www.youtube.com/embed/RfoJ7mikJfg"} component="iframe"/>
-                            </ExpansionPanelDetails>
-                        </ExpansionPanel>
-                        <ExpansionPanel>
-                            <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}
-                                                   aria-controls="panel1a-content" id="panel1a-header"
-                                                   style={{backgroundColor: "#dcffcf"}}>
-                                <div style={{width: "100%"}}>
-                                    <Typography className={classes.heading}>Number Classifier Demo</Typography>
-                                </div>
-                            </ExpansionPanelSummary>
-                            <ExpansionPanelDetails className={classes.classifierDemoContainer} style={{backgroundColor: "#dcffcf"}}>
-                                <div>
-                                    <DarkTextTypography variant="body2">
-                                        {digitClassifierDescription}
+                            <DarkTextTypography align="center" variant="h3" gutterBottom
+                                                className={classes.heading}>
+                                My projects
+                            </DarkTextTypography>
+                            <DarkTextTypography align="center" variant="body1" gutterBottom>
+                                {myProjectsDescription}
+                            </DarkTextTypography>
+
+                            <ExpansionPanel>
+                                <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}
+                                    aria-controls="panel1a-content" id="panel1a-header"
+                                                       style={{backgroundColor: "#cbe9ff"}}>
+                                    <div style={{width: "100%"}}>
+                                        <Typography className={classes.heading}>Android Notes App</Typography>
+                                    </div>
+                                </ExpansionPanelSummary>
+                                <ExpansionPanelDetails style={{backgroundColor: "#cbe9ff"}} className={classes.videoPanel}>
+                                    <DarkTextTypography variant={"body2"}>
+                                        {notesAppSummary}
                                     </DarkTextTypography>
-                                    <div style={{width: "100%", justifyContent: 'center', display: 'flex'}}>
-                                        <div className={classes.canvasContainer}>
-                                            <SignatureCanvas penColor={"black"} canvasProps={{width: canvasWidth, height:
-                                                canvasHeight, className: 'sigCanvas'}} minWidth={penSize} minHeight={penSize}
-                                                             ref={(ref) => { canvasRef = ref }}/>
+                                    <CardMedia className={classes.youtubeVideo}
+                                               src={"https://www.youtube.com/embed/RfoJ7mikJfg"} component="iframe"/>
+                                </ExpansionPanelDetails>
+                            </ExpansionPanel>
+                            <ExpansionPanel>
+                                <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}
+                                                       aria-controls="panel1a-content" id="panel1a-header"
+                                                       style={{backgroundColor: "#ddd2ff"}}>
+                                    <div style={{width: "100%"}}>
+                                        <Typography className={classes.heading}>
+                                            Android Photolocker App
+                                        </Typography>
+                                    </div>
+                                </ExpansionPanelSummary>
+                                <ExpansionPanelDetails style={{backgroundColor: "#ddd2ff"}} className={classes.videoPanel}>
+                                    <DarkTextTypography variant={"body2"}>
+                                        {photoLockerAppSummary}
+                                    </DarkTextTypography>
+                                    <CardMedia className={classes.youtubeVideo}
+                                               src={"https://www.youtube.com/embed/RfoJ7mikJfg"} component="iframe"/>
+                                </ExpansionPanelDetails>
+                            </ExpansionPanel>
+                            <ExpansionPanel>
+                                <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}
+                                                       aria-controls="panel1a-content" id="panel1a-header"
+                                                       style={{backgroundColor: "#dcffcf"}}>
+                                    <div style={{width: "100%"}}>
+                                        <Typography className={classes.heading}>Number Classifier Demo</Typography>
+                                    </div>
+                                </ExpansionPanelSummary>
+                                <ExpansionPanelDetails className={classes.classifierDemoContainer} style={{backgroundColor: "#dcffcf"}}>
+                                    <div>
+                                        <DarkTextTypography variant="body2">
+                                            {digitClassifierDescription}
+                                        </DarkTextTypography>
+                                        <div style={{width: "100%", justifyContent: 'center', display: 'flex'}}>
+                                            <div className={classes.canvasContainer}>
+                                                <SignatureCanvas penColor={"black"} canvasProps={{width: canvasWidth, height:
+                                                    canvasHeight, className: 'sigCanvas'}} minWidth={penSize} minHeight={penSize}
+                                                                 ref={(ref) => { canvasRef = ref }}/>
+                                            </div>
                                         </div>
-                                    </div>
-                                    {/*Div to align grid in center*/}
-                                    <div style={{width: "100%", justifyContent: 'center', display: 'flex'}}>
-                                        <Grid container direction="row" justify="center" alignItems="center" spacing={1}
-                                              className={classes.grid}>
-                                            <Grid item>
-                                                <Button color="secondary" onClick={onRestoreClick}>
-                                                    <RestoreIcon className={classes.darkIcon}/>
-                                                </Button>
+                                        {/*Div to align grid in center*/}
+                                        <div style={{width: "100%", justifyContent: 'center', display: 'flex'}}>
+                                            <Grid container direction="row" justify="center" alignItems="center" spacing={1}
+                                                  className={classes.grid}>
+                                                <Grid item>
+                                                    <Button color="secondary" onClick={onRestoreClick}>
+                                                        <RestoreIcon className={classes.darkIcon}/>
+                                                    </Button>
+                                                </Grid>
+                                                <Grid item>
+                                                    <Button color="secondary" onClick={onSubmitClick}>
+                                                        <DoneIcon className={classes.darkIcon}/>
+                                                    </Button>
+                                                </Grid>
                                             </Grid>
-                                            <Grid item>
-                                                <Button color="secondary" onClick={onSubmitClick}>
-                                                    <DoneIcon className={classes.darkIcon}/>
-                                                </Button>
-                                            </Grid>
-                                        </Grid>
+                                        </div>
+                                        <DarkTextTypography variant="body2">
+                                            {classifierExplanation}
+                                        </DarkTextTypography>
                                     </div>
-                                    <DarkTextTypography variant="body2">
-                                        {classifierExplanation}
-                                    </DarkTextTypography>
-                                </div>
-                            </ExpansionPanelDetails>
-                        </ExpansionPanel>
-                    </AnimateInQueue>
-                </Container>
-            </div>
+                                </ExpansionPanelDetails>
+                            </ExpansionPanel>
+                        </AnimateInQueue>
+                    </Container>
+                </div>
 
-            <div id={"education"} className={classes.purpleBox}>
-                <WhiteHeader/>
-                <Container className={classes.boxContainer}>
-                    <AnimateInQueue animateIn="animate__fadeIn" animateOnce={!debug}>
-                        <div style={{display: 'flex', justifyContent:'center'}}>
-                            <Avatar className={classes.lightIconContainer}>
-                                <SchoolIcon className={classes.educationIcon}/>
-                            </Avatar>
-                        </div>
-                        <LightTextTypography align="center" variant="h3" gutterBottom
-                                             className={classes.heading}>
-                            Education
-                        </LightTextTypography>
-                        <LightTextTypography align="center" variant="h4" gutterBottom
-                                             className={classes.heading}>
-                            University of Toronto
-                        </LightTextTypography>
-                        <LightTextTypography align="center" variant="h4" className={classes.heading}>
-                            2017 - Present
-                        </LightTextTypography>
-                        <LightTextTypography align="center" variant="body1" gutterBottom>
-                            {myEducationInfo}
-                        </LightTextTypography>
-                    </AnimateInQueue>
-                </Container>
-            </div>
+                <div id={"education"} className={classes.purpleBox}>
+                    <WhiteHeader/>
+                    <Container className={classes.boxContainer}>
+                        <AnimateInQueue animateIn="animate__fadeIn" animateOnce={!debug}>
+                            <div style={{display: 'flex', justifyContent:'center'}}>
+                                <Avatar className={classes.lightIconContainer}>
+                                    <SchoolIcon className={classes.educationIcon}/>
+                                </Avatar>
+                            </div>
+                            <LightTextTypography align="center" variant="h3" gutterBottom
+                                                 className={classes.heading}>
+                                Education
+                            </LightTextTypography>
+                            <LightTextTypography align="center" variant="h4" gutterBottom
+                                                 className={classes.heading}>
+                                University of Toronto
+                            </LightTextTypography>
+                            <LightTextTypography align="center" variant="h4" className={classes.heading}>
+                                2017 - Present
+                            </LightTextTypography>
+                            <LightTextTypography align="center" variant="body1" gutterBottom>
+                                {myEducationInfo}
+                            </LightTextTypography>
+                        </AnimateInQueue>
+                    </Container>
+                </div>
 
-            <div id={"hobbies"} className={classes.whiteBox}>
-                <PurpleHeader/>
-                <Container className={classes.boxContainer}>
-                    <AnimateInQueue animateIn="animate__fadeIn" animateOnce={!debug}>
-                        <div style={{display: 'flex', justifyContent:'center'}}>
-                            <Avatar className={classes.darkIconContainer}>
-                                <BrushIcon className={classes.hobbiesIcon}/>
-                            </Avatar>
-                        </div>
-                        <DarkTextTypography align="center" variant="h3" gutterBottom
-                                             className={classes.heading}>
-                            Hobbies and interests
-                        </DarkTextTypography>
-                        <DarkTextTypography align="center" variant="body1" gutterBottom
-                                             className={classes.heading}>
-                            {myHobbiesAndInterests}
-                        </DarkTextTypography>
-                    </AnimateInQueue>
-                </Container>
-            </div>
+                <div id={"hobbies"} className={classes.whiteBox}>
+                    <PurpleHeader/>
+                    <Container className={classes.boxContainer}>
+                        <AnimateInQueue animateIn="animate__fadeIn" animateOnce={!debug}>
+                            <div style={{display: 'flex', justifyContent:'center'}}>
+                                <Avatar className={classes.darkIconContainer}>
+                                    <BrushIcon className={classes.hobbiesIcon}/>
+                                </Avatar>
+                            </div>
+                            <DarkTextTypography align="center" variant="h3" gutterBottom
+                                                 className={classes.heading}>
+                                Hobbies and interests
+                            </DarkTextTypography>
+                            <DarkTextTypography align="center" variant="body1" gutterBottom
+                                                 className={classes.heading}>
+                                {myHobbiesAndInterests}
+                            </DarkTextTypography>
+                        </AnimateInQueue>
+                    </Container>
+                </div>
 
-            <div id={"contact"} className={classes.darkBlueBox}>
-                <WhiteHeader/>
-                <Container className={classes.boxContainer}>
-                    <AnimateInQueue animateIn="animate__fadeIn" animateOnce={!debug}>
-                        <div style={{display: 'flex', justifyContent:'center'}}>
-                            <Avatar className={classes.lightIconContainer}>
-                                <ChatIcon className={classes.chatIcon}/>
-                            </Avatar>
-                        </div>
-                        <LightTextTypography align="center" variant="h3" gutterBottom
-                                            className={classes.heading}>
-                            Contact me
-                        </LightTextTypography>
-                        <LightTextTypography align="center" variant="body1">
-                            If you wish to contact me, please email me at {" "}
-                            <CopyToClipboard text={emailAddress} onCopy={copiedEmailAddress}>
-                                {/*Prevent default just makes it so that it does not do anything.*/}
-                                <HyperLink href="" onClick={preventDefault}>
-                                    brandon.dang1234@gmail.com
+                <div id={"contact"} className={classes.darkBlueBox}>
+                    <WhiteHeader/>
+                    <Container className={classes.boxContainer}>
+                        <AnimateInQueue animateIn="animate__fadeIn" animateOnce={!debug}>
+                            <div style={{display: 'flex', justifyContent:'center'}}>
+                                <Avatar className={classes.lightIconContainer}>
+                                    <ChatIcon className={classes.chatIcon}/>
+                                </Avatar>
+                            </div>
+                            <LightTextTypography align="center" variant="h3" gutterBottom
+                                                className={classes.heading}>
+                                Contact me
+                            </LightTextTypography>
+                            <LightTextTypography align="center" variant="body1">
+                                If you wish to contact me, please email me at {" "}
+                                <CopyToClipboard text={emailAddress} onCopy={copiedEmailAddress}>
+                                    {/*Prevent default just makes it so that it does not do anything.*/}
+                                    <HyperLink href="" onClick={preventDefault}>
+                                        brandon.dang1234@gmail.com
+                                    </HyperLink>
+                                </CopyToClipboard>
+                            </LightTextTypography>
+                            <LightTextTypography align="center" variant="body1" gutterBottom>
+                                My resume is also available {" "}
+                                <HyperLink href={Resume}>
+                                    here.
                                 </HyperLink>
-                            </CopyToClipboard>
-                        </LightTextTypography>
-                        <LightTextTypography align="center" variant="body1" gutterBottom>
-                            My resume is also available {" "}
-                            <HyperLink href={Resume}>
-                                here.
-                            </HyperLink>
-                        </LightTextTypography>
-                        <Grid container direction="row" justify="center" alignItems="stretch" spacing={1}>
-                            <CopyToClipboard text={emailAddress} onCopy={copiedEmailAddress}>
-                                <IconButton className={classes.iconButton}>
-                                    <EmailIcon className={classes.emailIcon}/>
+                            </LightTextTypography>
+                            <Grid container direction="row" justify="center" alignItems="stretch" spacing={1}>
+                                <CopyToClipboard text={emailAddress} onCopy={copiedEmailAddress}>
+                                    <IconButton className={classes.iconButton}>
+                                        <EmailIcon className={classes.emailIcon}/>
+                                    </IconButton>
+                                </CopyToClipboard>
+                                <IconButton href={Resume} className={classes.iconButton}>
+                                    <FileCopyIcon className={classes.resumeIcon}/>
                                 </IconButton>
-                            </CopyToClipboard>
-                            <IconButton href={Resume} className={classes.iconButton}>
-                                <FileCopyIcon className={classes.resumeIcon}/>
-                            </IconButton>
-                        </Grid>
-                    </AnimateInQueue>
-                </Container>
-            </div>
+                            </Grid>
+                        </AnimateInQueue>
+                    </Container>
+                </div>
 
-            <div className={classes.darkGrayBox}>
-                <DarkBlueHeader/>
-                <Container className={classes.footerContainer}>
-                    <AnimateInQueue animateIn="animate__fadeIn" animateOnce={!debug}>
-                        <LightTextTypography align="center" variant="h4" gutterBottom>
-                            About this website
-                        </LightTextTypography>
-                        <LightTextTypography align="center" variant="body2" gutterBottom>
-                            {websiteDescription}
-                        </LightTextTypography>
-                    </AnimateInQueue>
-                </Container>
+                <div className={classes.darkGrayBox}>
+                    <DarkBlueHeader/>
+                    <Container className={classes.footerContainer}>
+                        <AnimateInQueue animateIn="animate__fadeIn" animateOnce={!debug}>
+                            <LightTextTypography align="center" variant="h4" gutterBottom>
+                                About this website
+                            </LightTextTypography>
+                            <LightTextTypography align="center" variant="body2" gutterBottom>
+                                {websiteDescription}
+                            </LightTextTypography>
+                        </AnimateInQueue>
+                    </Container>
+                </div>
+            </div>
             </div>
 
         </ThemeProvider>

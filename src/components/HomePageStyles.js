@@ -12,7 +12,7 @@ export const styles = makeStyles((theme) => ({
         position: "fixed",
         top: "0",
         left: "0",
-        zIndex: 0
+        zIndex: 1
     },
     skillsItem: {
         paddingBottom: "50px"
@@ -70,28 +70,28 @@ export const styles = makeStyles((theme) => ({
         paddingBottom: "0px",
         backgroundColor: "#E56B1F",
         position: "relative",
-        zIndex: 1
+        zIndex: 2
     },
     purpleBox: {
         paddingTop: "0px",
         paddingBottom: "0px",
         backgroundColor: "#961fe0",
         position: "relative",
-        zIndex: 1
+        zIndex: 2
     },
     darkBlueBox: {
         paddingTop: "0px",
         paddingBottom: "0px",
         backgroundColor: "#2a5a79",
         position: "relative",
-        zIndex: 1
+        zIndex: 2
     },
     darkGrayBox: {
         paddingTop: "0px",
         paddingBottom: "0px",
         backgroundColor: "#434343",
         position: "relative",
-        zIndex: 1
+        zIndex: 2
     },
     firstContainer: {
         minHeight: '70vh',
@@ -105,7 +105,7 @@ export const styles = makeStyles((theme) => ({
         justifyContent: 'center',
         alignItems: 'flex-start',
         paddingTop: 50,
-        paddingBottom: 50
+        paddingBottom: 50,
     },
     footerContainer: {
         justifyContent: 'center',
