@@ -1,8 +1,4 @@
-import React, {useEffect} from 'react'
 import {makeStyles} from "@material-ui/core/styles"
-
-export const canvasWidth = 200
-export const canvasHeight = 200
 
 export const styles = makeStyles((theme) => ({
     titleGrid: {
@@ -182,16 +178,6 @@ export const styles = makeStyles((theme) => ({
         height: "150px",
         padding: "10px",
         marginBottom: "20px",
-    },
-    canvasContainer: {
-        width: canvasWidth,
-        height:  canvasHeight,
-        marginTop: "20px",
-        border: '5px dotted #434343'
-    },
-    grid: {
-        marginBottom: "20px",
-        width: canvasWidth
     },
     youtubeVideo: {
         width: '100%',

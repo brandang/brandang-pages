@@ -1,7 +1,6 @@
 import { createMuiTheme } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
 import { withStyles } from '@material-ui/core/styles'
-import React from 'react'
 
 export const theme = createMuiTheme({
     palette: {
@@ -29,9 +28,6 @@ export const theme = createMuiTheme({
             fontSize: 20,
             lineHeight: 2
         },
-        body3: {
-            fontSize: 16,
-        },
         h1: {
             fontSize: 128
         },
@@ -41,6 +37,9 @@ export const theme = createMuiTheme({
         h3: {
             fontSize: 48
         },
+        h6: {
+            fontSize: 16,
+        }
     }
 })
 

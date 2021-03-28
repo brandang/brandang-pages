@@ -30,24 +30,23 @@ export default function ScrollItem(props) {
     let wrapRef = useRef()
 
     useEffect(() => {
+
+        const handleScroll = () => {
+            if (!wrapRef) {return}
+            let { top } = wrapRef.current.getBoundingClientRect()
+            top *= -1
+            if (top > windowHeight/3) {
+                wrapRef.current.style.opacity = '1'
+            }
+            else if (top < windowHeight/3) {
+                wrapRef.current.style.opacity = '0'
+            }
+        }
+
         // update on page resize or scroll events
         window.addEventListener('scroll', handleScroll);
         window.addEventListener('resize', handleScroll);
-    }, []);
-    // passing an empty array as second argument triggers the callback in useEffect only after the initial render
-    // thus replicating `componentDidMount` lifecycle behaviour
-
-    const handleScroll = () => {
-        if (!wrapRef) {return}
-        let { top } = wrapRef.current.getBoundingClientRect()
-        top *= -1
-        if (top > windowHeight/3) {
-            wrapRef.current.style.opacity = '1'
-        }
-        else if (top < windowHeight/3) {
-            wrapRef.current.style.opacity = '0'
-        }
-    }
+    });
 
     return (
         <div className={classes.scrollItem} ref={wrapRef}>

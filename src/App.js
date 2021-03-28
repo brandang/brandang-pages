@@ -1,7 +1,7 @@
 import React from 'react'
 import './App.css'
 import HomePage from "./pages/HomePage"
-import { Router, Link, Location } from '@reach/router'
+import { Router, Location } from '@reach/router'
 import posed, { PoseGroup } from 'react-pose'
 import { ParallaxProvider } from 'react-scroll-parallax'
 
@@ -23,9 +23,6 @@ const PosedRouter = ({ children }) => (
 );
 
 function App() {
-
-    let show = true
-
 
     return (
         <div className="App">

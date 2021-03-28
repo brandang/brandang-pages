@@ -4,14 +4,13 @@ import '../App.css'
 import Avatar from '@material-ui/core/Avatar'
 import Grid from '@material-ui/core/Grid'
 import Typography from '@material-ui/core/Typography'
-import Button from '@material-ui/core/Button'
 import { ThemeProvider } from '@material-ui/core/styles'
 import {LightTextTypography, DarkTextTypography, theme} from '../CustomTheme'
 import posed from 'react-pose'
 import {
-    aboutMeBrief, myProgrammingLanguages, myWorkExperienceInfo, myProjectsDescription, myEducationInfo,
-    myHobbiesAndInterests, emailAddress, websiteDescription, digitClassifierDescription, notesAppSummary,
-    photoLockerAppSummary, classifierExplanation
+    aboutMeBrief, myWorkExperienceInfo, myProjectsDescription, myEducationInfo,
+    myHobbiesAndInterests, emailAddress, websiteDescription, notesAppSummary,
+    photoLockerAppSummary
 } from "../Localisation"
 import Container from "@material-ui/core/Container"
 import ScrollItem from "../components/ScrollItem"
@@ -25,9 +24,6 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
 import SchoolIcon from '@material-ui/icons/School'
 import BrushIcon from '@material-ui/icons/Brush'
 import ChatIcon from '@material-ui/icons/Chat'
-import ExpansionPanel from '@material-ui/core/ExpansionPanel'
-import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary'
-import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails'
 import {CopyToClipboard} from "react-copy-to-clipboard"
 import {default as HyperLink} from "@material-ui/core/Link/Link"
 import Resume from "../files/Resume.pdf"
@@ -36,40 +32,28 @@ import EmailIcon from "@material-ui/icons/Email"
 import FileCopyIcon from "@material-ui/icons/FileCopy"
 import EmailAddressCopiedDialog from "../components/EmailAddressCopiedDialog"
 import RoundContainer from "../components/RoundContainer"
-import SignatureCanvas from "react-signature-canvas"
-import RestoreIcon from "@material-ui/icons/Restore"
-import DoneIcon from "@material-ui/icons/Done"
-import DigitClassifier from "../DigitClassifier"
-import {getDigitsFromCanvas} from "../CanvasHelpers"
-import NumberClassificationDialog from "../components/NumberClassificationDialog"
 import CardMedia from '@material-ui/core/CardMedia'
-import {styles, canvasWidth, canvasHeight} from "../components/HomePageStyles"
+import {styles} from "../components/HomePageStyles"
 import HomePageBackground from "../components/HomePageBackground"
 import AnimateInQueue from "../components/AnimateInQueue"
-import { Link, Element , Events, animateScroll as scroll, scrollSpy, scroller } from 'react-scroll'
+import { Link } from 'react-scroll'
 import {
     BrowserView,
     MobileView,
-    isBrowser,
     isMobile
 } from "react-device-detect"
 import Drawer from '@material-ui/core/Drawer'
-import List from '@material-ui/core/List'
-import ListItem from '@material-ui/core/ListItem'
-import ListItemText from '@material-ui/core/ListItemText'
-import Toolbar from '@material-ui/core/Toolbar'
 import MenuIcon from '@material-ui/icons/Menu'
+import {Accordion, AccordionDetails, AccordionSummary} from "@material-ui/core";
 
 const debug = false
 const scrollAnimationDuration = 500
-
-const penSize = 10
 
 const ItemPoseContainer = posed.div({
     enter: { staggerChildren: 500, delayChildren: 500 }
 });
 
-const Item = posed.p({
+const Item = posed.div({
     enter: { y: 0, opacity: 1 },
     exit: { y: -50, opacity: 0 }
 });
@@ -83,38 +67,7 @@ function HomePage() {
     // whether or not to show snackbar about email address being copied to clipboard
     const [showSnackbar, setShowSnackbar] = React.useState(false)
 
-    // whether or not to show dialog about digit classifier
-    const [openDialog, setOpenDialog] = React.useState(false)
-
     const [showDrawer, setShowDrawer] = React.useState(false)
-
-    const [classifierPrediction, setPrediction] = React.useState("Unknown")
-
-    // NOTE: DONT USE REFS FOR FUNCTIONAL COMPONENTS, SINCE THEY MIGHT GET DEREFENCED
-    let canvasRef = React.createRef()
-
-    const onRestoreClick = () => {
-        canvasRef.clear()
-    }
-
-    const handleCloseDialog = () => {
-        setOpenDialog(false)
-    }
-
-    const classifier = new DigitClassifier()
-
-    const onSubmitClick = () => {
-        const trimmedCanvas = canvasRef.getTrimmedCanvas()
-        // console.log(canvasRef.toDataURL())
-        const digits = getDigitsFromCanvas(trimmedCanvas, trimmedCanvas.width, trimmedCanvas.height)
-        let predictions = ""
-        for (let i in digits) {
-            const digit = digits[i]
-            predictions += classifier.predict(digit, 3)
-        }
-        setPrediction(predictions)
-        setOpenDialog(true)
-    }
 
     const copiedEmailAddress = () => {
         setShowSnackbar(true)
@@ -137,42 +90,41 @@ function HomePage() {
     useEffect(() => {
         // this function runs whenever page finished loading
 
+        // updates components as needed when window resizes
+        const handleWindowResize = () => {
+            setWindowDimensions([window.innerWidth, window.innerHeight])
+            updateProgressBar(lastSelectedItem)
+        }
+
+        const onScroll = () => {
+            updateNavBar()
+        }
+
+        const updateNavBar = () => {
+            // mobile does not have this
+            if (isMobile) {return}
+            const navBar = document.getElementById("navBar")
+            const scrollY = window.scrollY
+            if (scrollY >= windowDimensions[1] * 0.2) {
+                navBar.style.backgroundColor = "#434343"
+            } else {
+                navBar.style.backgroundColor = "transparent"
+            }
+            updateProgressBar(scrollY)
+        }
+
         // update on page resize or scroll events
         window.addEventListener('resize', handleWindowResize)
         // update whenever page scrolls
         window.addEventListener('scroll', onScroll)
 
         updateNavBar()
-    }, []);
+    });
     // passing an empty array as second argument triggers the callback in useEffect only after the initial render
     // thus replicating `componentDidMount` lifecycle behaviour
 
-    // updates components as needed when window resizes
-    const handleWindowResize = () => {
-        setWindowDimensions([window.innerWidth, window.innerHeight])
-        updateProgressBar(lastSelectedItem)
-    }
-
-    const onScroll = () => {
-        updateNavBar()
-    }
-
-    const updateNavBar = () => {
-        // mobile does not have this
-        if (isMobile) {return}
-        const navBar = document.getElementById("navBar")
-        const scrollY = window.scrollY
-        if (scrollY >= windowDimensions[1] * 0.2) {
-            navBar.style.backgroundColor = "#434343"
-        } else {
-            navBar.style.backgroundColor = "transparent"
-        }
-        updateProgressBar(scrollY)
-    }
-
     // for determining which function to call when user resizes window
     let lastSelectedItem = null
-    let selectedItemIndex = 0
 
     const updateProgressBar = (scrollY) => {
         // mobile does not have this
@@ -230,56 +182,55 @@ function HomePage() {
             <HomePageBackground/>
             <div style={{zIndex: 1, position: "relative"}}>
             <EmailAddressCopiedDialog show={showSnackbar} handleClose={handleCloseSnackBar}/>
-            <NumberClassificationDialog show={openDialog} prediction={classifierPrediction} onHide={handleCloseDialog}/>
             <AppBar id={"navBar"} position="fixed" className={isMobile ? classes.navBarMobile : classes.navBar}>
                 <BrowserView>
                     <div style={{display: 'flex', justifyContent:'center'}}>
                         <div id={"progressBar"} className={classes.progressBar}/>
                         <Link id={"homeNavButton"} className={classes.navBarButton} to={"home"} spy={true}
                               smooth={true} duration={scrollAnimationDuration}>
-                            <LightTextTypography variant={"body3"}>
+                            <LightTextTypography variant={"h6"}>
                                 Home
                             </LightTextTypography>
                         </Link>
                         <Link id={"aboutNavButton"} className={classes.navBarButton} to={"about"} spy={true}
                               smooth={true} duration={scrollAnimationDuration}>
-                            <LightTextTypography variant={"body3"}>
+                            <LightTextTypography variant={"h6"}>
                                 About
                             </LightTextTypography>
                         </Link>
                         <Link id={"skillsNavButton"} className={classes.navBarButton} to={"skills"} spy={true}
                               smooth={true} duration={scrollAnimationDuration}>
-                            <LightTextTypography variant={"body3"}>
+                            <LightTextTypography variant={"h6"}>
                                 Skills
                             </LightTextTypography>
                         </Link>
                         <Link id={"experienceNavButton"} className={classes.navBarButton} to={"experience"} spy={true}
                               smooth={true} duration={scrollAnimationDuration}>
-                            <LightTextTypography variant={"body3"}>
+                            <LightTextTypography variant={"h6"}>
                                 Experience
                             </LightTextTypography>
                         </Link>
                         <Link id={"projectsNavButton"} className={classes.navBarButton} to={"projects"} spy={true}
                               smooth={true} duration={scrollAnimationDuration}>
-                            <LightTextTypography variant={"body3"}>
+                            <LightTextTypography variant={"h6"}>
                                 Projects
                             </LightTextTypography>
                         </Link>
                         <Link id={"educationNavButton"} className={classes.navBarButton} to={"education"} spy={true}
                               smooth={true} duration={scrollAnimationDuration}>
-                            <LightTextTypography variant={"body3"}>
+                            <LightTextTypography variant={"h6"}>
                                 Education
                             </LightTextTypography>
                         </Link>
                         <Link id={"hobbiesNavButton"} className={classes.navBarButton} to={"hobbies"} spy={true}
                               smooth={true} duration={scrollAnimationDuration}>
-                            <LightTextTypography variant={"body3"}>
+                            <LightTextTypography variant={"h6"}>
                                 Hobbies
                             </LightTextTypography>
                         </Link>
                         <Link id={"contactNavButton"} className={classes.navBarButton} to={"contact"} spy={true}
                               smooth={true} duration={scrollAnimationDuration}>
-                            <LightTextTypography variant={"body3"}>
+                            <LightTextTypography variant={"h6"}>
                                 Contact
                             </LightTextTypography>
                         </Link>
@@ -298,49 +249,49 @@ function HomePage() {
                 <Drawer anchor={"right"} open={showDrawer} onClose={onDrawerClose} classes={{paper: classes.menuDrawer}}>
                     <Link id={"homeNavButton"} className={classes.navBarButton} to={"home"} spy={true}
                           smooth={true} duration={scrollAnimationDuration} onSetInactive={onDrawerClose}>
-                        <LightTextTypography variant={"body3"}>
+                        <LightTextTypography variant={"h6"}>
                             Home
                         </LightTextTypography>
                     </Link>
                     <Link id={"aboutNavButton"} className={classes.navBarButton} to={"about"} spy={true}
                           smooth={true} duration={scrollAnimationDuration} onSetInactive={onDrawerClose}>
-                        <LightTextTypography variant={"body3"}>
+                        <LightTextTypography variant={"h6"}>
                             About
                         </LightTextTypography>
                     </Link>
                     <Link id={"skillsNavButton"} className={classes.navBarButton} to={"skills"} spy={true}
                           smooth={true} duration={scrollAnimationDuration} onSetInactive={onDrawerClose}>
-                        <LightTextTypography variant={"body3"}>
+                        <LightTextTypography variant={"h6"}>
                             Skills
                         </LightTextTypography>
                     </Link>
                     <Link id={"experienceNavButton"} className={classes.navBarButton} to={"experience"} spy={true}
                           smooth={true} duration={scrollAnimationDuration} onSetInactive={onDrawerClose}>
-                        <LightTextTypography variant={"body3"}>
+                        <LightTextTypography variant={"h6"}>
                             Experience
                         </LightTextTypography>
                     </Link>
                     <Link id={"projectsNavButton"} className={classes.navBarButton} to={"projects"} spy={true}
                           smooth={true} duration={scrollAnimationDuration} onSetInactive={onDrawerClose}>
-                        <LightTextTypography variant={"body3"}>
+                        <LightTextTypography variant={"h6"}>
                             Projects
                         </LightTextTypography>
                     </Link>
                     <Link id={"educationNavButton"} className={classes.navBarButton} to={"education"} spy={true}
                           smooth={true} duration={scrollAnimationDuration} onSetInactive={onDrawerClose}>
-                        <LightTextTypography variant={"body3"}>
+                        <LightTextTypography variant={"h6"}>
                             Education
                         </LightTextTypography>
                     </Link>
                     <Link id={"hobbiesNavButton"} className={classes.navBarButton} to={"hobbies"} spy={true}
                           smooth={true} duration={scrollAnimationDuration} onSetInactive={onDrawerClose}>
-                        <LightTextTypography variant={"body3"}>
+                        <LightTextTypography variant={"h6"}>
                             Hobbies
                         </LightTextTypography>
                     </Link>
                     <Link id={"contactNavButton"} className={classes.navBarButton} to={"contact"} spy={true}
                           smooth={true} duration={scrollAnimationDuration} onSetInactive={onDrawerClose}>
-                        <LightTextTypography variant={"body3"}>
+                        <LightTextTypography variant={"h6"}>
                             Contact
                         </LightTextTypography>
                     </Link>
@@ -349,10 +300,10 @@ function HomePage() {
 
             {/* padding is required so pose animation does not create unnecessary scrollbars */}
             <div style={{ paddingLeft: 20, paddingRight: 20}}>
-                <Grid container direction="row" justify="flex-start" alignItems="center" alignContent="center"
+                <Grid container direction="row" alignItems="center" alignContent="center"
                       justify={"center"} className={classes.titleGrid}>
                     <BrowserView>
-                        <Grid item direction="column">
+                        <Grid item >
                             <ItemPoseContainer>
                                 <Item>
                                     <LightTextTypography align={"left"} variant="h2">
@@ -373,7 +324,7 @@ function HomePage() {
                         </Grid>
                     </BrowserView>
                     <MobileView>
-                        <Grid item direction="column" >
+                        <Grid>
                             <ItemPoseContainer>
                                 <Item>
                                     <LightTextTypography align={"left"} variant="h4">
@@ -414,7 +365,7 @@ function HomePage() {
                             <LightTextTypography align="center" variant="h3" className={classes.heading}>
                                 A little about me
                             </LightTextTypography>
-                            <LightTextTypography align="center" variant="body1" gutterBottomm style={{paddingBottom: "20px"}}>
+                            <LightTextTypography align="center" variant="body1" gutterBottom style={{paddingBottom: "20px"}}>
                                 {aboutMeBrief}
                             </LightTextTypography>
                         </AnimateInQueue>
@@ -441,7 +392,7 @@ function HomePage() {
                                 <RoundContainer colour={"#009eb1"}>
                                     Python
                                 </RoundContainer>
-                                <RoundContainer className={classes.purpleRoundContainer} colour={"#9b5dff"}>
+                                <RoundContainer colour={"#9b5dff"}>
                                     JavaScript
                                 </RoundContainer>
                                 <RoundContainer colour={"#389500"}>
@@ -502,24 +453,24 @@ function HomePage() {
                                 {myProjectsDescription}
                             </DarkTextTypography>
 
-                            <ExpansionPanel>
-                                <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}
+                            <Accordion>
+                                <AccordionSummary expandIcon={<ExpandMoreIcon />}
                                     aria-controls="panel1a-content" id="panel1a-header"
                                                        style={{backgroundColor: "#cbe9ff"}}>
                                     <div style={{width: "100%"}}>
                                         <Typography className={classes.heading}>Android Notes App</Typography>
                                     </div>
-                                </ExpansionPanelSummary>
-                                <ExpansionPanelDetails style={{backgroundColor: "#cbe9ff"}} className={classes.videoPanel}>
+                                </AccordionSummary>
+                                <AccordionDetails style={{backgroundColor: "#cbe9ff"}} className={classes.videoPanel}>
                                     <DarkTextTypography variant={"body2"}>
                                         {notesAppSummary}
                                     </DarkTextTypography>
                                     <CardMedia className={classes.youtubeVideo}
                                                src={"https://www.youtube.com/embed/RfoJ7mikJfg"} component="iframe"/>
-                                </ExpansionPanelDetails>
-                            </ExpansionPanel>
-                            <ExpansionPanel>
-                                <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}
+                                </AccordionDetails>
+                            </Accordion>
+                            <Accordion>
+                                <AccordionSummary expandIcon={<ExpandMoreIcon />}
                                                        aria-controls="panel1a-content" id="panel1a-header"
                                                        style={{backgroundColor: "#ddd2ff"}}>
                                     <div style={{width: "100%"}}>
@@ -527,57 +478,15 @@ function HomePage() {
                                             Android Photolocker App
                                         </Typography>
                                     </div>
-                                </ExpansionPanelSummary>
-                                <ExpansionPanelDetails style={{backgroundColor: "#ddd2ff"}} className={classes.videoPanel}>
+                                </AccordionSummary>
+                                <AccordionDetails style={{backgroundColor: "#ddd2ff"}} className={classes.videoPanel}>
                                     <DarkTextTypography variant={"body2"}>
                                         {photoLockerAppSummary}
                                     </DarkTextTypography>
                                     <CardMedia className={classes.youtubeVideo}
                                                src={"https://www.youtube.com/embed/RfoJ7mikJfg"} component="iframe"/>
-                                </ExpansionPanelDetails>
-                            </ExpansionPanel>
-                            <ExpansionPanel>
-                                <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}
-                                                       aria-controls="panel1a-content" id="panel1a-header"
-                                                       style={{backgroundColor: "#dcffcf"}}>
-                                    <div style={{width: "100%"}}>
-                                        <Typography className={classes.heading}>Number Classifier Demo</Typography>
-                                    </div>
-                                </ExpansionPanelSummary>
-                                <ExpansionPanelDetails className={classes.classifierDemoContainer} style={{backgroundColor: "#dcffcf"}}>
-                                    <div>
-                                        <DarkTextTypography variant="body2">
-                                            {digitClassifierDescription}
-                                        </DarkTextTypography>
-                                        <div style={{width: "100%", justifyContent: 'center', display: 'flex'}}>
-                                            <div className={classes.canvasContainer}>
-                                                <SignatureCanvas penColor={"black"} canvasProps={{width: canvasWidth, height:
-                                                    canvasHeight, className: 'sigCanvas'}} minWidth={penSize} minHeight={penSize}
-                                                                 ref={(ref) => { canvasRef = ref }}/>
-                                            </div>
-                                        </div>
-                                        {/*Div to align grid in center*/}
-                                        <div style={{width: "100%", justifyContent: 'center', display: 'flex'}}>
-                                            <Grid container direction="row" justify="center" alignItems="center" spacing={1}
-                                                  className={classes.grid}>
-                                                <Grid item>
-                                                    <Button color="secondary" onClick={onRestoreClick}>
-                                                        <RestoreIcon className={classes.darkIcon}/>
-                                                    </Button>
-                                                </Grid>
-                                                <Grid item>
-                                                    <Button color="secondary" onClick={onSubmitClick}>
-                                                        <DoneIcon className={classes.darkIcon}/>
-                                                    </Button>
-                                                </Grid>
-                                            </Grid>
-                                        </div>
-                                        <DarkTextTypography variant="body2">
-                                            {classifierExplanation}
-                                        </DarkTextTypography>
-                                    </div>
-                                </ExpansionPanelDetails>
-                            </ExpansionPanel>
+                                </AccordionDetails>
+                            </Accordion>
                         </AnimateInQueue>
                     </Container>
                 </div>
