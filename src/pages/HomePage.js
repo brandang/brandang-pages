@@ -8,7 +8,7 @@ import { ThemeProvider } from '@material-ui/core/styles'
 import {LightTextTypography, DarkTextTypography, theme} from '../CustomTheme'
 import posed from 'react-pose'
 import {
-    aboutMeBrief, myWorkExperienceInfo, myProjectsDescription, myEducationInfo,
+    aboutMeBrief, myWorkExperienceInfoPart1, myWorkExperienceInfoPart2, myProjectsDescription, myEducationInfo,
     myHobbiesAndInterests, emailAddress, websiteDescription, notesAppSummary,
     photoLockerAppSummary
 } from "../Localisation"
@@ -16,6 +16,8 @@ import Container from "@material-ui/core/Container"
 import ScrollItem from "../components/ScrollItem"
 import {BlueHeader, WhiteHeader, OrangeHeader, PurpleHeader, DarkBlueHeader} from "../components/Headers"
 import AppBar from "@material-ui/core/AppBar"
+import HomeIcon from '@material-ui/icons/Home';
+import InfoIcon from '@material-ui/icons/Info';
 import PriorityHighIcon from '@material-ui/icons/PriorityHigh'
 import CodeIcon from '@material-ui/icons/Code'
 import WorkIcon from '@material-ui/icons/Work'
@@ -24,6 +26,13 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
 import SchoolIcon from '@material-ui/icons/School'
 import BrushIcon from '@material-ui/icons/Brush'
 import ChatIcon from '@material-ui/icons/Chat'
+import MenuIcon from '@material-ui/icons/Menu';
+import Drawer from '@material-ui/core/Drawer';
+import Divider from '@material-ui/core/Divider';
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemText from '@material-ui/core/ListItemText';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
 import {CopyToClipboard} from "react-copy-to-clipboard"
 import {default as HyperLink} from "@material-ui/core/Link/Link"
 import Resume from "../files/Resume.pdf"
@@ -39,12 +48,11 @@ import AnimateInQueue from "../components/AnimateInQueue"
 import { Link } from 'react-scroll'
 import {
     BrowserView,
-    MobileView,
     isMobile
 } from "react-device-detect"
-import Drawer from '@material-ui/core/Drawer'
-import MenuIcon from '@material-ui/icons/Menu'
+import { useMediaQuery } from 'react-responsive'
 import {Accordion, AccordionDetails, AccordionSummary} from "@material-ui/core";
+import {Brush} from "@material-ui/icons";
 
 const debug = false
 const scrollAnimationDuration = 500
@@ -64,10 +72,27 @@ function HomePage() {
 
     const [windowDimensions, setWindowDimensions] = useState([window.innerWidth, window.innerHeight])
 
+    const isSmallScreen = useMediaQuery({
+        query: '(max-width: 992px)'
+    })
+
+    const isExtraSmallScreen = useMediaQuery({
+        query: '(max-width: 800px)'
+    })
+
+    // Anchor for main menu.
+    const [mainMenuOpen, setMainMenuOpen] = React.useState(false);
+
+    const handleMainMenuClose = () => {
+        setMainMenuOpen(false);
+    };
+
+    const handleMainMenuToggle = () => {
+        setMainMenuOpen((prevOpen) => !prevOpen);
+    };
+
     // whether or not to show snackbar about email address being copied to clipboard
     const [showSnackbar, setShowSnackbar] = React.useState(false)
-
-    const [showDrawer, setShowDrawer] = React.useState(false)
 
     const copiedEmailAddress = () => {
         setShowSnackbar(true)
@@ -77,14 +102,6 @@ function HomePage() {
         setShowSnackbar(false)
     }
 
-    const onDrawerClose = () => {
-        setShowDrawer(false)
-    }
-
-    const onDrawerOpen = () => {
-        setShowDrawer(true)
-    }
-
     const preventDefault = (event) => event.preventDefault()
 
     useEffect(() => {
@@ -92,7 +109,6 @@ function HomePage() {
 
         // updates components as needed when window resizes
         const handleWindowResize = () => {
-            setWindowDimensions([window.innerWidth, window.innerHeight])
             updateProgressBar(lastSelectedItem)
         }
 
@@ -101,8 +117,6 @@ function HomePage() {
         }
 
         const updateNavBar = () => {
-            // mobile does not have this
-            if (isMobile) {return}
             const navBar = document.getElementById("navBar")
             const scrollY = window.scrollY
             if (scrollY >= windowDimensions[1] * 0.2) {
@@ -110,7 +124,11 @@ function HomePage() {
             } else {
                 navBar.style.backgroundColor = "transparent"
             }
-            updateProgressBar(scrollY)
+
+            if (!isExtraSmallScreen) {
+                updateProgressBar(scrollY)
+                handleMainMenuClose()
+            }
         }
 
         // update on page resize or scroll events
@@ -182,121 +200,150 @@ function HomePage() {
             <HomePageBackground/>
             <div style={{zIndex: 1, position: "relative"}}>
             <EmailAddressCopiedDialog show={showSnackbar} handleClose={handleCloseSnackBar}/>
-            <AppBar id={"navBar"} position="fixed" className={isMobile ? classes.navBarMobile : classes.navBar}>
-                <BrowserView>
-                    <div style={{display: 'flex', justifyContent:'center'}}>
-                        <div id={"progressBar"} className={classes.progressBar}/>
-                        <Link id={"homeNavButton"} className={classes.navBarButton} to={"home"} spy={true}
-                              smooth={true} duration={scrollAnimationDuration}>
-                            <LightTextTypography variant={"h6"}>
-                                Home
-                            </LightTextTypography>
-                        </Link>
-                        <Link id={"aboutNavButton"} className={classes.navBarButton} to={"about"} spy={true}
-                              smooth={true} duration={scrollAnimationDuration}>
-                            <LightTextTypography variant={"h6"}>
-                                About
-                            </LightTextTypography>
-                        </Link>
-                        <Link id={"skillsNavButton"} className={classes.navBarButton} to={"skills"} spy={true}
-                              smooth={true} duration={scrollAnimationDuration}>
-                            <LightTextTypography variant={"h6"}>
-                                Skills
-                            </LightTextTypography>
-                        </Link>
-                        <Link id={"experienceNavButton"} className={classes.navBarButton} to={"experience"} spy={true}
-                              smooth={true} duration={scrollAnimationDuration}>
-                            <LightTextTypography variant={"h6"}>
-                                Experience
-                            </LightTextTypography>
-                        </Link>
-                        <Link id={"projectsNavButton"} className={classes.navBarButton} to={"projects"} spy={true}
-                              smooth={true} duration={scrollAnimationDuration}>
-                            <LightTextTypography variant={"h6"}>
-                                Projects
-                            </LightTextTypography>
-                        </Link>
-                        <Link id={"educationNavButton"} className={classes.navBarButton} to={"education"} spy={true}
-                              smooth={true} duration={scrollAnimationDuration}>
-                            <LightTextTypography variant={"h6"}>
-                                Education
-                            </LightTextTypography>
-                        </Link>
-                        <Link id={"hobbiesNavButton"} className={classes.navBarButton} to={"hobbies"} spy={true}
-                              smooth={true} duration={scrollAnimationDuration}>
-                            <LightTextTypography variant={"h6"}>
-                                Hobbies
-                            </LightTextTypography>
-                        </Link>
-                        <Link id={"contactNavButton"} className={classes.navBarButton} to={"contact"} spy={true}
-                              smooth={true} duration={scrollAnimationDuration}>
-                            <LightTextTypography variant={"h6"}>
-                                Contact
-                            </LightTextTypography>
-                        </Link>
-                    </div>
-                </BrowserView>
-                <MobileView>
-                    <div style={{display: 'flex', justifyContent: 'flex-end'}}>
-                        <IconButton className={classes.menuIcon} onClick={onDrawerOpen}>
-                            <MenuIcon/>
-                        </IconButton>
-                    </div>
-                </MobileView>
-            </AppBar>
-
-            <MobileView>
-                <Drawer anchor={"right"} open={showDrawer} onClose={onDrawerClose} classes={{paper: classes.menuDrawer}}>
+            <AppBar id={"navBar"} position="fixed" className={classes.navBar}>
+                <div style={{display: isExtraSmallScreen ? 'none' : 'flex', justifyContent:'center'}}>
+                    <div id={"progressBar"} className={classes.progressBar}/>
                     <Link id={"homeNavButton"} className={classes.navBarButton} to={"home"} spy={true}
-                          smooth={true} duration={scrollAnimationDuration} onSetInactive={onDrawerClose}>
+                          smooth={true} duration={scrollAnimationDuration}>
                         <LightTextTypography variant={"h6"}>
                             Home
                         </LightTextTypography>
                     </Link>
                     <Link id={"aboutNavButton"} className={classes.navBarButton} to={"about"} spy={true}
-                          smooth={true} duration={scrollAnimationDuration} onSetInactive={onDrawerClose}>
+                          smooth={true} duration={scrollAnimationDuration}>
                         <LightTextTypography variant={"h6"}>
                             About
                         </LightTextTypography>
                     </Link>
                     <Link id={"skillsNavButton"} className={classes.navBarButton} to={"skills"} spy={true}
-                          smooth={true} duration={scrollAnimationDuration} onSetInactive={onDrawerClose}>
+                          smooth={true} duration={scrollAnimationDuration}>
                         <LightTextTypography variant={"h6"}>
                             Skills
                         </LightTextTypography>
                     </Link>
                     <Link id={"experienceNavButton"} className={classes.navBarButton} to={"experience"} spy={true}
-                          smooth={true} duration={scrollAnimationDuration} onSetInactive={onDrawerClose}>
+                          smooth={true} duration={scrollAnimationDuration}>
                         <LightTextTypography variant={"h6"}>
                             Experience
                         </LightTextTypography>
                     </Link>
                     <Link id={"projectsNavButton"} className={classes.navBarButton} to={"projects"} spy={true}
-                          smooth={true} duration={scrollAnimationDuration} onSetInactive={onDrawerClose}>
+                          smooth={true} duration={scrollAnimationDuration}>
                         <LightTextTypography variant={"h6"}>
                             Projects
                         </LightTextTypography>
                     </Link>
                     <Link id={"educationNavButton"} className={classes.navBarButton} to={"education"} spy={true}
-                          smooth={true} duration={scrollAnimationDuration} onSetInactive={onDrawerClose}>
+                          smooth={true} duration={scrollAnimationDuration}>
                         <LightTextTypography variant={"h6"}>
                             Education
                         </LightTextTypography>
                     </Link>
                     <Link id={"hobbiesNavButton"} className={classes.navBarButton} to={"hobbies"} spy={true}
-                          smooth={true} duration={scrollAnimationDuration} onSetInactive={onDrawerClose}>
+                          smooth={true} duration={scrollAnimationDuration}>
                         <LightTextTypography variant={"h6"}>
                             Hobbies
                         </LightTextTypography>
                     </Link>
                     <Link id={"contactNavButton"} className={classes.navBarButton} to={"contact"} spy={true}
-                          smooth={true} duration={scrollAnimationDuration} onSetInactive={onDrawerClose}>
+                          smooth={true} duration={scrollAnimationDuration}>
                         <LightTextTypography variant={"h6"}>
                             Contact
                         </LightTextTypography>
                     </Link>
-                </Drawer>
-            </MobileView>
+                </div>
+
+                <div position="fixed" style={{display: isExtraSmallScreen ? 'flex' : 'none', justifyContent: 'flex-end'}}>
+                    <IconButton id={"menuButton"} color="primary" onClick={handleMainMenuToggle} component="span">
+                        <MenuIcon className={classes.menuIcon}/>
+                    </IconButton>
+                </div>
+            </AppBar>
+
+            <Drawer anchor={"right"} classes={{ paper: classes.mainMenu }} open={mainMenuOpen} onClose={handleMainMenuClose}>
+                <List>
+                    <Link onClick={handleMainMenuClose} to={"home"} spy={true}
+                          smooth={true} duration={scrollAnimationDuration}>
+                        <ListItem button>
+                            <ListItemIcon>
+                                <HomeIcon className={classes.mainMenuIcon}></HomeIcon>
+                            </ListItemIcon>
+                            <ListItemText disableTypography><LightTextTypography variant="h6">Main page
+                            </LightTextTypography></ListItemText>
+                        </ListItem>
+                    </Link>
+                    <Divider/>
+                    <Link onClick={handleMainMenuClose} to={"about"} spy={true}
+                          smooth={true} duration={scrollAnimationDuration}>
+                        <ListItem button>
+                            <ListItemIcon>
+                                <InfoIcon className={classes.mainMenuIcon}></InfoIcon>
+                            </ListItemIcon>
+                            <ListItemText disableTypography><LightTextTypography variant="h6">About me
+                            </LightTextTypography></ListItemText>
+                        </ListItem>
+                    </Link>
+                    <Link onClick={handleMainMenuClose} to={"skills"} spy={true}
+                          smooth={true} duration={scrollAnimationDuration}>
+                        <ListItem button>
+                            <ListItemIcon>
+                                <CodeIcon className={classes.mainMenuIcon}></CodeIcon>
+                            </ListItemIcon>
+                            <ListItemText disableTypography><LightTextTypography variant="h6">My skills
+                            </LightTextTypography></ListItemText>
+                        </ListItem>
+                    </Link>
+                    <Link onClick={handleMainMenuClose} to={"experience"} spy={true}
+                          smooth={true} duration={scrollAnimationDuration}>
+                        <ListItem button>
+                            <ListItemIcon>
+                                <WorkIcon className={classes.mainMenuIcon}></WorkIcon>
+                            </ListItemIcon>
+                            <ListItemText disableTypography><LightTextTypography variant="h6">Experience
+                            </LightTextTypography></ListItemText>
+                        </ListItem>
+                    </Link>
+                    <Link onClick={handleMainMenuClose} to={"projects"} spy={true}
+                          smooth={true} duration={scrollAnimationDuration}>
+                        <ListItem button>
+                            <ListItemIcon>
+                                <BuildIcon className={classes.mainMenuIcon}></BuildIcon>
+                            </ListItemIcon>
+                            <ListItemText disableTypography><LightTextTypography variant="h6">My projects
+                            </LightTextTypography></ListItemText>
+                        </ListItem>
+                    </Link>
+                    <Link onClick={handleMainMenuClose} to={"education"} spy={true}
+                          smooth={true} duration={scrollAnimationDuration}>
+                        <ListItem button>
+                            <ListItemIcon>
+                                <SchoolIcon className={classes.mainMenuIcon}></SchoolIcon>
+                            </ListItemIcon>
+                            <ListItemText disableTypography><LightTextTypography variant="h6">Education
+                            </LightTextTypography></ListItemText>
+                        </ListItem>
+                    </Link>
+                    <Link onClick={handleMainMenuClose} to={"hobbies"} spy={true}
+                          smooth={true} duration={scrollAnimationDuration}>
+                        <ListItem button>
+                            <ListItemIcon>
+                                <BrushIcon className={classes.mainMenuIcon}></BrushIcon>
+                            </ListItemIcon>
+                            <ListItemText disableTypography><LightTextTypography variant="h6">My hobbies</LightTextTypography></ListItemText>
+                        </ListItem>
+                    </Link>
+                    <Divider/>
+                    <Link onClick={handleMainMenuClose} to={"contact"} spy={true}
+                          smooth={true} duration={scrollAnimationDuration}>
+                        <ListItem button>
+                            <ListItemIcon>
+                                <ChatIcon className={classes.mainMenuIcon}></ChatIcon>
+                            </ListItemIcon>
+                            <ListItemText disableTypography><LightTextTypography variant="h6">Contact</LightTextTypography></ListItemText>
+                        </ListItem>
+                    </Link>
+                </List>
+            </Drawer>
 
             {/* padding is required so pose animation does not create unnecessary scrollbars */}
             <div style={{ paddingLeft: 20, paddingRight: 20}}>
@@ -323,27 +370,6 @@ function HomePage() {
                             </ItemPoseContainer>
                         </Grid>
                     </BrowserView>
-                    <MobileView>
-                        <Grid>
-                            <ItemPoseContainer>
-                                <Item>
-                                    <LightTextTypography align={"left"} variant="h4">
-                                        Hello!
-                                    </LightTextTypography>
-                                </Item>
-                                <Item>
-                                    <LightTextTypography align={"left"} variant="h3">
-                                        I'm Brandon.
-                                    </LightTextTypography>
-                                </Item>
-                                <Item>
-                                    <LightTextTypography align={"left"} variant="h4">
-                                        A Software Developer.
-                                    </LightTextTypography>
-                                </Item>
-                            </ItemPoseContainer>
-                        </Grid>
-                    </MobileView>
                 </Grid>
             </div>
 
@@ -385,7 +411,7 @@ function HomePage() {
                                                 className={classes.heading}>
                                 My skills
                             </DarkTextTypography>
-                            <div className={isMobile ? classes.skillsDisplayContainerMobile : classes.skillsDisplayContainer}>
+                            <div className={isSmallScreen ? classes.skillsDisplayContainerMobile : classes.skillsDisplayContainer}>
                                 <RoundContainer colour={"#ff4d4d"}>
                                     Java
                                 </RoundContainer>
@@ -406,6 +432,9 @@ function HomePage() {
                                 </RoundContainer>
                                 <RoundContainer colour={"#ff60aa"}>
                                     React
+                                </RoundContainer>
+                                <RoundContainer colour={"#dd3232"}>
+                                    Angular
                                 </RoundContainer>
                             </div>
                             <DarkTextTypography align="center" variant="h4">
@@ -429,7 +458,12 @@ function HomePage() {
                                 Work experience
                             </LightTextTypography>
                             <LightTextTypography align="center" variant="body1" gutterBottom>
-                                {myWorkExperienceInfo}
+                                {myWorkExperienceInfoPart1}
+                                <a href="https://ams.confex.com/ams/14Meso15ARAM/webprogram/Manuscript/Paper190844/aihoshi_pmtip_aram_13.5.pdf"
+                                   target="_blank" className={classes.hoverLink}>
+                                    <LightTextTypography>here</LightTextTypography>
+                                </a>
+                                {myWorkExperienceInfoPart2}
                             </LightTextTypography>
                         </AnimateInQueue>
                     </Container>
@@ -556,14 +590,14 @@ function HomePage() {
                                 If you wish to contact me, please email me at {" "}
                                 <CopyToClipboard text={emailAddress} onCopy={copiedEmailAddress}>
                                     {/*Prevent default just makes it so that it does not do anything.*/}
-                                    <HyperLink href="" onClick={preventDefault}>
+                                    <HyperLink href="" onClick={preventDefault} className={classes.hoverLink}>
                                         brandon.dang1234@gmail.com
                                     </HyperLink>
                                 </CopyToClipboard>
                             </LightTextTypography>
                             <LightTextTypography align="center" variant="body1" gutterBottom>
                                 My resume is also available {" "}
-                                <HyperLink href={Resume}>
+                                <HyperLink href={Resume} className={classes.hoverLink}>
                                     here.
                                 </HyperLink>
                             </LightTextTypography>

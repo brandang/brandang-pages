@@ -21,6 +21,7 @@ export const theme = createMuiTheme({
         },
         fontFamily: '"Segoe UI"',
         body1: {
+            display: "inline",
             fontSize: 26,
             lineHeight: 2
         },
@@ -40,7 +41,7 @@ export const theme = createMuiTheme({
         h6: {
             fontSize: 16,
         }
-    }
+    },
 })
 
 export const DarkTextTypography = withStyles({

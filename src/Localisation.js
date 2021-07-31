@@ -3,14 +3,15 @@ export const aboutMeBrief = "Hello! I am Brandon, and I am a (aspiring) software
     "Although I am still currently a third year Computer Science Student, I am eager to get out into the field once I graduate." +
     " My Resume is available at the bottom of the page."
 
-// const aboutMeBrief = "Hello! I am Brandon, and I am a software developer currently based in the Greater Toronto Area. " +
-//     "I am currently a third year Computer Science Student at the University of Toronto. I started programming when I was" +
-//     " in high school; at first teaching myself, but afterwards getting formal instruction on it. "
-
 export const myEducationInfo = "Computer Science student at the University of Toronto."
 
-export const myWorkExperienceInfo = "I have had many jobs in the past, but my first \"serious\" one is at Environment and " +
-    "Climate Change Canada, which is where I am currently working as a Software Developer intern."
+export const myWorkExperienceInfoPart1 = "From July 2020 to August 2021 (13 months), I was employed as an intern at Environment and " +
+    "Climate Change Canada, where I worked as a full stack software developer. I helped to maintain and modernize a Webapp called " +
+    "'PMTIP', a tool used to provide information related to Aviation weather forecasts. End users include government agencies " +
+    "and aviation companies such as Air Canada. More details can be found in this PDF on the American Meteorological Society" +
+    " website "
+
+export const myWorkExperienceInfoPart2 = ". Whilst working there, I used many tools and frameworks, such as Angular and jQuery."
 
 export const myProgrammingLanguages = "Java, JavaScript, Python, SQL, CSS, and C."
 

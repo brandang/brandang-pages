@@ -2,9 +2,9 @@ import {makeStyles} from "@material-ui/core/styles"
 
 export const styles = makeStyles((theme) => ({
     titleGrid: {
-        height: '100vh',
+        height: "100vh",
         paddingBottom: "10vh",
-        marginBottom: '10vh',
+        marginBottom: "10vh",
         position: "fixed",
         top: "0",
         left: "0",
@@ -18,12 +18,21 @@ export const styles = makeStyles((theme) => ({
         height: theme.spacing(40),
     },
     navBar: {
-        background: 'transparent',
-        boxShadow: 'none',
+        background: "transparent",
+        boxShadow: "none",
+        height: "65px",
+        justifyContent: "center"
     },
     navBarMobile: {
-        background: '#434343',
-        boxShadow: 'none',
+        background: "#434343",
+        boxShadow: "none",
+    },
+    mainMenu: {
+        background: "#434343",
+    },
+    mainMenuIcon: {
+        color: "#ffffff",
+        fontSize: 24,
     },
     progressBar: {
         width: "100px",
@@ -90,67 +99,67 @@ export const styles = makeStyles((theme) => ({
         zIndex: 2
     },
     firstContainer: {
-        minHeight: '70vh',
+        minHeight: "70vh",
         display: "flex",
-        justifyContent: 'center',
-        alignItems: 'center'
+        justifyContent: "center",
+        alignItems: "center"
     },
     boxContainer: {
         display: "flex",
         minHeight: "80vh",
-        justifyContent: 'center',
-        alignItems: 'flex-start',
+        justifyContent: "center",
+        alignItems: "flex-start",
         paddingTop: 50,
         paddingBottom: 50,
     },
     footerContainer: {
-        justifyContent: 'center',
-        alignItems: 'flex-start',
+        justifyContent: "center",
+        alignItems: "flex-start",
         paddingTop: 10,
         paddingBottom: 150
     },
     menuIcon: {
-        color: '#ffffff',
-        marginRight: 20
+        color: "#ffffff",
+        fontSize: 35
     },
     skillsIcon: {
-        color: '#ffffff',
+        color: "#ffffff",
         fontSize: 150
     },
     aboutIcon: {
-        color: '#006cbf',
+        color: "#006cbf",
         fontSize: 150
     },
     workIcon: {
-        color: '#e56b1f',
+        color: "#e56b1f",
         fontSize: 130
     },
     projectsIcon: {
-        color: '#ffffff',
+        color: "#ffffff",
         fontSize: 120
     },
     educationIcon: {
-        color: '#961fe0',
+        color: "#961fe0",
         fontSize: 140
     },
     hobbiesIcon: {
-        color: '#ffffff',
+        color: "#ffffff",
         fontSize: 130
     },
     chatIcon: {
-        color: '#2a5a79',
+        color: "#2a5a79",
         fontSize: 130
     },
     emailIcon: {
-        color: '#2a5a79',
+        color: "#2a5a79",
         fontSize: 60
     },
     resumeIcon: {
-        color: '#2a5a79',
+        color: "#2a5a79",
         fontSize: 60
     },
     darkIcon: {
-        color: '#434343',
+        color: "#434343",
         fontSize: 40
     },
     iconButton: {
@@ -158,11 +167,11 @@ export const styles = makeStyles((theme) => ({
         marginLeft: 20,
         marginRight: 20,
         backgroundColor: "#ffffff",
-        '&:hover': {
+        "&:hover": {
             backgroundColor: "#c4c4c4",
         },
-        '&:active': {
-            backgroundColor: '#c4c4c4'
+        "&:active": {
+            backgroundColor: "#c4c4c4"
         }
     },
     darkIconContainer: {
@@ -180,12 +189,12 @@ export const styles = makeStyles((theme) => ({
         marginBottom: "20px",
     },
     youtubeVideo: {
-        width: '100%',
-        height: '720px'
+        width: "100%",
+        height: "720px"
     },
     videoPanel: {
-        justifyContent: 'center',
-        display: 'block',
+        justifyContent: "center",
+        display: "block",
         paddingBottom: "50px",
     },
     videoBackground: {
@@ -194,32 +203,44 @@ export const styles = makeStyles((theme) => ({
         position: "fixed",
         width: "auto",
         height: "auto",
-        backgroundPosition: 'center',
-        size: 'cover',
-        backgroundRepeat: 'no-repeat',
+        backgroundPosition: "center",
+        size: "cover",
+        backgroundRepeat: "no-repeat",
         top: 0,
         left: 0,
         zIndex: -1
     },
     classifierDemoContainer: {
-        justifyContent: 'center',
-        display: 'flex',
+        justifyContent: "center",
+        display: "flex",
         paddingBottom: "50px",
         paddingTop: "50px",
     },
     skillsDisplayContainer: {
         display: "flex",
         flexDirection: "row",
-        justifyContent: 'center',
-        flexWrap: 'wrap',
-        width: '600px'
+        justifyContent: "center",
+        flexWrap: "wrap",
+        width: "600px"
     },
     skillsDisplayContainerMobile: {
         display: "flex",
         flexDirection: "row",
-        justifyContent: 'center',
-        flexWrap: 'wrap',
-        width: '100vw'
+        justifyContent: "center",
+        flexWrap: "wrap",
+        width: "95vw"
+    },
+    hoverLink: {
+        display: "inline",
+        "&": {
+            textDecoration: "underline",
+            color: "#ffffff",
+        },
+        "&:hover": {
+            textDecoration: "underline",
+            textDecorationThickness: "5px",
+            color: "#ffffff",
+        },
     },
     drawerList: {
         backgroundColor: "#434343"
