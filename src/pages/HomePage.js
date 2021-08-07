@@ -415,6 +415,9 @@ function HomePage() {
                                 <RoundContainer colour={"#ff4d4d"}>
                                     Java
                                 </RoundContainer>
+                                <RoundContainer colour={"#3ddc84"}>
+                                    Android
+                                </RoundContainer>
                                 <RoundContainer colour={"#009eb1"}>
                                     Python
                                 </RoundContainer>
@@ -437,9 +440,6 @@ function HomePage() {
                                     Angular
                                 </RoundContainer>
                             </div>
-                            <DarkTextTypography align="center" variant="h4">
-                                And more!
-                            </DarkTextTypography>
                         </AnimateInQueue>
                     </Container>
                 </div>
@@ -587,7 +587,7 @@ function HomePage() {
                                 Contact me
                             </LightTextTypography>
                             <LightTextTypography align="center" variant="body1">
-                                If you wish to contact me, please email me at {" "}
+                                My email: {" "}
                                 <CopyToClipboard text={emailAddress} onCopy={copiedEmailAddress}>
                                     {/*Prevent default just makes it so that it does not do anything.*/}
                                     <HyperLink href="" onClick={preventDefault} className={classes.hoverLink}>
@@ -596,9 +596,8 @@ function HomePage() {
                                 </CopyToClipboard>
                             </LightTextTypography>
                             <LightTextTypography align="center" variant="body1" gutterBottom>
-                                My resume is also available {" "}
                                 <HyperLink href={Resume} className={classes.hoverLink}>
-                                    here.
+                                    My resume
                                 </HyperLink>
                             </LightTextTypography>
                             <Grid container direction="row" justify="center" alignItems="stretch" spacing={1}>
