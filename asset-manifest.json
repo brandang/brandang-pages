@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/brandang-pages/static/css/main.8ab6f918.chunk.css",
-    "main.js": "/brandang-pages/static/js/main.5d9365ec.chunk.js",
-    "main.js.map": "/brandang-pages/static/js/main.5d9365ec.chunk.js.map",
+    "main.js": "/brandang-pages/static/js/main.374fc5dc.chunk.js",
+    "main.js.map": "/brandang-pages/static/js/main.374fc5dc.chunk.js.map",
     "runtime-main.js": "/brandang-pages/static/js/runtime-main.68262221.js",
     "runtime-main.js.map": "/brandang-pages/static/js/runtime-main.68262221.js.map",
     "static/css/2.d48510fc.chunk.css": "/brandang-pages/static/css/2.d48510fc.chunk.css",
     "static/js/2.4423c2bd.chunk.js": "/brandang-pages/static/js/2.4423c2bd.chunk.js",
     "static/js/2.4423c2bd.chunk.js.map": "/brandang-pages/static/js/2.4423c2bd.chunk.js.map",
     "index.html": "/brandang-pages/index.html",
-    "precache-manifest.44a9f4cac53604455fead54fa371508b.js": "/brandang-pages/precache-manifest.44a9f4cac53604455fead54fa371508b.js",
+    "precache-manifest.08b89ac98bd13f08c9402e406dfc21cf.js": "/brandang-pages/precache-manifest.08b89ac98bd13f08c9402e406dfc21cf.js",
     "service-worker.js": "/brandang-pages/service-worker.js",
     "static/css/2.d48510fc.chunk.css.map": "/brandang-pages/static/css/2.d48510fc.chunk.css.map",
     "static/css/main.8ab6f918.chunk.css.map": "/brandang-pages/static/css/main.8ab6f918.chunk.css.map",
@@ -23,6 +23,6 @@
     "static/css/2.d48510fc.chunk.css",
     "static/js/2.4423c2bd.chunk.js",
     "static/css/main.8ab6f918.chunk.css",
-    "static/js/main.5d9365ec.chunk.js"
+    "static/js/main.374fc5dc.chunk.js"
   ]
 }
