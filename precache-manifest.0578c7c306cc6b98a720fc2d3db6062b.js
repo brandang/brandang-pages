@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "f1394dd7cb5f18331d0dd4710ba7dfea",
+    "revision": "52e1579d5e92265075a2d90e9b63ef18",
     "url": "/brandang-pages/index.html"
   },
   {
@@ -8,7 +8,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/brandang-pages/static/css/2.d48510fc.chunk.css"
   },
   {
-    "revision": "2d674ee8f608b61eb1f6",
+    "revision": "29a6699848fef44e61fc",
     "url": "/brandang-pages/static/css/main.8ab6f918.chunk.css"
   },
   {
@@ -20,8 +20,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/brandang-pages/static/js/2.4423c2bd.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "2d674ee8f608b61eb1f6",
-    "url": "/brandang-pages/static/js/main.374fc5dc.chunk.js"
+    "revision": "29a6699848fef44e61fc",
+    "url": "/brandang-pages/static/js/main.02fa74a3.chunk.js"
   },
   {
     "revision": "68c4e988073154663735",
