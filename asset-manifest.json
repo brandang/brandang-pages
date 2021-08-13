@@ -1,28 +1,28 @@
 {
   "files": {
     "main.css": "/brandang-pages/static/css/main.8ab6f918.chunk.css",
-    "main.js": "/brandang-pages/static/js/main.02fa74a3.chunk.js",
-    "main.js.map": "/brandang-pages/static/js/main.02fa74a3.chunk.js.map",
+    "main.js": "/brandang-pages/static/js/main.6a29130c.chunk.js",
+    "main.js.map": "/brandang-pages/static/js/main.6a29130c.chunk.js.map",
     "runtime-main.js": "/brandang-pages/static/js/runtime-main.68262221.js",
     "runtime-main.js.map": "/brandang-pages/static/js/runtime-main.68262221.js.map",
     "static/css/2.d48510fc.chunk.css": "/brandang-pages/static/css/2.d48510fc.chunk.css",
-    "static/js/2.4423c2bd.chunk.js": "/brandang-pages/static/js/2.4423c2bd.chunk.js",
-    "static/js/2.4423c2bd.chunk.js.map": "/brandang-pages/static/js/2.4423c2bd.chunk.js.map",
+    "static/js/2.ce5b45f1.chunk.js": "/brandang-pages/static/js/2.ce5b45f1.chunk.js",
+    "static/js/2.ce5b45f1.chunk.js.map": "/brandang-pages/static/js/2.ce5b45f1.chunk.js.map",
     "index.html": "/brandang-pages/index.html",
-    "precache-manifest.0578c7c306cc6b98a720fc2d3db6062b.js": "/brandang-pages/precache-manifest.0578c7c306cc6b98a720fc2d3db6062b.js",
+    "precache-manifest.c014b092cc288bd98f6ea89ddb4bd897.js": "/brandang-pages/precache-manifest.c014b092cc288bd98f6ea89ddb4bd897.js",
     "service-worker.js": "/brandang-pages/service-worker.js",
     "static/css/2.d48510fc.chunk.css.map": "/brandang-pages/static/css/2.d48510fc.chunk.css.map",
     "static/css/main.8ab6f918.chunk.css.map": "/brandang-pages/static/css/main.8ab6f918.chunk.css.map",
-    "static/js/2.4423c2bd.chunk.js.LICENSE.txt": "/brandang-pages/static/js/2.4423c2bd.chunk.js.LICENSE.txt",
+    "static/js/2.ce5b45f1.chunk.js.LICENSE.txt": "/brandang-pages/static/js/2.ce5b45f1.chunk.js.LICENSE.txt",
     "static/media/Resume.pdf": "/brandang-pages/static/media/Resume.6fdbcf9d.pdf",
-    "static/media/backgroundImage.jpg": "/brandang-pages/static/media/backgroundImage.7ea762c1.jpg",
+    "static/media/backgroundImage.jpg": "/brandang-pages/static/media/backgroundImage.30495771.jpg",
     "static/media/blackBackground.jpg": "/brandang-pages/static/media/blackBackground.27cd9d82.jpg"
   },
   "entrypoints": [
     "static/js/runtime-main.68262221.js",
     "static/css/2.d48510fc.chunk.css",
-    "static/js/2.4423c2bd.chunk.js",
+    "static/js/2.ce5b45f1.chunk.js",
     "static/css/main.8ab6f918.chunk.css",
-    "static/js/main.02fa74a3.chunk.js"
+    "static/js/main.6a29130c.chunk.js"
   ]
 }
