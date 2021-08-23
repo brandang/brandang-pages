@@ -1,16 +1,16 @@
-import backgroundOverlay from '../images/backgroundImage.jpg'
-import background from '../images/blackBackground.jpg'
-import React from "react"
-import {makeStyles} from "@material-ui/core/styles"
+import backgroundOverlay from '../images/backgroundImage.jpg';
+import background from '../images/blackBackground.jpg';
+import React from "react";
+import {makeStyles} from "@material-ui/core/styles";
 
 /**
  * Animated background for the Home page. All other elements on the page must have a zIndex of at least 0 to appear
  * above this background.
  */
 
-const transition = "opacity 2s"
+const transition = "opacity 2s";
 
-const styles = makeStyles(() => ({
+const useStyles = makeStyles(() => ({
     container: {
         position: 'fixed',
         width: '100vw',
@@ -31,57 +31,66 @@ const styles = makeStyles(() => ({
         height: '100vh',
         zIndex: '-1',
         opacity: '0.2',
-        backgroundSize: 'contain',
+        backgroundPosition: 'center',
+        backgroundSize: 'cover',
         backgroundRepeat: 'no-repeat',
         background: `url(${backgroundOverlay})`
     }
-}))
+}));
 
-export default function NumberClassificationDialog(props) {
-    const classes = styles()
+export default function NumberClassificationDialog() {
 
-    let fadingIn = true
+    const classes = useStyles();
 
-    let st = startTransition
+    const maxOpacity = '0.35';
+
+    const minOpacity = '0.1';
+
+    let fadingIn = false;
+
+    // Do this at the end of the queue.
+    const firstTransition = startTransition;
     setTimeout(function() {
-        st()
-    })
+        firstTransition();
+    });
 
+    // Begins transition.
     function startTransition() {
-        const overlay = document.getElementById("backgroundOverlay")
+        const overlay = document.getElementById("backgroundOverlay");
 
-        // start transition
+        // Start transition.
         if (fadingIn) {
-            overlay.style.opacity = '0.4'
+            overlay.style.opacity = maxOpacity;
         }
         else {
-            overlay.style.opacity = '0.2'
+            overlay.style.opacity = minOpacity;
         }
 
-        // set transition length
-        overlay.style.transition = `${transition}`
+        // Set transition time length.
+        overlay.style.transition = `${transition}`;
 
         // set listener to notify after transition is done
-        overlay.addEventListener("transitionend", onTransitionEnd)
+        overlay.addEventListener("transitionend", onTransitionEnd);
     }
 
+    // End transition.
     function onTransitionEnd() {
-        const overlay = document.getElementById("backgroundOverlay")
+        const overlay = document.getElementById("backgroundOverlay");
 
-        // start transition
+        // start transition.
         if (fadingIn) {
-            overlay.style.opacity = '1'
-            fadingIn = false
+            overlay.style.opacity = minOpacity;
+            fadingIn = false;
         }
         else {
-            overlay.style.opacity = '0.3'
-            fadingIn = true
+            overlay.style.opacity = maxOpacity;
+            fadingIn = true;
         }
 
         // remove listener so we dont get notified next time colour changes
-        overlay.removeEventListener("transitionend", this)
+        overlay.removeEventListener("transitionend", this);
 
-        startTransition()
+        startTransition();
     }
 
     return (

@@ -6,6 +6,17 @@ export const styles = makeStyles((theme) => ({
         paddingBottom: "10vh",
         marginBottom: "10vh",
         position: "fixed",
+        justifyContent: "center",
+        top: "0",
+        left: "0",
+        zIndex: 1
+    },
+    titleGridSmall: {
+        height: "100vh",
+        paddingBottom: "10vh",
+        marginBottom: "10vh",
+        position: "fixed",
+        justifyContent: "center",
         top: "0",
         left: "0",
         zIndex: 1
@@ -16,40 +27,6 @@ export const styles = makeStyles((theme) => ({
     avatar: {
         width: theme.spacing(40),
         height: theme.spacing(40),
-    },
-    navBar: {
-        background: "transparent",
-        boxShadow: "none",
-        height: "65px",
-        justifyContent: "center"
-    },
-    navBarMobile: {
-        background: "#434343",
-        boxShadow: "none",
-    },
-    mainMenu: {
-        background: "#434343",
-    },
-    mainMenuIcon: {
-        color: "#ffffff",
-        fontSize: 24,
-    },
-    progressBar: {
-        width: "100px",
-        position: "absolute",
-        left: 0,
-        height: "2px",
-        background: "#fff",
-        transition: "width 1s"
-    },
-    navBarButton: {
-        marginLeft: 20,
-        marginRight: 20,
-        marginTop: 20,
-        marginBottom: 20,
-        backgroundColor: "transparent",
-        cursor: "pointer",
-        float: "left",
     },
     heading: {
         paddingTop: "30px",
@@ -117,10 +94,6 @@ export const styles = makeStyles((theme) => ({
         alignItems: "flex-start",
         paddingTop: 10,
         paddingBottom: 150
-    },
-    menuIcon: {
-        color: "#ffffff",
-        fontSize: 35
     },
     skillsIcon: {
         color: "#ffffff",
