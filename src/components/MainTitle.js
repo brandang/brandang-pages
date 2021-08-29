@@ -1,6 +1,6 @@
 import Grid from "@material-ui/core/Grid";
 import {LightTextTypography} from "../CustomTheme";
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import {makeStyles} from "@material-ui/core/styles";
 import PropTypes from "prop-types";
 import {motion} from "framer-motion";
@@ -54,12 +54,18 @@ function MainTitle({ drawerNavMenuOpen }) {
 
     const [startAnimation, setStartAnimation] = useState(false);
 
-    // Start animation at end of the queue after a slight delay.
-    setTimeout(function() {
-        setStartAnimation(true)
-    }, 100);
+    const pageLoaded = () => {
+        // Start animation at end of the queue.
+        setTimeout(function() {
+            setStartAnimation(true);
+        }, 0);
+    }
 
-    /* Padding is required so pose animation does not create unnecessary scrollbars. */
+    useEffect(()=>{
+        window.addEventListener("load", pageLoaded);
+        return () => window.removeEventListener("load", pageLoaded);
+    },[]);
+
     return <Grid id={"titleGrid"} container direction="row" alignItems="center" alignContent="center"
                  className={drawerNavMenuOpen ? classes.titleGridSmall : classes.titleGrid}>
         <Grid item>
