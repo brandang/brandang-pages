@@ -8,12 +8,13 @@ import {OrangeHeader} from "./Headers";
 import {
     myProjectsDescription,
     notesAppSummary, photoLockerAppSummary
-} from "../Localisation";
+} from "../Texts";
 import BuildIcon from "@material-ui/icons/Build";
 import {Accordion, AccordionDetails, AccordionSummary} from "@material-ui/core";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import Typography from "@material-ui/core/Typography";
 import CardMedia from "@material-ui/core/CardMedia";
+import BubbleContainer from "./BubbleContainer";
 
 const useStyles = makeStyles(() => ({
     // NOTE: in order for zIndex to work, position must be set to relative
@@ -82,11 +83,13 @@ function ProjectsSection() {
     return <div id={"projects"} className={classes.whiteBox}>
         <OrangeHeader/>
         <Container className={classes.boxContainer}>
-            <ScrollAnimation animateIn="animate__fadeIn">
+            <ScrollAnimation animateIn="animate__fadeIn" animateOnce={true}>
                 <div style={{display: 'flex', justifyContent:'center'}}>
-                    <Avatar className={classes.darkIconContainer}>
-                        <BuildIcon className={classes.projectsIcon}/>
-                    </Avatar>
+                    <BubbleContainer>
+                        <Avatar className={classes.darkIconContainer}>
+                            <BuildIcon className={classes.projectsIcon}/>
+                        </Avatar>
+                    </BubbleContainer>
                 </div>
 
                 <DarkTextTypography align="center" variant="h3" gutterBottom className={classes.heading}>
@@ -97,7 +100,7 @@ function ProjectsSection() {
                 </DarkTextTypography>
 
                 <Accordion>
-                    <AccordionSummary expandIcon={<ExpandMoreIcon/>} aria-controls="panel1a-content" id="panel1a-header"
+                    <AccordionSummary expandIcon={<ExpandMoreIcon/>} id="panel1a-header"
                                       style={{backgroundColor: "#cbe9ff"}}>
                         <div style={{width: "100%"}}>
                             <Typography className={classes.heading}>Android Notes App</Typography>
@@ -114,7 +117,7 @@ function ProjectsSection() {
                     </AccordionDetails>
                 </Accordion>
                 <Accordion>
-                    <AccordionSummary expandIcon={<ExpandMoreIcon/>} aria-controls="panel1a-content" id="panel1a-header"
+                    <AccordionSummary expandIcon={<ExpandMoreIcon/>} id="panel1a-header"
                                       style={{backgroundColor: "#ddd2ff"}}>
                         <div style={{width: "100%"}}>
                             <Typography className={classes.heading}>

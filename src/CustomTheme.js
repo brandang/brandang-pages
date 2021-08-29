@@ -22,24 +22,42 @@ export const theme = createMuiTheme({
         fontFamily: '"Segoe UI"',
         body1: {
             display: "inline",
-            fontSize: 26,
+            fontSize: 16,
+            '@media (min-width:800px)': {
+                fontSize: 26,
+            },
             lineHeight: 2
         },
         body2: {
-            fontSize: 20,
+            fontSize: 14,
+            '@media (min-width:800px)': {
+                fontSize: 20,
+            },
             lineHeight: 2
         },
         h1: {
-            fontSize: 128
+            fontSize: 96,
+            '@media (min-width:800px)': {
+                fontSize: 128
+            }
         },
         h2: {
-            fontSize: 72
+            fontSize: 56,
+            '@media (min-width:800px)': {
+                fontSize: 72
+            }
         },
         h3: {
-            fontSize: 48
+            fontSize: 36,
+            '@media (min-width:800px)': {
+                fontSize: 48
+            }
         },
         h6: {
-            fontSize: 16,
+            fontSize: 12,
+            '@media (min-width:800px)': {
+                fontSize: 16,
+            }
         }
     },
 })

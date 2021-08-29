@@ -17,7 +17,7 @@ export default function EmailAddressCopiedDialog(props) {
             message="Email address copied to clipboard."
             action={
                 <React.Fragment>
-                    <IconButton size="small" aria-label="close" color="inherit" onClick={props.handleClose}>
+                    <IconButton size="small" color="inherit" onClick={props.handleClose}>
                         <CloseIcon fontSize="small" />
                     </IconButton>
                 </React.Fragment>

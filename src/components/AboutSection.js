@@ -3,9 +3,10 @@ import ScrollAnimation from "react-animate-on-scroll";
 import Avatar from "@material-ui/core/Avatar";
 import PriorityHighIcon from "@material-ui/icons/PriorityHigh";
 import {LightTextTypography} from "../CustomTheme";
-import {aboutMeBrief} from "../Localisation";
+import {aboutMeBrief} from "../Texts";
 import React from "react";
 import {makeStyles} from "@material-ui/core/styles";
+import BubbleContainer from "./BubbleContainer";
 
 const useStyles = makeStyles(() => ({
     aboutIcon: {
@@ -49,11 +50,13 @@ function AboutSection() {
 
     return <div id={"about"} className={classes.blueBox}>
         <Container className={classes.firstContainer}>
-            <ScrollAnimation animateIn="animate__fadeIn">
+            <ScrollAnimation animateIn="animate__fadeIn" animateOnce={true}>
                 <div style={{display: 'flex', justifyContent:'center'}}>
-                    <Avatar className={classes.lightIconContainer}>
-                        <PriorityHighIcon className={classes.aboutIcon}/>
-                    </Avatar>
+                    <BubbleContainer>
+                        <Avatar className={classes.lightIconContainer}>
+                            <PriorityHighIcon className={classes.aboutIcon}/>
+                        </Avatar>
+                    </BubbleContainer>
                 </div>
                 <LightTextTypography align="center" variant="h3" className={classes.heading}>
                     A little about me

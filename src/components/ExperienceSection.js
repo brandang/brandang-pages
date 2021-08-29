@@ -6,7 +6,8 @@ import React from "react";
 import {makeStyles} from "@material-ui/core/styles";
 import {WhiteHeader} from "./Headers";
 import WorkIcon from "@material-ui/icons/Work";
-import {myWorkExperienceInfoPart1, myWorkExperienceInfoPart2} from "../Localisation";
+import {myWorkExperienceInfoPart1, myWorkExperienceInfoPart2} from "../Texts";
+import BubbleContainer from "./BubbleContainer";
 
 const useStyles = makeStyles(() => ({
     // NOTE: in order for zIndex to work, position must be set to relative
@@ -60,16 +61,21 @@ const useStyles = makeStyles(() => ({
  */
 function ExperienceSection() {
 
+    const linkUrl = "https://ams.confex.com/ams/14Meso15ARAM/webprogram/Manuscript/Paper190844/aihoshi_pmtip" +
+        "_aram_13.5.pdf"
+
     const classes = useStyles();
 
     return <div id={"experience"} className={classes.orangeBox}>
         <WhiteHeader/>
         <Container className={classes.boxContainer}>
-            <ScrollAnimation animateIn="animate__fadeIn">
+            <ScrollAnimation animateIn="animate__fadeIn" animateOnce={true}>
                 <div style={{display: 'flex', justifyContent:'center'}}>
-                    <Avatar className={classes.lightIconContainer}>
-                        <WorkIcon className={classes.workIcon}/>
-                    </Avatar>
+                    <BubbleContainer>
+                        <Avatar className={classes.lightIconContainer}>
+                            <WorkIcon className={classes.workIcon}/>
+                        </Avatar>
+                    </BubbleContainer>
                 </div>
                 <LightTextTypography align="center" variant="h3" gutterBottom
                                      className={classes.heading}>
@@ -78,8 +84,7 @@ function ExperienceSection() {
                 <LightTextTypography component={'div'} align="center" variant="body1" gutterBottom>
                     {myWorkExperienceInfoPart1}
                     {/* rel="noopener noreferrer" is to prevent security risk. */}
-                    <a href="https://ams.confex.com/ams/14Meso15ARAM/webprogram/Manuscript/Paper190844/aihoshi_pmtip_aram_13.5.pdf"
-                       target="_blank" className={classes.hoverLink} rel="noopener noreferrer">
+                    <a href={linkUrl} target="_blank" className={classes.hoverLink} rel="noopener noreferrer">
                         <LightTextTypography>here</LightTextTypography>
                     </a>
                     {myWorkExperienceInfoPart2}

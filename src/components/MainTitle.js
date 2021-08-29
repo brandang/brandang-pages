@@ -1,20 +1,9 @@
 import Grid from "@material-ui/core/Grid";
 import {LightTextTypography} from "../CustomTheme";
-import React from "react";
-import posed from "react-pose";
+import React, {useState} from "react";
 import {makeStyles} from "@material-ui/core/styles";
 import PropTypes from "prop-types";
-
-// Container for Pose animations.
-const ItemPoseContainer = posed.div({
-    enter: { staggerChildren: 500, delayChildren: 500 }
-});
-
-// Animations.
-const Item = posed.div({
-    enter: { y: 0, opacity: 1 },
-    exit: { y: -50, opacity: 0 }
-});
+import {motion} from "framer-motion";
 
 const useStyles = makeStyles(() => ({
     titleGrid: {
@@ -37,7 +26,22 @@ const useStyles = makeStyles(() => ({
         left: "0",
         zIndex: 1
     },
+    animationList: {
+        paddingLeft: 10
+    }
 }));
+
+// List animation for staggering children.
+const enterListAnimation = {
+    hidden: { opacity: 0 },
+    visible: { opacity: 1, transition: { when: "beforeChildren", staggerChildren: 0.5 } },
+};
+
+// Animation for title.
+const enterListItemAnimation = {
+    hidden: { y: -100, opacity: 0 },
+    visible: { y: 0, opacity: 1 },
+}
 
 /**
  * Animated main title.
@@ -48,31 +52,37 @@ function MainTitle({ drawerNavMenuOpen }) {
 
     const classes = useStyles();
 
+    const [startAnimation, setStartAnimation] = useState(false);
+
+    // Start animation at end of the queue after a slight delay.
+    setTimeout(function() {
+        setStartAnimation(true)
+    }, 100);
+
     /* Padding is required so pose animation does not create unnecessary scrollbars. */
-    return <div style={{ paddingLeft: 20, paddingRight: 20}}>
-        <Grid id={"titleGrid"} container direction="row" alignItems="center" alignContent="center"
-              className={drawerNavMenuOpen ? classes.titleGridSmall : classes.titleGrid}>
-            <Grid item>
-                <ItemPoseContainer>
-                    <Item>
-                        <LightTextTypography align={"left"} variant="h3">
-                            Hello!
-                        </LightTextTypography>
-                    </Item>
-                    <Item>
-                        <LightTextTypography align={"left"} variant="h2">
-                            I'm Brandon.
-                        </LightTextTypography>
-                    </Item>
-                    <Item>
-                        <LightTextTypography align={"left"} variant="h3">
-                            A Software Developer.
-                        </LightTextTypography>
-                    </Item>
-                </ItemPoseContainer>
-            </Grid>
+    return <Grid id={"titleGrid"} container direction="row" alignItems="center" alignContent="center"
+                 className={drawerNavMenuOpen ? classes.titleGridSmall : classes.titleGrid}>
+        <Grid item>
+            <motion.ul className={classes.animationList} align={"left"} initial="hidden"
+                       animate={startAnimation ? "visible" : "hidden"} variants={enterListAnimation}>
+                <motion.li variants={enterListItemAnimation}>
+                    <LightTextTypography align={"left"} variant="h3">
+                        Hello!
+                    </LightTextTypography>
+                </motion.li>
+                <motion.li variants={enterListItemAnimation}>
+                    <LightTextTypography align={"left"} variant="h3">
+                        I'm Brandon.
+                    </LightTextTypography>
+                </motion.li>
+                <motion.li variants={enterListItemAnimation}>
+                    <LightTextTypography align={"left"} variant="h3">
+                        A Software Developer.
+                    </LightTextTypography>
+                </motion.li>
+            </motion.ul>
         </Grid>
-    </div>
+    </Grid>
 }
 
 MainTitle.propTypes = {

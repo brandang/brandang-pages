@@ -83,7 +83,7 @@ function HomePage() {
 
                     <AboutSection/>
 
-                    <SkillsSection/>
+                    <SkillsSection isExtraSmallScreen={isExtraSmallScreen}/>
 
                     <ExperienceSection/>
 

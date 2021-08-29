@@ -6,7 +6,7 @@ import React from "react";
 import {makeStyles} from "@material-ui/core/styles";
 import {BlueHeader} from "./Headers";
 import CodeIcon from "@material-ui/icons/Code";
-import RoundContainer from "./RoundContainer";
+import BubbleContainer from "./BubbleContainer";
 import PropTypes from "prop-types";
 
 const useStyles = makeStyles(() => ({
@@ -62,6 +62,12 @@ const useStyles = makeStyles(() => ({
         paddingTop: 50,
         paddingBottom: 50,
     },
+    round: {
+        width: "100px",
+        height: "100px",
+        padding: "10px",
+        margin: "10px"
+    },
 }));
 
 /**
@@ -76,11 +82,13 @@ function SkillsSection({ isExtraSmallScreen }) {
     return <div id={"skills"} className={classes.whiteBox}>
         <BlueHeader/>
         <Container className={classes.boxContainer}>
-            <ScrollAnimation animateIn="animate__fadeIn">
+            <ScrollAnimation animateIn="animate__fadeIn" animateOnce={true}>
                 <div style={{display: 'flex', justifyContent:'center'}}>
-                    <Avatar className={classes.darkIconContainer}>
-                        <CodeIcon className={classes.skillsIcon}/>
-                    </Avatar>
+                    <BubbleContainer>
+                        <Avatar className={classes.darkIconContainer}>
+                            <CodeIcon className={classes.skillsIcon}/>
+                        </Avatar>
+                    </BubbleContainer>
                 </div>
                 <DarkTextTypography align="center" variant="h3" gutterBottom
                                     className={classes.heading}>
@@ -88,33 +96,51 @@ function SkillsSection({ isExtraSmallScreen }) {
                 </DarkTextTypography>
                 <div className={isExtraSmallScreen ? classes.skillsDisplayContainerMobile :
                     classes.skillsDisplayContainer}>
-                    <RoundContainer colour={"#ff4d4d"}>
-                        Java
-                    </RoundContainer>
-                    <RoundContainer colour={"#3ddc84"}>
-                        Android
-                    </RoundContainer>
-                    <RoundContainer colour={"#009eb1"}>
-                        Python
-                    </RoundContainer>
-                    <RoundContainer colour={"#9b5dff"}>
-                        JavaScript
-                    </RoundContainer>
-                    <RoundContainer colour={"#389500"}>
-                        C
-                    </RoundContainer>
-                    <RoundContainer colour={"#ff6d00"}>
-                        SQL
-                    </RoundContainer>
-                    <RoundContainer colour={"#566cff"}>
-                        CSS
-                    </RoundContainer>
-                    <RoundContainer colour={"#ff60aa"}>
-                        React
-                    </RoundContainer>
-                    <RoundContainer colour={"#dd3232"}>
-                        Angular
-                    </RoundContainer>
+                    <BubbleContainer>
+                        <Avatar className={classes.round} style={{backgroundColor: "#ff4d4d"}}>
+                            Java
+                        </Avatar>
+                    </BubbleContainer>
+                    <BubbleContainer>
+                        <Avatar className={classes.round} style={{backgroundColor: "#3ddc84"}}>
+                            Android
+                        </Avatar>
+                    </BubbleContainer>
+                    <BubbleContainer>
+                        <Avatar className={classes.round} style={{backgroundColor: "#009eb1"}}>
+                            Python
+                        </Avatar>
+                    </BubbleContainer>
+                    <BubbleContainer>
+                        <Avatar className={classes.round} style={{backgroundColor: "#9b5dff"}}>
+                            JavaScript
+                        </Avatar>
+                    </BubbleContainer>
+                    <BubbleContainer>
+                        <Avatar className={classes.round} style={{backgroundColor: "#389500"}}>
+                            C
+                        </Avatar>
+                    </BubbleContainer>
+                    <BubbleContainer>
+                        <Avatar className={classes.round} style={{backgroundColor: "#ff6d00"}}>
+                            SQL
+                        </Avatar>
+                    </BubbleContainer>
+                    <BubbleContainer>
+                        <Avatar className={classes.round} style={{backgroundColor: "#566cff"}}>
+                            CSS
+                        </Avatar>
+                    </BubbleContainer>
+                    <BubbleContainer>
+                        <Avatar className={classes.round} style={{backgroundColor: "#ff60aa"}}>
+                            React
+                        </Avatar>
+                    </BubbleContainer>
+                    <BubbleContainer>
+                        <Avatar className={classes.round} style={{backgroundColor: "#dd3232"}}>
+                            Angular
+                        </Avatar>
+                    </BubbleContainer>
                 </div>
             </ScrollAnimation>
         </Container>

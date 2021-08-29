@@ -7,8 +7,9 @@ import {makeStyles} from "@material-ui/core/styles";
 import {WhiteHeader} from "./Headers";
 import {
     myEducationInfo,
-} from "../Localisation";
+} from "../Texts";
 import SchoolIcon from "@material-ui/icons/School";
+import BubbleContainer from "./BubbleContainer";
 
 const useStyles = makeStyles(() => ({
     // NOTE: in order for zIndex to work, position must be set to relative
@@ -55,11 +56,13 @@ function EducationSection() {
     return <div id={"education"} className={classes.purpleBox}>
         <WhiteHeader/>
         <Container className={classes.boxContainer}>
-            <ScrollAnimation animateIn="animate__fadeIn">
+            <ScrollAnimation animateIn="animate__fadeIn" animateOnce={true}>
                 <div style={{display: 'flex', justifyContent:'center'}}>
-                    <Avatar className={classes.lightIconContainer}>
-                        <SchoolIcon className={classes.educationIcon}/>
-                    </Avatar>
+                    <BubbleContainer>
+                        <Avatar className={classes.lightIconContainer}>
+                            <SchoolIcon className={classes.educationIcon}/>
+                        </Avatar>
+                    </BubbleContainer>
                 </div>
                 <LightTextTypography align="center" variant="h3" gutterBottom
                                      className={classes.heading}>

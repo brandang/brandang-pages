@@ -7,7 +7,7 @@ import {makeStyles} from "@material-ui/core/styles";
 import {WhiteHeader} from "./Headers";
 import {
     emailAddress,
-} from "../Localisation";
+} from "../Texts";
 import ChatIcon from "@material-ui/icons/Chat";
 import {CopyToClipboard} from "react-copy-to-clipboard";
 import {default as HyperLink} from "@material-ui/core/Link/Link";
@@ -18,6 +18,7 @@ import EmailIcon from "@material-ui/icons/Email";
 import FileCopyIcon from "@material-ui/icons/FileCopy";
 import PropTypes from "prop-types";
 import MainTitle from "./MainTitle";
+import BubbleContainer from "./BubbleContainer";
 
 const useStyles = makeStyles(() => ({
     // NOTE: in order for zIndex to work, position must be set to relative
@@ -105,11 +106,13 @@ function ContactSection({ setShowEmailDialog }) {
     return <div id={"contact"} className={classes.darkBlueBox}>
         <WhiteHeader/>
         <Container className={classes.boxContainer}>
-            <ScrollAnimation animateIn="animate__fadeIn">
+            <ScrollAnimation animateIn="animate__fadeIn" animateOnce={true}>
                 <div style={{display: 'flex', justifyContent:'center'}}>
-                    <Avatar className={classes.lightIconContainer}>
-                        <ChatIcon className={classes.chatIcon}/>
-                    </Avatar>
+                    <BubbleContainer>
+                        <Avatar className={classes.lightIconContainer}>
+                            <ChatIcon className={classes.chatIcon}/>
+                        </Avatar>
+                    </BubbleContainer>
                 </div>
                 <LightTextTypography align="center" variant="h3" gutterBottom
                                      className={classes.heading}>

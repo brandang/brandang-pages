@@ -7,8 +7,9 @@ import {makeStyles} from "@material-ui/core/styles";
 import {PurpleHeader} from "./Headers";
 import {
     myHobbiesAndInterests,
-} from "../Localisation";
+} from "../Texts";
 import BrushIcon from "@material-ui/icons/Brush";
+import BubbleContainer from "./BubbleContainer";
 
 const useStyles = makeStyles(() => ({
     // NOTE: in order for zIndex to work, position must be set to relative
@@ -55,11 +56,13 @@ function HobbiesSection() {
     return <div id={"hobbies"} className={classes.whiteBox}>
         <PurpleHeader/>
         <Container className={classes.boxContainer}>
-            <ScrollAnimation animateIn="animate__fadeIn">
+            <ScrollAnimation animateIn="animate__fadeIn" animateOnce={true}>
                 <div style={{display: 'flex', justifyContent:'center'}}>
-                    <Avatar className={classes.darkIconContainer}>
-                        <BrushIcon className={classes.hobbiesIcon}/>
-                    </Avatar>
+                    <BubbleContainer>
+                        <Avatar className={classes.darkIconContainer}>
+                            <BrushIcon className={classes.hobbiesIcon}/>
+                        </Avatar>
+                    </BubbleContainer>
                 </div>
                 <DarkTextTypography align="center" variant="h3" gutterBottom
                                     className={classes.heading}>
