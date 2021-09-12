@@ -4,7 +4,7 @@ export const aboutMeBrief = "Hello! I am Brandon, a young software developer cur
 
 export const myEducationInfo = "Fourth year Computer Science student"
 
-export const myWorkExperienceInfoPart1 = "From July 2020 to August 2021 (13 months), I was employed as an intern at" +
+export const myWorkExperienceInfoPart1 = "From July 2020 to August 2021 (14 months), I was employed as an intern at" +
     " Environment and Climate Change Canada, where I worked as a full stack software developer. I helped to maintain" +
     " and modernize a Webapp called 'PMTIP', a tool used to provide information related to Aviation weather forecasts" +
     ". The project has close to 100,000 lines of code. End users include government agencies and aviation companies" +
@@ -30,5 +30,5 @@ export const notesAppSummary = "A video demonstration of an Android Notes app th
 export const photoLockerAppSummary = "A video demonstration of an Android PhotoLocker app that I created. Users may" +
     " encrypt their photos with a password. The file is unreadable without first decrypting it using the password."
 
-export const websiteDescription = "I used the JavaScript React library to build the interactive UI for this Website." +
+export const websiteDescription = "I used the JavaScript React library to build the UI for this Website." +
     " The icons were provided from the Material-UI library. This website is currently hosted on GitHub pages."
