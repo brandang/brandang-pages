@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "ce0a014cb2dc04298bf004ce0b90583b",
+    "revision": "a90113d1431270cecf20d33ca37a0173",
     "url": "/brandang-pages/index.html"
   },
   {
