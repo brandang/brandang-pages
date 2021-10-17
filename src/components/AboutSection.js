@@ -1,6 +1,7 @@
 import Container from "@material-ui/core/Container";
 import ScrollAnimation from "react-animate-on-scroll";
 import Avatar from "@material-ui/core/Avatar";
+import {Link} from "react-scroll";
 import PriorityHighIcon from "@material-ui/icons/PriorityHigh";
 import {LightTextTypography} from "../CustomTheme";
 import {aboutMeBrief} from "../Texts";
@@ -40,6 +41,9 @@ const useStyles = makeStyles(() => ({
     },
 }));
 
+// How long scroll animation lasts.
+const scrollAnimationDuration = 500;
+
 /**
  * About Section.
  * @returns {JSX.Element} About Section.
@@ -53,9 +57,11 @@ function AboutSection() {
             <ScrollAnimation animateIn="animate__fadeIn" animateOnce={true}>
                 <div style={{display: 'flex', justifyContent:'center'}}>
                     <BubbleContainer>
-                        <Avatar className={classes.lightIconContainer}>
-                            <PriorityHighIcon className={classes.aboutIcon}/>
-                        </Avatar>
+                        <Link to={"about"} spy={true} smooth={true} duration={scrollAnimationDuration}>
+                            <Avatar className={classes.lightIconContainer}>
+                                <PriorityHighIcon className={classes.aboutIcon}/>
+                            </Avatar>
+                        </Link>
                     </BubbleContainer>
                 </div>
                 <LightTextTypography align="center" variant="h3" className={classes.heading}>

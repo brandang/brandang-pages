@@ -21,6 +21,8 @@ export const myHobbiesAndInterests = "Aside from programming, I also have a pass
 
 export const emailAddress = "brandon.dang1234@gmail.com"
 
+export const linkedIn = "https://www.linkedin.com/in/brandon-dang-899553221/"
+
 export const myProjectsDescription = "Here, you can view some of the personal projects that I have worked on over " +
     "the past few years. I have some of them installed on my phone, and I use some of them daily."
 
@@ -30,5 +32,5 @@ export const notesAppSummary = "A video demonstration of an Android Notes app th
 export const photoLockerAppSummary = "A video demonstration of an Android PhotoLocker app that I created. Users may" +
     " encrypt their photos with a password. The file is unreadable without first decrypting it using the password."
 
-export const websiteDescription = "I used the JavaScript React library to build the UI for this Website." +
+export const websiteDescription = "I used the React library to build the UI for this Website." +
     " The icons were provided from the Material-UI library. This website is currently hosted on GitHub pages."

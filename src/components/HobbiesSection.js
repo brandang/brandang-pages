@@ -2,6 +2,7 @@ import Container from "@material-ui/core/Container";
 import ScrollAnimation from "react-animate-on-scroll";
 import Avatar from "@material-ui/core/Avatar";
 import {DarkTextTypography} from "../CustomTheme";
+import {Link} from "react-scroll";
 import React from "react";
 import {makeStyles} from "@material-ui/core/styles";
 import {PurpleHeader} from "./Headers";
@@ -45,6 +46,9 @@ const useStyles = makeStyles(() => ({
     },
 }));
 
+// How long scroll animation lasts.
+const scrollAnimationDuration = 500;
+
 /**
  * Hobbies Section.
  * @returns {JSX.Element} Hobbies Section.
@@ -59,9 +63,11 @@ function HobbiesSection() {
             <ScrollAnimation animateIn="animate__fadeIn" animateOnce={true}>
                 <div style={{display: 'flex', justifyContent:'center'}}>
                     <BubbleContainer>
-                        <Avatar className={classes.darkIconContainer}>
-                            <BrushIcon className={classes.hobbiesIcon}/>
-                        </Avatar>
+                        <Link to={"hobbies"} spy={true} smooth={true} duration={scrollAnimationDuration}>
+                            <Avatar className={classes.darkIconContainer}>
+                                <BrushIcon className={classes.hobbiesIcon}/>
+                            </Avatar>
+                        </Link>
                     </BubbleContainer>
                 </div>
                 <DarkTextTypography align="center" variant="h3" gutterBottom

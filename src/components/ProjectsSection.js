@@ -2,6 +2,7 @@ import Container from "@material-ui/core/Container";
 import ScrollAnimation from "react-animate-on-scroll";
 import Avatar from "@material-ui/core/Avatar";
 import {DarkTextTypography} from "../CustomTheme";
+import {Link} from "react-scroll";
 import React from "react";
 import {makeStyles} from "@material-ui/core/styles";
 import {OrangeHeader} from "./Headers";
@@ -72,6 +73,9 @@ const useStyles = makeStyles(() => ({
     },
 }));
 
+// How long scroll animation lasts.
+const scrollAnimationDuration = 500;
+
 /**
  * Projects Section.
  * @returns {JSX.Element} Projects Section.
@@ -86,9 +90,11 @@ function ProjectsSection() {
             <ScrollAnimation animateIn="animate__fadeIn" animateOnce={true}>
                 <div style={{display: 'flex', justifyContent:'center'}}>
                     <BubbleContainer>
-                        <Avatar className={classes.darkIconContainer}>
-                            <BuildIcon className={classes.projectsIcon}/>
-                        </Avatar>
+                        <Link to={"projects"} spy={true} smooth={true} duration={scrollAnimationDuration}>
+                            <Avatar className={classes.darkIconContainer}>
+                                <BuildIcon className={classes.projectsIcon}/>
+                            </Avatar>
+                        </Link>
                     </BubbleContainer>
                 </div>
 

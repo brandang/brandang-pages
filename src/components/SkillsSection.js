@@ -2,6 +2,7 @@ import Container from "@material-ui/core/Container";
 import ScrollAnimation from "react-animate-on-scroll";
 import Avatar from "@material-ui/core/Avatar";
 import {DarkTextTypography} from "../CustomTheme";
+import {Link} from "react-scroll";
 import React from "react";
 import {makeStyles} from "@material-ui/core/styles";
 import {BlueHeader} from "./Headers";
@@ -70,6 +71,9 @@ const useStyles = makeStyles(() => ({
     },
 }));
 
+// How long scroll animation lasts.
+const scrollAnimationDuration = 500;
+
 /**
  * Skills Section.
  * @param isExtraSmallScreen whether screen size is very small.
@@ -85,9 +89,11 @@ function SkillsSection({ isExtraSmallScreen }) {
             <ScrollAnimation animateIn="animate__fadeIn" animateOnce={true}>
                 <div style={{display: 'flex', justifyContent:'center'}}>
                     <BubbleContainer>
-                        <Avatar className={classes.darkIconContainer}>
-                            <CodeIcon className={classes.skillsIcon}/>
-                        </Avatar>
+                        <Link to={"skills"} spy={true} smooth={true} duration={scrollAnimationDuration}>
+                            <Avatar className={classes.darkIconContainer}>
+                                <CodeIcon className={classes.skillsIcon}/>
+                            </Avatar>
+                        </Link>
                     </BubbleContainer>
                 </div>
                 <DarkTextTypography align="center" variant="h3" gutterBottom

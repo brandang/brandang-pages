@@ -2,6 +2,7 @@ import Container from "@material-ui/core/Container";
 import ScrollAnimation from "react-animate-on-scroll";
 import Avatar from "@material-ui/core/Avatar";
 import {LightTextTypography} from "../CustomTheme";
+import {Link} from "react-scroll";
 import React from "react";
 import {makeStyles} from "@material-ui/core/styles";
 import {WhiteHeader} from "./Headers";
@@ -45,6 +46,9 @@ const useStyles = makeStyles(() => ({
     },
 }));
 
+// How long scroll animation lasts.
+const scrollAnimationDuration = 500;
+
 /**
  * Education Section.
  * @returns {JSX.Element} Education Section.
@@ -59,9 +63,11 @@ function EducationSection() {
             <ScrollAnimation animateIn="animate__fadeIn" animateOnce={true}>
                 <div style={{display: 'flex', justifyContent:'center'}}>
                     <BubbleContainer>
-                        <Avatar className={classes.lightIconContainer}>
-                            <SchoolIcon className={classes.educationIcon}/>
-                        </Avatar>
+                        <Link to={"education"} spy={true} smooth={true} duration={scrollAnimationDuration}>
+                            <Avatar className={classes.lightIconContainer}>
+                                <SchoolIcon className={classes.educationIcon}/>
+                            </Avatar>
+                        </Link>
                     </BubbleContainer>
                 </div>
                 <LightTextTypography align="center" variant="h3" gutterBottom
