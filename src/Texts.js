@@ -1,6 +1,6 @@
 export const aboutMeBrief = "Hello! I am Brandon, a young software developer currently based in the Greater Toronto" +
     " Area (GTA). I am currently a fourth year Computer Science Student, and I am eager to re-enter the field once" +
-    " I graduate. My Resume is available at the bottom of the page."
+    " I graduate. My Resume is available "
 
 export const myEducationInfo = "Fourth year Computer Science student"
 

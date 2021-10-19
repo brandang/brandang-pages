@@ -8,6 +8,7 @@ import {aboutMeBrief} from "../Texts";
 import React from "react";
 import {makeStyles} from "@material-ui/core/styles";
 import BubbleContainer from "./BubbleContainer";
+import Resume from "../files/Resume.pdf";
 
 const useStyles = makeStyles(() => ({
     aboutIcon: {
@@ -38,6 +39,18 @@ const useStyles = makeStyles(() => ({
     heading: {
         paddingTop: "30px",
         paddingBottom: "30px",
+    },
+    hoverLink: {
+        display: "inline",
+        "&": {
+            textDecoration: "underline",
+            color: "#ffffff",
+        },
+        "&:hover": {
+            textDecoration: "underline",
+            textDecorationThickness: "5px",
+            color: "#ffffff",
+        },
     },
 }));
 
@@ -70,6 +83,10 @@ function AboutSection() {
                 <LightTextTypography align="center" variant="body1" gutterBottom
                                      style={{paddingBottom: "20px"}}>
                     {aboutMeBrief}
+                    {/* rel="noopener noreferrer" is to prevent security risk. */}
+                    <a href={Resume} target={"_blank"} className={classes.hoverLink} rel="noopener noreferrer">
+                        <LightTextTypography>here.</LightTextTypography>
+                    </a>
                 </LightTextTypography>
             </ScrollAnimation>
         </Container>
