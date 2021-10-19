@@ -137,7 +137,7 @@ function ProjectsSection() {
                                 {photoLockerAppSummary}
                             </DarkTextTypography>
                             <CardMedia className={classes.youtubeVideo}
-                                       src={"https://www.youtube.com/embed/RfoJ7mikJfg"} component="iframe"/>
+                                       src={"https://www.youtube.com/embed/UuVqQf_pRMg"} component="iframe"/>
                         </div>
                     </AccordionDetails>
                 </Accordion>
