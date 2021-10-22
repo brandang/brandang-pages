@@ -7,17 +7,17 @@ import React from "react";
 import {makeStyles} from "@material-ui/core/styles";
 import {WhiteHeader} from "./Headers";
 import {
-    emailAddress, linkedIn,
+    emailAddress, gitHub, linkedIn,
 } from "../Texts";
 import ChatIcon from "@material-ui/icons/Chat";
 import {CopyToClipboard} from "react-copy-to-clipboard";
-import {default as HyperLink} from "@material-ui/core/Link/Link";
 import Resume from "../files/Resume.pdf";
 import Grid from "@material-ui/core/Grid";
 import IconButton from "@material-ui/core/IconButton";
 import EmailIcon from "@material-ui/icons/Email";
 import FileCopyIcon from "@material-ui/icons/FileCopy";
 import LinkedInIcon from '@material-ui/icons/LinkedIn';
+import GitHubIcon from '@material-ui/icons/GitHub';
 import PropTypes from "prop-types";
 import MainTitle from "./MainTitle";
 import BubbleContainer from "./BubbleContainer";
@@ -87,6 +87,10 @@ const useStyles = makeStyles(() => ({
         color: "#2a5a79",
         fontSize: 60
     },
+    gitHubIcon: {
+        color: "#2a5a79",
+        fontSize: 60
+    },
 }));
 
 // How long scroll animation lasts.
@@ -103,9 +107,6 @@ function ContactSection({ setShowEmailDialog }) {
     const copiedEmailAddress = () => {
         setShowEmailDialog(true);
     };
-
-    // Prevents event from propagating.
-    const preventDefault = (event) => event.preventDefault();
 
     const classes = useStyles();
 
@@ -126,44 +127,49 @@ function ContactSection({ setShowEmailDialog }) {
                                      className={classes.heading}>
                     Contact me
                 </LightTextTypography>
-                <LightTextTypography align="center" variant="body1">
-                    <CopyToClipboard text={emailAddress} onCopy={copiedEmailAddress}>
-                        {/*Prevent default just makes it so that it does not do anything.*/}
-                        <HyperLink href="" onClick={preventDefault} className={classes.hoverLink}>
-                            brandon.dang1234@gmail.com
-                        </HyperLink>
-                    </CopyToClipboard>
-                </LightTextTypography>
-                <br/>
-                <LightTextTypography align="center" variant="body1" gutterBottom>
-                    <HyperLink href={Resume} target={"_blank"} className={classes.hoverLink}>
-                        My resume
-                    </HyperLink>
-                </LightTextTypography>
-                <br/>
-                <LightTextTypography align="center" variant="body1" gutterBottom>
-                    <HyperLink href={linkedIn} target={"_blank"} className={classes.hoverLink}>
-                        LinkedIn
-                    </HyperLink>
-                </LightTextTypography>
                 <Grid container direction="row" justify="center" alignItems="stretch" spacing={1}>
-                    <BubbleContainer>
-                        <CopyToClipboard text={emailAddress} onCopy={copiedEmailAddress}>
-                            <IconButton className={classes.iconButton}>
-                                <EmailIcon className={classes.emailIcon}/>
+                    <Grid item>
+                        <BubbleContainer>
+                            <CopyToClipboard text={emailAddress} onCopy={copiedEmailAddress}>
+                                <IconButton className={classes.iconButton}>
+                                    <EmailIcon className={classes.emailIcon}/>
+                                </IconButton>
+                            </CopyToClipboard>
+                        </BubbleContainer>
+                        <LightTextTypography align="center" variant="body1" gutterBottom>
+                            Email
+                        </LightTextTypography>
+                    </Grid>
+                    <Grid item>
+                        <BubbleContainer>
+                            <IconButton href={Resume} target={"_blank"} className={classes.iconButton}>
+                                <FileCopyIcon className={classes.resumeIcon}/>
                             </IconButton>
-                        </CopyToClipboard>
-                    </BubbleContainer>
-                    <BubbleContainer>
-                        <IconButton href={Resume} target={"_blank"} className={classes.iconButton}>
-                            <FileCopyIcon className={classes.resumeIcon}/>
-                        </IconButton>
-                    </BubbleContainer>
-                    <BubbleContainer>
-                        <IconButton href={linkedIn} target={"_blank"} className={classes.iconButton}>
-                            <LinkedInIcon className={classes.linkedInIcon}/>
-                        </IconButton>
-                    </BubbleContainer>
+                        </BubbleContainer>
+                        <LightTextTypography align="center" variant="body1" gutterBottom>
+                            Resume
+                        </LightTextTypography>
+                    </Grid>
+                    <Grid item>
+                        <BubbleContainer>
+                            <IconButton href={linkedIn} target={"_blank"} className={classes.iconButton}>
+                                <LinkedInIcon className={classes.linkedInIcon}/>
+                            </IconButton>
+                        </BubbleContainer>
+                        <LightTextTypography align="center" variant="body1" gutterBottom>
+                            LinkedIn
+                        </LightTextTypography>
+                    </Grid>
+                    <Grid item>
+                        <BubbleContainer>
+                            <IconButton href={gitHub} target={"_blank"} className={classes.iconButton}>
+                                <GitHubIcon className={classes.gitHubIcon}/>
+                            </IconButton>
+                        </BubbleContainer>
+                        <LightTextTypography align="center" variant="body1" gutterBottom>
+                            GitHub
+                        </LightTextTypography>
+                    </Grid>
                 </Grid>
             </ScrollAnimation>
         </Container>

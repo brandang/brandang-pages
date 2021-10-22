@@ -23,8 +23,10 @@ export const emailAddress = "brandon.dang1234@gmail.com"
 
 export const linkedIn = "https://www.linkedin.com/in/brandon-dang-899553221/"
 
-export const myProjectsDescription = "Here, you can view some of the personal projects that I have worked on over " +
-    "the past few years. I have some of them installed on my phone, and I use some of them daily."
+export const gitHub = "https://github.com/brandang"
+
+export const myProjectsDescription = "Here, you can view some of my most recent personal side projects. I have some" +
+    " of them installed on my phone, and I use some of them daily."
 
 export const notesAppSummary = "A video demonstration of an Android Notes app that I created. Users may embed images" +
     " and audio recordings within their Notes."
