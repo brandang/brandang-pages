@@ -6,14 +6,9 @@ import {Link} from "react-scroll";
 import React from "react";
 import {makeStyles} from "@material-ui/core/styles";
 import {OrangeHeader} from "./Headers";
-import {
-    myProjectsDescription,
-    notesAppSummary, photoLockerAppSummary
-} from "../Texts";
+import {myProjectsDescription, notesAppSummary, photoLockerAppSummary} from "../Texts";
 import BuildIcon from "@material-ui/icons/Build";
-import {Accordion, AccordionDetails, AccordionSummary} from "@material-ui/core";
-import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
-import Typography from "@material-ui/core/Typography";
+import {Paper} from "@material-ui/core";
 import CardMedia from "@material-ui/core/CardMedia";
 import BubbleContainer from "./BubbleContainer";
 
@@ -25,7 +20,7 @@ const useStyles = makeStyles(() => ({
     },
     youtubeVideo: {
         width: "100%",
-        height: "720px"
+        height: "420px"
     },
     videoPanel: {
         justifyContent: "center",
@@ -71,6 +66,21 @@ const useStyles = makeStyles(() => ({
         color: "#ffffff",
         fontSize: 120
     },
+    rowContainer: {
+        display: "flex",
+        flexDirection: "row",
+    },
+    columnContainer: {
+        display: "flex",
+        flexDirection: "column"
+    },
+    projectContainer: {
+        margin: 10,
+        flexGrow: 1,
+        flexBasis: 1,
+        padding: 20,
+
+    }
 }));
 
 // How long scroll animation lasts.
@@ -78,9 +88,10 @@ const scrollAnimationDuration = 500;
 
 /**
  * Projects Section.
+ * @param isSmallScreen whether screen size is small.
  * @returns {JSX.Element} Projects Section.
  */
-function ProjectsSection() {
+function ProjectsSection({ isSmallScreen }) {
 
     const classes = useStyles();
 
@@ -105,42 +116,28 @@ function ProjectsSection() {
                     {myProjectsDescription}
                 </DarkTextTypography>
 
-                <Accordion>
-                    <AccordionSummary expandIcon={<ExpandMoreIcon/>} id="panel1a-header"
-                                      style={{backgroundColor: "#cbe9ff"}}>
-                        <div style={{width: "100%"}}>
-                            <Typography className={classes.heading}>Android Notes App</Typography>
-                        </div>
-                    </AccordionSummary>
-                    <AccordionDetails style={{backgroundColor: "#cbe9ff"}} className={classes.videoPanel}>
+                <div className={isSmallScreen ? classes.columnContainer : classes.rowContainer}>
+                    <Paper className={classes.projectContainer} elevation={6} >
                         <div>
+                            <CardMedia className={classes.youtubeVideo}
+                                       src={"https://www.youtube.com/embed/RfoJ7mikJfg"} component="iframe"
+                                       allow="fullscreen"/>
                             <DarkTextTypography variant={"body2"}>
                                 {notesAppSummary}
                             </DarkTextTypography>
-                            <CardMedia className={classes.youtubeVideo}
-                                       src={"https://www.youtube.com/embed/RfoJ7mikJfg"} component="iframe"/>
                         </div>
-                    </AccordionDetails>
-                </Accordion>
-                <Accordion>
-                    <AccordionSummary expandIcon={<ExpandMoreIcon/>} id="panel1a-header"
-                                      style={{backgroundColor: "#ddd2ff"}}>
-                        <div style={{width: "100%"}}>
-                            <Typography className={classes.heading}>
-                                Android Photolocker App
-                            </Typography>
-                        </div>
-                    </AccordionSummary>
-                    <AccordionDetails style={{backgroundColor: "#ddd2ff"}} className={classes.videoPanel}>
+                    </Paper>
+                    <Paper className={classes.projectContainer} elevation={6} >
                         <div>
+                            <CardMedia className={classes.youtubeVideo}
+                                       src={"https://www.youtube.com/embed/UuVqQf_pRMg"} component="iframe"
+                                       allow="fullscreen"/>
                             <DarkTextTypography variant={"body2"}>
                                 {photoLockerAppSummary}
                             </DarkTextTypography>
-                            <CardMedia className={classes.youtubeVideo}
-                                       src={"https://www.youtube.com/embed/UuVqQf_pRMg"} component="iframe"/>
                         </div>
-                    </AccordionDetails>
-                </Accordion>
+                    </Paper>
+                </div>
             </ScrollAnimation>
         </Container>
     </div>

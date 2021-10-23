@@ -57,6 +57,11 @@ function HomePage() {
         query: '(max-width: 800px)'
     });
 
+    const isSmallScreen = useMediaQuery({
+        query: '(max-width: 992px)'
+    });
+
+
     // Whether or not to show snackbar about email address being copied to clipboard.
     const [showSnackbar, setShowSnackbar] = React.useState(false);
 
@@ -87,7 +92,7 @@ function HomePage() {
 
                     <ExperienceSection/>
 
-                    <ProjectsSection/>
+                    <ProjectsSection isSmallScreen={isSmallScreen}/>
 
                     <EducationSection/>
 

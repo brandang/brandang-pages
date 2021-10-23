@@ -26,7 +26,7 @@ export const linkedIn = "https://www.linkedin.com/in/brandon-dang-899553221/"
 export const gitHub = "https://github.com/brandang"
 
 export const myProjectsDescription = "Here, you can view some of my most recent personal side projects. I have some" +
-    " of them installed on my phone, and I use some of them daily."
+    " of them installed on my phone, which I use."
 
 export const notesAppSummary = "A video demonstration of an Android Notes app that I created. Users may embed images" +
     " and audio recordings within their Notes."

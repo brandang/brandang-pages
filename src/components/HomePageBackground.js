@@ -1,5 +1,4 @@
 import backgroundOverlay from '../images/backgroundImage.jpg';
-import background from '../images/blackBackground.jpg';
 import React from "react";
 import {makeStyles} from "@material-ui/core/styles";
 
@@ -23,14 +22,14 @@ const useStyles = makeStyles(() => ({
         height: '100vh',
         zIndex: '-1',
         backgroundSize: 'cover',
-        background: `url(${background})`,
+        background: 'black',
     },
     backgroundOverlay: {
         position: 'fixed',
         width: '100vw',
         height: '100vh',
         zIndex: '-1',
-        opacity: '0.2',
+        opacity: '0.0',
         backgroundPosition: 'center',
         backgroundSize: 'cover',
         backgroundRepeat: 'no-repeat',
@@ -38,7 +37,7 @@ const useStyles = makeStyles(() => ({
     }
 }));
 
-export default function NumberClassificationDialog() {
+export default function HomePageBackground() {
 
     const classes = useStyles();
 
@@ -46,7 +45,7 @@ export default function NumberClassificationDialog() {
 
     const minOpacity = '0.1';
 
-    let fadingIn = false;
+    let fadingIn = true;
 
     // Do this at the end of the queue.
     const firstTransition = startTransition;

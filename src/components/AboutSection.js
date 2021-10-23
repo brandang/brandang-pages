@@ -85,7 +85,7 @@ function AboutSection() {
                     {aboutMeBrief}
                     {/* rel="noopener noreferrer" is to prevent security risk. */}
                     <a href={Resume} target={"_blank"} className={classes.hoverLink} rel="noopener noreferrer">
-                        <LightTextTypography>here.</LightTextTypography>
+                        here.
                     </a>
                 </LightTextTypography>
             </ScrollAnimation>
