@@ -24,14 +24,14 @@ export const theme = createMuiTheme({
             display: "inline",
             fontSize: 16,
             '@media (min-width:800px)': {
-                fontSize: 26,
+                fontSize: 23,
             },
             lineHeight: 2
         },
         body2: {
             fontSize: 14,
             '@media (min-width:800px)': {
-                fontSize: 20,
+                fontSize: 18,
             },
             lineHeight: 2
         },
@@ -56,7 +56,7 @@ export const theme = createMuiTheme({
         h6: {
             fontSize: 12,
             '@media (min-width:800px)': {
-                fontSize: 16,
+                fontSize: 14,
             }
         }
     },

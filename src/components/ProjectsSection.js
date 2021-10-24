@@ -110,7 +110,7 @@ function ProjectsSection({ isSmallScreen }) {
                 </div>
 
                 <DarkTextTypography align="center" variant="h3" gutterBottom className={classes.heading}>
-                    My projects
+                    My side projects
                 </DarkTextTypography>
                 <DarkTextTypography align="center" variant="body1" gutterBottom>
                     {myProjectsDescription}

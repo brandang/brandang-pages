@@ -123,11 +123,6 @@ function SkillsSection({ isExtraSmallScreen }) {
                         </Avatar>
                     </BubbleContainer>
                     <BubbleContainer>
-                        <Avatar className={classes.round} style={{backgroundColor: "#389500"}}>
-                            C
-                        </Avatar>
-                    </BubbleContainer>
-                    <BubbleContainer>
                         <Avatar className={classes.round} style={{backgroundColor: "#ff6d00"}}>
                             SQL
                         </Avatar>
