@@ -27,7 +27,8 @@ const useStyles = makeStyles(() => ({
         zIndex: 1
     },
     animationList: {
-        paddingLeft: 10
+        paddingLeft: 10,
+        listStyleType: "none"
     }
 }));
 
