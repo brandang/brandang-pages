@@ -17,8 +17,9 @@ export const myWorkExperienceInfoPart2 = ". Whilst working there, I used many li
 export const myProgrammingLanguages = "Java, JavaScript, Python, SQL, CSS, and C."
 
 export const myHobbiesAndInterests = "Aside from programming, I also have a passion for reading. My favourite " +
-    "series is J.R.R. Tolkien`s \"Lord of the Rings\", although I also enjoy Science Fiction novels by authors " +
-    "like H.G. Wells. Other than that, I love playing video games, especially those in the Grand Strategy genre. "
+    "series is J.R.R. Tolkien's \"Lord of the Rings\", although I also enjoy Science Fiction novels by authors " +
+    "like H.G. Wells, such as his \"War of the Worlds\". Other than that, I have an interest in the histories of the" +
+    " Roman Empire and the Victorian era."
 
 export const emailAddress = "brandon.dang1234@gmail.com"
 
