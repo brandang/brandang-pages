@@ -78,11 +78,11 @@ function EducationSection() {
                                      className={classes.heading}>
                     University of Toronto
                 </LightTextTypography>
-                <LightTextTypography align="center" variant="h4" className={classes.heading}>
-                    2017 - Present
+                <LightTextTypography align="center" variant="h5" className={classes.heading}>
+                    {myEducationInfo}
                 </LightTextTypography>
                 <LightTextTypography align="center" variant="body1" gutterBottom>
-                    {myEducationInfo}
+                    2017 - 2022
                 </LightTextTypography>
             </ScrollAnimation>
         </Container>

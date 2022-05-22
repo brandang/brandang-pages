@@ -1,18 +1,11 @@
-export const aboutMeBrief = "Hello! I am Brandon, a young software developer currently based in the Greater Toronto" +
-    " Area (GTA). I am currently a fourth year Computer Science Student, and I am eager to re-enter the field once" +
-    " I graduate. My Resume is available "
+export const aboutMeBrief = "Hello! I am Brandon, a software developer currently based in the Greater Toronto" +
+    " Area (GTA). My Resume is available "
 
-export const myEducationInfo = "Fourth year Computer Science student"
+export const myEducationInfo = "Bachelors of Arts and Science (Computer Science)"
 
-export const myWorkExperienceInfoPart1 = "From July 2020 to August 2021 (14 months), I was employed as an intern at" +
-    " Environment and Climate Change Canada, where I worked as a full stack software developer. I helped to maintain" +
-    " and modernize a Webapp called 'PMTIP', a tool used to provide information related to Aviation weather forecasts" +
-    ". More details can be found in this PDF on the American Meteorological Society website "
-
-export const myWorkExperienceInfoPart2 = ". Whilst working there, I used many libraries, tools, and frameworks, such" +
-    " as Angular, JUnit, and jQuery. My duties included implementing complex layouts for new pages, " +
-    "writing new RESTful services for the server, porting over features from an old Apache Tomcat app, updating old" +
-    " features, and fixing bugs."
+export const myWorkExperienceInfoPart = "I am currently employed as a software developer at Faire, a tech unicorn " +
+    "startup developing an online wholesale marketplace. Faire connects local retailers with brands and artisans " +
+    "using a data-driven approach. "
 
 export const myProgrammingLanguages = "Java, JavaScript, Python, SQL, CSS, and C."
 

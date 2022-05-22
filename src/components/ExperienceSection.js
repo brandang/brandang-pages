@@ -7,7 +7,7 @@ import React from "react";
 import {makeStyles} from "@material-ui/core/styles";
 import {WhiteHeader} from "./Headers";
 import WorkIcon from "@material-ui/icons/Work";
-import {myWorkExperienceInfoPart1, myWorkExperienceInfoPart2} from "../Texts";
+import {myWorkExperienceInfoPart} from "../Texts";
 import BubbleContainer from "./BubbleContainer";
 
 const useStyles = makeStyles(() => ({
@@ -88,12 +88,7 @@ function ExperienceSection() {
                     Work experience
                 </LightTextTypography>
                 <LightTextTypography component={'div'} align="center" variant="body1" gutterBottom>
-                    {myWorkExperienceInfoPart1}
-                    {/* rel="noopener noreferrer" is to prevent security risk. */}
-                    <a href={linkUrl} target="_blank" className={classes.hoverLink} rel="noopener noreferrer">
-                        <LightTextTypography>here</LightTextTypography>
-                    </a>
-                    {myWorkExperienceInfoPart2}
+                    {myWorkExperienceInfoPart}
                 </LightTextTypography>
             </ScrollAnimation>
         </Container>
