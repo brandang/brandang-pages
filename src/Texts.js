@@ -3,9 +3,10 @@ export const aboutMeBrief = "Hello! I am Brandon, a software developer currently
 
 export const myEducationInfo = "Bachelors of Arts and Science (Computer Science)"
 
-export const myWorkExperienceInfoPart = "I am currently employed as a software developer at Faire, a tech unicorn " +
+export const myWorkExperienceInfoPart = "I am currently employed as a software developer at Faire, a unicorn tech " +
     "startup developing an online wholesale marketplace. Faire connects local retailers with brands and artisans " +
-    "using a data-driven approach. "
+    "using a data-driven approach. I currently primarily work as a front-end developer. Tech stack: React, " +
+    "Typescript, CSS, Kotlin"
 
 export const myProgrammingLanguages = "Java, JavaScript, Python, SQL, CSS, and C."
 
